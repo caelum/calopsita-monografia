@@ -4,14 +4,16 @@
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
 \usepackage{hyperref}
+\usepackage{rotating}
+\usepackage{amsmath, amsthm, amssymb}
 \hypersetup{colorlinks=true,%
 	citecolor=red,%
 	linkcolor=red,%
 	urlcolor=blue,%
 	pdftex}
 
-\title{Monografia}
-\author{Cauê Haucke Porta Guerra\\Cecilia Fernandes\\Lucas Cavalcanti dos Santos\\ \\Prof. Dr. Alfredo Goldman}
+\title{Calopsita: Um sistema gerenciador de projetos que utilizam metodologias ágeis}
+\author{Cauê Haucke Porta Guerra\\Cecilia Fernandes\\Lucas Cavalcanti dos Santos\\ \\Orientador: Prof. Dr. Alfredo Goldman}
 
 \begin{document}
 
@@ -25,17 +27,89 @@
 
 \section{Introdução}
 
+Calopsita é um projeto
+o q eh o projeto
+pq decidiu fzr isso (necessidade da empresa, acredito, blablabla)
+
+
 \section{Motivação e público alvo}
 
+qualquer metodologia agil
+time distribuido
+projetos open source
+agilistas
+
 \section{Desenvolvimento}
+Java
+Hibernate
+ActiveRecord
+BDD =D
+Plugins
+VRaptor 2/3 (migração)
+
 
 \section{Código}
 
+onde ta
+descricao tecnica (cuidado pra n ficar chato)
+
 \section{Funcionalidades}
 
+O Calopsita é feito utilizando uma arquitetura de plugins. Ou seja, a aplicação tem um núcleo, contendo a parte básica do sistema e todo o resto é feito ou configurado com a criação de plugins, dando um grande poder de customização.
+Entre as funcionalidades que fazem parte do núcleo estão a criação e administração de usuários,
+projetos, cartões, iterações e ações para log.
+
+O Calopsita, ao contrário de outros sistemas com o mesmo propósito, não possui o conceito de histórias, apenas de cartões. Isso foi feito pensando em trazer maior grau de customização para os usuários, uma vez que cartões podem ter subcartões. Essa funcionalidade permite uma hierarquia tão profunda quanto se deseje, e permite que o projeto seja visto no nível de detalhe mais apropriado pra cada envolvido no projeto, seja um gerente, desenvolvedor, product owner, etc.
+
+A arquitetura de plugins
+
+Esses são os plugins que implementamos:
+priorizacao
+burnup
+burn down
+marcar horas
+estimativa
+templates de metodologias
+templates de cartão
+
 \section{Integração}
+pretendemos ainda integrar com github, ou outros meios, para atualizacao dinamica de cartoes
+treco de desenhos do lipe (sketch blabla)
+
 
 \section{Visão dos clientes e comparativos}
+
+clientes: mari, hugo, caelum
+
+Metodologias
+
+XP
+Lean
+Scrum
+Crystal
+
+
+\begin{sidewaystable}
+	\begin{tabular}{|l|l|l|l|l|l|l|l}
+		\hline
+		\multicolumn{8}{|c|}{Aplicações similares} \\
+		\hline
+		 & PivotalTracker & Scrumy & ScrumNinja & Scrumd & VersionOne & BlueSoft & Mingle \\
+		Gratuito & X & & & & & & \\
+		OpenSource & - & & & & & & \\
+		Graficos & X & & & & & & \\
+		Estimativas & X & & & & & & \\
+		Priorizacao & X & & & & & & \\
+		Marcacao Horas & - & & & & & & \\
+		Customizavel & & & & & & & \\
+		Templates Metodologias & & & & & & & \\
+		Templates Cartão & & & & & & & \\
+		Personas & & & & & & & \\
+		\hline
+	\end{tabular}
+\end{sidewaystable}
+
+IG
 
 \section{Conclusão}
 
