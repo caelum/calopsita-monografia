@@ -25,130 +25,14 @@
 \item{\textbf{Colaboradores:}\\Mariana V. Bravo\\Hugo Corbucci\\Paulo E. de Azevedo Silveira\\Guilherme de Azevedo Silveira}
 \end{description}
 
-\section{Introdução}
-Calopsita é um projeto que nasceu da necessidade de seus idealizadores, que trabalham na mesma empresa, em gerenciar projetos ágeis que utilizavam diferentes métodos e com o diferencial de seu time ser distribuído. Essa necessidade ficou evidente quando alguns de nós estávamos alocados em algum projeto de consultoria e esse projeto era desenvolvido dentro da própria empresa e o cliente ainda tinha a necessidade de acompanhar a evolução do mesmo de uma maneira mais dinâmica.
-
-Aproveitando que dois amigos nossos, Hugo Corbucci e Mariana Bravo, estavam fazendo mestrado nessa área, resolvemos convidá-los para serem clientes do projeto, convite esse que foi aceito prontamente. Além deles, contamos com o apoio do nosso orientador, que sempre esteve envolvido e acompanhava o andamento do projeto, e com alguns amigos da Caelum, que foram de fundamental importância nas discussões sobre a arquitetura do sistema, e que depois tornaram-se clientes e passaram a pedir por novas funcionalidades e reportar bugs. Hoje, o Calopsita já é usado para gerenciar seu próprio desenvolvimento (que pode ser acessado aqui:) e o desenvolvimento de vários outros projetos internos da Caelum.
-
-\section{Motivação e público alvo}
-
-Nosso público alvo concentra-se em times distríbuidos ágeis, mas sem se restringir a alguma matodologia em específico. A idéia, é que a ferramenta tenha a capacidade de se adaptar às necessidades do time, servindo de facilitadora da comunicação, ao invés de um simples aparato burocrático. Uma inspiração são os times de projetos open source que em sua maioria são distribuídos, e quase sempre não tem uma ferramenta similar para acompanhamento de suas atividades, ou quando tem, essas ferramentas são deficientes (faremos um comparativo disso mais pra frente)
-
-Embora o Calopsita seja mais uma ferramenta, a idéia é que seu uso seja um facilitador das iterações entre os indivíduos de um determinado projeto, não contrariando um dos valores do manifesto ágil:
-
-"Individuals and interactions over processes and tool"
-
-\section{Desenvolvimento}
-Java
-Hibernate
-Plugins
-VRaptor 2/3 (migração)
-
-ActiveRecord
-post do Lucas aqui, ja q n foi publicado
-
-BDD
-citar nosso post de BDD, colocar exemplos
-http://blog.caelum.com.br/2009/02/28/behavior-driven-development-com-junit/
-
-\section{Código}
-
-onde ta
-descricao tecnica (cuidado pra n ficar chato)
-
-\section{Funcionalidades}
-
-O Calopsita é feito utilizando uma arquitetura de plugins. Ou seja, a aplicação tem um núcleo, contendo a parte básica do sistema e todo o resto é feito ou configurado com a criação de plugins, dando um grande poder de customização.
-Entre as funcionalidades que fazem parte do núcleo estão a criação e administração de usuários,
-projetos, cartões, iterações e ações para log.
-
-O Calopsita, ao contrário de outros sistemas com o mesmo propósito, não possui o conceito de histórias, apenas de cartões. Isso foi feito pensando em trazer maior grau de customização para os usuários, uma vez que cartões podem ter subcartões. Essa funcionalidade permite uma hierarquia tão profunda quanto se deseje, e permite que o projeto seja visto no nível de detalhe mais apropriado pra cada envolvido no projeto, seja um gerente, desenvolvedor, product owner, etc.
-
-A arquitetura de plugins
-
-Esses são os plugins que implementamos:
-priorizacao
-burnup
-burn down
-marcar horas
-estimativa
-templates de metodologias
-templates de cartão
-
-\section{Integração}
-pretendemos ainda integrar com github, ou outros meios, para atualizacao dinamica de cartoes
-treco de desenhos do lipe (sketch blabla)
-
-
-\section{Visão dos clientes e comparativos}
-
-clientes: mari, hugo, caelum
-
-Metodologias
-
-XP
-Lean
-Scrum
-Crystal
-
-
-scrumy
-	pago / proprietario
-	interface baseada em drag and drop
-	leve
-	nao é customizavel
-	snapshots do projeto no passado e futuro (board image)
-	live update
-	nao permite estimativas
-	nao permite marcacao horas
-	nao trabalha com templates nem personas
-	burndown
-	
-pivotal tracker
-
-scrumninja
-	pago / proprietario
-	pouco customizavel
-	estimativa (1, 2 ou 3)
-	interface baseada em estados (start, deliver, etc)
-	leve
-	graficos de progresso
-	sem marcacao de horas
-	nao trabalha com templates nem personas
-
-scrumd
-	
-
-versionone
-bluesoft
-mingle
-http://ses-ppts.sourceforge.net/
-http://www.agile-trac.org
-http://trac.edgewall.org
-
-
-\begin{sidewaystable}
-	\begin{tabular}{|l|l|l|l|l|l|l|l}
-		\hline
-		\multicolumn{8}{|c|}{Aplicações similares} \\
-		\hline
-		 & PivotalTracker & Scrumy & ScrumNinja & Scrumd & VersionOne & BlueSoft & Mingle \\
-		Gratuito & X & & & & & & \\
-		OpenSource & - & & & & & & \\
-		Graficos & X & & & & & & \\
-		Estimativas & X & & & & & & \\
-		Priorizacao & X & & & & & & \\
-		Marcacao Horas & - & & & & & & \\
-		Customizavel & & & & & & & \\
-		Templates Metodologias & & & & & & & \\
-		Templates Cartão & & & & & & & \\
-		Personas & & & & & & & \\
-		\hline
-	\end{tabular}
-\end{sidewaystable}
-
-\section{Conclusão}
-
-\section{Bibliografia}
+\input{introducao}
+\input{motivacao}
+\input{desenvolvimento}
+\input{codigo}
+\input{funcionalidades}
+\input{integracao}
+\input{comparativos}
+\input{conclusao}
+\input{bibliografia}
 
 \end{document}
