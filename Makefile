@@ -4,4 +4,4 @@ paper: monografia.tex
 	rm monografia.toc -f
 	rm monografia.log -f
 	rm monografia.aux -f
-	acroread monografia.pdf 
+	evince monografia.pdf 
