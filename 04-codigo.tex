@@ -1,6 +1,103 @@
 \section{Código}
 Todo o código do Calopsita está hospedado no GitHub, local onde também pode ser visualizado todo o histórico e atividades do projeto desde sua concepção. http://github.com/caelum/calopsita/
 
+Antes de iniciar o desenvolvimento do Calopsita, foi discutido quais seriam as escolhas de linguagens e frameworks a serem utilizados. As opções eram: Ruby on Rails ou Java com VRaptor. Como a maioria da equipe era mais familiar com Java do que com Ruby, a escolha foi pelo Java com VRaptor.
+
+Desde o começo resolvemos adotar boas práticas de desenvolvimento, como {\it Behavior Driven Development} (BDD), refatoração constante e programação pareada. Principalmente para usar BDD precisávamos de ferramentas que nos ajudassem a escrever testes mais expressivos e legíveis. No mundo do Ruby on Rails essa prática já está bastante difundida, então existem várias ferramentas de teste como o RUnit e o Cucumber, além da linguagem ser dinâmica e possibilitar a escrita de DSLs e interfaces fluentes de uma maneira bastante direta. Em Java a prática de BDD ainda não está muito forte, então não existem ferramentas muito avançadas, além da linguagem ser estática e burocrática, que torna o desenvolvimento de tais ferramentas muito mais difícil. Mesmo assim, foram pesquisadas as alternativas:
+
+-JBehave - que possibilita a escrita de arquivos texto com a descrição das funcionalidades, e uma classe Java correspondente a esse arquivo. Foi descartado por causa da sua sintaxe pouco produtiva e de algumas limitações, como a impossibilidade de compartilhar passos entre features ****melhorar essa frase****
+-Cucumber + JRuby - poderíamos também usar o próprio Cucumber do Ruby, usando o JRuby para poder integrar código Java aos testes. Foi descartada por causa da complexidade da integração, e por causa da mistura de linguagens.
+
+** o que mais mesmo? **
+
+-JUnit + Bom senso - Não usar nenhuma ferramenta específica, apenas JUnit para rodar os testes, e o bom senso da equipe para escrever testes legíveis e expressivos.
+
+Acabamos por optar pela última opção, que era bem mais simples e poderíamos criar uma nova forma de desenvolver testes em Java. A nossa solução para testes foi publicada no blog da Caelum: http://blog.caelum.com.br/2009/02/28/behavior-driven-development-com-junit/. Essa solução é uma arquitetura de testes que possibilita a escrita de testes de aceitação, em Java, quase em linguagem natural. Um exemplo de teste escrito nessa arquitetura, tirado do código do calopsita:
+
+TODO -> colorir isso
+/**
+ * <b>In order to</b> plan what has to be done <br>
+ * <b>As a</b> project client <br>
+ * <b>I want to</b> create and edit cards (with name and description) <br>
+ *
+ */
+public class CreateACardStory extends DefaultStory {
+
+	@Test
+	public void cardCreation() throws Exception {
+		given.thereIsAnUserNamed("David").and()
+			.thereIsAProjectNamed("Papyrus").ownedBy("David").and()
+			.iAmLoggedInAs("David");
+
+		when.iOpenProjectPageOf("Papyrus").and()
+		    .iOpenCardsPage().and()
+			.iAddTheCard("Incidents").withDescription("create and update an incident").and()
+			.iOpenCardsPage();
+		then.theCard("Incidents").appearsOnList();
+	}
+}
+
+que se removermos os ruidos sintáticos e os Camel cases, ficaria:
+
+{\bf In order to} plan what has to be done
+{\bf As a} project client
+{\bf I want to} create and edit cards (with name and description)
+
+Create a card story:
+
+card creation:
+	
+		given there is an user Named "David" and
+			there is a project named "Papyrus" owned by "David" and
+			i am logged in as "David"
+
+		when I open project page of "Papyrus" and
+		  I open cards page and
+			I add the card "Incidents" with description "create and update an incident" and
+			I open cards page
+			
+		then the card "Incidents" appears on list
+
+Isso é bastante próximo da linguagem natural, em inglês, e possibilita a leitura fácil até para leigos.
+
+Essa arquitetura de testes foi adotada apenas para testes de aceitação, que eram escritos a cada solicitação de
+funcionalidade. Para os testes unitários, decidimos apenas usar de refatoração, em especial a 
+*****Extract Method - colocar a citação para o livro do Martin Fowler****, possibilitando a escrita de testes bastante
+legíveis, mas com um pouco mais de ruidos sintáticos do Java. Um exemplo de teste unitário, tirado do código do calopsita:
+
+TODO- colorir isso
+
+public class IterationTest {
+	@Test
+	public void addingACardInAnIteration() throws Exception {
+		Iteration iteration = givenAnIteration();
+		Card card = givenACard();
+
+		shouldUpdateTheCard(card);
+
+		whenIAddTheCardToIteration(card, iteration);
+
+		assertThat(card.getIteration(), is(iteration));
+		mockery.assertIsSatisfied();
+	}
+}
+
+Mesmo com mais ruído sintático é possível entender facilmente o intuito do teste:
+
+Adicionando um cartão em uma iteração:
+  dado uma Iteração e
+  dado um cartão
+  
+  deve atualizar o cartão
+  
+  quando eu adicionar o cartão na iteração
+  
+  no final, garanta que a iteração do cartão é a iteração acima
+  
+
+Dessa forma, a manutenção dos testes fica muito fácil, e pode ser feita facilmente por qualquer pessoa, pois o teste deixa bem claro que está fazendo.
+
+
 O Calopsita está sendo desenvolvido com a linguagem Java, utilizando ainda Hibernate e javascript. Como framework MVC começamos utilizando o VRaptor 2 e durante o desenvolvimento do VRaptor 3 resolvemos fazer a migração. Muita coisa que precisavamos ainda não contava com o suporte do VRaptor 3, portanto nossa adoção ajudou no desenvolvimento desse framework. Ainda foi a adoção desse framework que nos permitiu a utilização de url's amigáveis, restful, etc. Sua principal vantagem é: blabla
 
 
