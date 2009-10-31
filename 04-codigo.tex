@@ -137,6 +137,42 @@ o desenvolvimento da arquitetura em plugins do calopsita.
 
 \section{ActiveRecord}
 
+TODO -- mudar isso para estilo de monografia...
+
+O ***http://martinfowler.com/eaaCatalog/activeRecord.html*** padrão Active Record ficou bem famoso após o 
+surgimento do <a href="http://rubyonrails.org/">Ruby on Rails</a>, que o usa para fazer a persistência dos 
+dados. Em Java, geralmente usamos o padrão ****http://martinfowler.com/eaaCatalog/dataMapper.html*** Data 
+Mapper, pois temos ótimos frameworks, como o Hibernate e a JPA, que nos ajudam com a parte de persistência 
+e são classificados como tal.
+
+Geralmente, em Java, usamos o Hibernate, e usamos ***citação de design pattern disso?**** DAOs para encapsular 
+o acesso a dados. Mas frequentemente nos encontramos escrevendo o seguinte tipo de método, dentro de um DAO:
+
+public List<Aluno> listaAlunosInteressadosNaTurma(Turma turma) {...}
+
+Esse código não está orientado a objetos, embora receba e retorne objetos. Esse mesmo código poderia ser escrito como:
+
+public class Turma {
+   //...
+   List<Aluno> getAlunosInteressados() {...}
+}
+
+que é um código bem mais orientado a objetos.
+Existem muitos casos em que daria para fazer algo assim, e não precisaríamos ficar espalhando os DAOs por aí só para fazer esse tipo de consulta. Nessas situações é que usar Active Record deixa o código mais limpo, menos acoplado e mais orientado a objetos. Mas estamos em uma linguagem estática, e as coisas não acontecem <a href="http://rubylearning.com/satishtalim/ruby_method_missing.html">"magicamente"</a> como no Ruby, por exemplo. Precisamos que a <strong>Turma</strong> saiba lidar com o banco de dados, e geralmente passamos pra ela uma <a href="https://www.hibernate.org/hib_docs/v3/api/org/hibernate/Session.html">Session</a> ou um <a href="http://www.techq.com/onlinedoc/jdocs/jee15/api/javax/persistence/EntityManager.html">Entity Manager</a>.</p>
+<p>Isso também não é muito legal, pois a <strong>Turma</strong> começa a ficar com milhares de métodos, e com um monte de lógica de consulta ao banco de dados. Uma boa solução é adotar uma idéia que vem do <a href="http://domaindrivendesign.org/">DDD</a>: a Entidade <strong>Turma</strong> tem acesso ao repositório de dados de <strong>Turma</strong>, ou seja, ao <strong>TurmaRepository</strong>. Desse modo, poderíamos ter:</p>
+<p><code> </code></p>
+<p><code></p>
+<pre>public class Turma {
+   private TurmaRepository repository;
+   ...
+   List&lt;Aluno&gt; getAlunosInteressados() {
+       return repository.listaAlunosInteressadosNaTurma(this);
+   }
+}</pre>
+<p></code></p>
+<p>Ou seja, a entidade continuaria tendo acesso "direto" ao BD e mesmo assim não teríamos um monte de código dentro da entidade para darmos manutenção. Usando essa variante de Active Record, poderíamos ter na nossa entidade tanto acesso aos dados da tabela <strong>Turma</strong>, aos métodos <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> para <strong>Turma</strong>, e a algumas consultas ao BD que dependem da turma. Dessa forma, nosso código lá no <strong>AlunoLogic</strong> não precisaria ficar usando vários DAOs "desnecessariamente", bastaria usar as consultas diretamente nas entidades pertinentes.</p>
+<p>Claro que essa abordagem não resolve consulta do tipo: <strong>listaTodasAsTurmasDoSistema</strong>, ou <strong>listaTodasAsTurmasFuturas</strong>, e nesse caso, sua lógica de negócio poderia usar o próprio DAO para isso. Mas usando essa idéia, é possível deixar a lógica de negócios muito menos dependente de DAOs, e as entidades muito mais ativas, conseguindo se comunicar com o banco de dados de uma maneira mais limpa e orientada a objetos.</p>
+
 
 
 O Calopsita está sendo desenvolvido com a linguagem Java, utilizando ainda Hibernate e javascript. Como framework MVC começamos utilizando o VRaptor 2 e durante o desenvolvimento do VRaptor 3 resolvemos fazer a migração. Muita coisa que precisavamos ainda não contava com o suporte do VRaptor 3, portanto nossa adoção ajudou no desenvolvimento desse framework. Ainda foi a adoção desse framework que nos permitiu a utilização de url's amigáveis, restful, etc. Sua principal vantagem é: blabla
