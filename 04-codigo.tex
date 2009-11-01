@@ -157,21 +157,30 @@ public class Turma {
    List<Aluno> getAlunosInteressados() {...}
 }
 
-que é um código bem mais orientado a objetos.
-Existem muitos casos em que daria para fazer algo assim, e não precisaríamos ficar espalhando os DAOs por aí só para fazer esse tipo de consulta. Nessas situações é que usar Active Record deixa o código mais limpo, menos acoplado e mais orientado a objetos. Mas estamos em uma linguagem estática, e as coisas não acontecem <a href="http://rubylearning.com/satishtalim/ruby_method_missing.html">"magicamente"</a> como no Ruby, por exemplo. Precisamos que a <strong>Turma</strong> saiba lidar com o banco de dados, e geralmente passamos pra ela uma <a href="https://www.hibernate.org/hib_docs/v3/api/org/hibernate/Session.html">Session</a> ou um <a href="http://www.techq.com/onlinedoc/jdocs/jee15/api/javax/persistence/EntityManager.html">Entity Manager</a>.</p>
-<p>Isso também não é muito legal, pois a <strong>Turma</strong> começa a ficar com milhares de métodos, e com um monte de lógica de consulta ao banco de dados. Uma boa solução é adotar uma idéia que vem do <a href="http://domaindrivendesign.org/">DDD</a>: a Entidade <strong>Turma</strong> tem acesso ao repositório de dados de <strong>Turma</strong>, ou seja, ao <strong>TurmaRepository</strong>. Desse modo, poderíamos ter:</p>
-<p><code> </code></p>
-<p><code></p>
-<pre>public class Turma {
-   private TurmaRepository repository;
-   ...
-   List&lt;Aluno&gt; getAlunosInteressados() {
-       return repository.listaAlunosInteressadosNaTurma(this);
-   }
-}</pre>
-<p></code></p>
-<p>Ou seja, a entidade continuaria tendo acesso "direto" ao BD e mesmo assim não teríamos um monte de código dentro da entidade para darmos manutenção. Usando essa variante de Active Record, poderíamos ter na nossa entidade tanto acesso aos dados da tabela <strong>Turma</strong>, aos métodos <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> para <strong>Turma</strong>, e a algumas consultas ao BD que dependem da turma. Dessa forma, nosso código lá no <strong>AlunoLogic</strong> não precisaria ficar usando vários DAOs "desnecessariamente", bastaria usar as consultas diretamente nas entidades pertinentes.</p>
-<p>Claro que essa abordagem não resolve consulta do tipo: <strong>listaTodasAsTurmasDoSistema</strong>, ou <strong>listaTodasAsTurmasFuturas</strong>, e nesse caso, sua lógica de negócio poderia usar o próprio DAO para isso. Mas usando essa idéia, é possível deixar a lógica de negócios muito menos dependente de DAOs, e as entidades muito mais ativas, conseguindo se comunicar com o banco de dados de uma maneira mais limpa e orientada a objetos.</p>
+que é um código bem mais orientado a objetos. O Hibernate já possibilita esse tipo de código quando você
+tem relacionamentos configurados no seu modelo, através de *****citação***** proxies, fazendo a consulta ao banco
+só da primeira vez que o método é acessado. Mas nem sempre temos um relacionamento direto, queremos só os alunos
+ativos, por exemplo. Nesse caso é preciso o acesso ao banco de dados a partir do modelo e precisamos injetá-lo.
+Em Ruby isso é possível através de ***citação**** mixins, que interpretam invocações a métodos que não existem no
+modelo, e traduzindo a invocação para uma consulta ao banco de dados. Em Java precisamos dos métodos explicitamente
+declarados, logo não é possível fazer uma herança que interprete métodos arbitrários.
+
+A saída foi adotar o padrão Repository do Domain Driven Design *****citação*****, e usar injeção de dependências para
+que o modelo receba o seu respectivo repositório de dados. Desse modo, adicionamos métodos que apenas delegam para o
+repositório, que vai fazer a consulta ao banco de fato.
+
+Injetar dependências em modelos não é uma tarefa trivial, pois os modelos são criados várias vezes, em várias condições
+diferentes, algumas delas feitas internamente pelo Hibernate para criar listagens, por exemplo. Além disso, esses
+modelos são criados a partir de parâmetros da requisição Web. Quando o Active Record começou a ser implementado no 
+calopsita, o VRaptor não suportava esse tipo de injeção de dependência, então o próprio calopsita implementou essa
+injeção sobrescrevendo alguns componentes do VRaptor. Mas um pouco antes do VRaptor lançar sua versão final surgiu
+um projeto \opensource chamado IOGI, que permite criar objetos imutáveis a partir de parâmetros da requisição.
+Além disso ele possibilita a injeção de dependências, o que fez com que não precisássemos fazer isso no calopsita,
+diminuindo a quantidade de código de infraestrutura existente.
+
+Desse modo criamos modelos ricos, que encapsulam o seu acesso e representação no banco de dados. Assim os controladores
+das requisições Web não precisam lidar com operações do banco de dados, eles apenas usam a interface do próprio modelo
+para fazer isso.
 
 
 
