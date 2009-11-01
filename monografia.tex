@@ -5,12 +5,19 @@
 \usepackage[brazil]{babel}
 \usepackage{hyperref}
 \usepackage{rotating}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{listings}
 \usepackage{amsmath, amsthm, amssymb}
 \hypersetup{colorlinks=true,%
 	citecolor=red,%
 	linkcolor=red,%
 	urlcolor=blue,%
 	pdftex}
+
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
 
 \newcommand{\opensource}{\textit{open source}}
 \newcommand{\software}{\textit{software}}
@@ -19,6 +26,13 @@
 \author{Cauê Haucke Porta Guerra\\Cecilia Fernandes\\Lucas Cavalcanti dos Santos\\ \\Orientador: Prof. Dr. Alfredo Goldman}
 
 \begin{document}
+	
+\lstset{language=Java,frame=ltrb,framesep=5pt,basicstyle=\normalsize,
+  keywordstyle=\ttfamily\color{OliveGreen},
+ identifierstyle=\ttfamily\color{CadetBlue}\bfseries, 
+ commentstyle=\color{Brown},
+ stringstyle=\ttfamily,
+ showstringspaces=ture}
 
 \maketitle
 

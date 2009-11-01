@@ -29,7 +29,7 @@ http://blog.caelum.com.br/2009/02/28/behavior-driven-development-com-junit/. Ess
 testes que possibilita a escrita de testes de aceitação, em Java, quase em linguagem natural. Um exemplo de teste 
 escrito nessa arquitetura, tirado do código do calopsita:
 
-TODO -> colorir isso
+\begin{lstlisting}
 /**
  * <b>In order to</b> plan what has to be done <br>
  * <b>As a</b> project client <br>
@@ -51,6 +51,7 @@ public class CreateACardStory extends DefaultStory {
 		then.theCard("Incidents").appearsOnList();
 	}
 }
+\end{lstlisting}
 
 que se removermos os ruidos sintáticos e os Camel cases, ficaria:
 
