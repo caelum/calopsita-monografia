@@ -26,9 +26,9 @@ escrito nessa arquitetura, tirado do código do calopsita:
 
 \begin{lstlisting}
 /**
- * <b>In order to</b> plan what has to be done <br>
- * <b>As a</b> project client <br>
- * <b>I want to</b> create and edit cards (with name and description) <br>
+ * In order to plan what has to be done
+ * As a project client
+ * I want to create and edit cards (with name and description)
  *
  */
 public class CreateACardStory extends DefaultStory {
@@ -41,34 +41,35 @@ public class CreateACardStory extends DefaultStory {
 
 		when.iOpenProjectPageOf("Papyrus").and()
 		    .iOpenCardsPage().and()
-			.iAddTheCard("Incidents").withDescription("create and update an incident").and()
+			.iAddTheCard("Incidents")
+				.withDescription("create and update an incident").and()
 			.iOpenCardsPage();
 		then.theCard("Incidents").appearsOnList();
 	}
 }
 \end{lstlisting}
 
-que se removermos os ruidos sintáticos e os Camel cases, ficaria:
-
-{\bf In order to} plan what has to be done
-{\bf As a} project client
-{\bf I want to} create and edit cards (with name and description)
+Repare que se removermos os ruídos sintáticos, ficariámos com:
 
 \begin{verbatim}
+In order to plan what has to be done
+As a project client
+I want to create and edit cards (with name and description)
+
 Create a card story:
 
 card creation:
 	
-		given there is an user Named "David" and
-			there is a project named "Papyrus" owned by "David" and
-			i am logged in as "David"
+	given there is an user Named "David" and
+		there is a project named "Papyrus" owned by "David" and
+		i am logged in as "David"
 
-		when I open project page of "Papyrus" and
-		  I open cards page and
-			I add the card "Incidents" with description "create and update an incident" and
-			I open cards page
+	when I open project page of "Papyrus" and
+		I open cards page and
+		I add the card "Incidents" with description "create and update an incident" and
+		I open cards page
 			
-		then the card "Incidents" appears on list
+	then the card "Incidents" appears on list
 \end{verbatim}
 
 Isso é bastante próximo da linguagem natural, em inglês, e possibilita a leitura fácil até para leigos.
@@ -98,14 +99,14 @@ Mesmo com mais ruído sintático é possível entender facilmente o intuito do t
 
 \begin{verbatim}
 Adicionando um cartão em uma iteração:
-  dado uma Iteração e
-  dado um cartão
+	dado uma Iteração e
+	dado um cartão
   
-  deve atualizar o cartão
+	deve atualizar o cartão
   
-  quando eu adicionar o cartão na iteração
+	quando eu adicionar o cartão na iteração
   
-  no final, garanta que a iteração do cartão é a iteração acima
+	no final, garanta que a iteração do cartão é a iteração acima
 \end{verbatim}
 
 Dessa forma, a manutenção dos testes fica muito fácil, e pode ser feita facilmente por qualquer pessoa, pois o teste deixa bem claro que está fazendo.
@@ -152,8 +153,8 @@ Esse código não está orientado a objetos, embora receba e retorne objetos. Es
 
 \begin{lstlisting}
 public class Turma {
-   //...
-   List<Aluno> getAlunosInteressados() {...}
+	//...
+	List<Aluno> getAlunosInteressados() {...}
 }
 \end{lstlisting}
 
