@@ -16,7 +16,24 @@ Esses dados foram colhidos do gráfico de impacto do GitHub e as divisões de li
 
 Nota-se dessa imagem um pico de linhas de código enviadas ao repositório no mês de maio, mês seguinte a começarmos a gerenciar o próprio Calopsita usando a parte que já estava pronta do projeto. Contudo, houve trabalho de janeiro até o momento atual, com uma considerável queda em setembro para que focássemos nessa monografia.
 
-Desde janeiro, non-stop
+\begin{figure}[htbp]
+  \centering
+  \fbox{
+    \includegraphics[width=110mm]{images/calopsita-kanban.jpg}
+  }
+  \caption{KanBan do Calopsita}
+\end{figure}
+
+Para mantermos a qualidade de nosso código, utilizamos desde o começo do projeto um servidor de integração contínua~\cite{ci}, o CruiseControl.rb~\footnote{http://cruisecontrolrb.thoughtworks.com/}. Esse servidor é capaz de **pingar** o repositório de código de tempos em tempos verificando por mudançar no código, e uma vez detectada alguma alteração, ele baixa o novo código, compila e roda seus testes de forma automática. Se durante esse processo, qualquer um dos testes falha, um email é disparado para toda a equipe, garantido que o bug introduzido seja corrigido o mais rapidamente possível.
+
+\begin{figure}[htbp]
+  \centering
+  \fbox{
+    \includegraphics[width=110mm]{images/cruisecontrol-calopsita.png}
+  }
+  \caption{Cruisecontrol.rb do calopsita}
+\end{figure}
+
 Clientes reais e distribuidos
 Muito pareamento
 Kanban + Calopsita
