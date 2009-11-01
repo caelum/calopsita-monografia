@@ -7,21 +7,18 @@ Antes de iniciar o desenvolvimento do Calopsita, foi discutido quais seriam as e
 Desde o começo resolvemos adotar boas práticas de desenvolvimento, como {\it Behavior Driven Development} (BDD), 
 refatoração constante e programação pareada. Principalmente para usar BDD precisávamos de ferramentas que nos 
 ajudassem a escrever testes mais expressivos e legíveis. No mundo do Ruby on Rails essa prática já está bastante 
-difundida, então existem várias ferramentas de teste como o RUnit e o Cucumber, além da linguagem ser dinâmica e 
-possibilitar a escrita de DSLs e interfaces fluentes de uma maneira bastante direta. Em Java a prática de BDD ainda 
-não está muito forte, então não existem ferramentas muito avançadas, além da linguagem ser estática e burocrática, 
-que torna o desenvolvimento de tais ferramentas muito mais difícil. Mesmo assim, foram pesquisadas as alternativas:
+difundida, então existem várias ferramentas de teste como o RSpec~\footnote{http://rspec.info/} e o Cucumber~\footnote{http://cukes.info/}, além da linguagem ser dinâmica e possibilitar a escrita de DSLs e interfaces fluentes de uma maneira bastante direta. Em Java a prática de BDD ainda não está muito forte, então não existem ferramentas muito avançadas, além da linguagem ser estática e burocrática, que torna o desenvolvimento de tais ferramentas muito mais difícil. Mesmo assim, foram pesquisadas as alternativas:
 
--JBehave - que possibilita a escrita de arquivos texto com a descrição das funcionalidades, e uma classe Java 
+\begin{itemize}
+	\item{JBehave - que possibilita a escrita de arquivos texto com a descrição das funcionalidades, e uma classe Java 
 correspondente a esse arquivo. Foi descartado por causa da sua sintaxe pouco produtiva e de algumas limitações, 
-como a impossibilidade de compartilhar passos entre features ****melhorar essa frase****
--Cucumber + JRuby - poderíamos também usar o próprio Cucumber do Ruby, usando o JRuby para poder integrar código 
-Java aos testes. Foi descartada por causa da complexidade da integração, e por causa da mistura de linguagens.
-
+como a impossibilidade de compartilhar passos entre features ****melhorar essa frase****}
+	\item{Cucumber + JRuby - poderíamos também usar o próprio Cucumber do Ruby, usando o JRuby para poder integrar código 
+Java aos testes. Foi descartada por causa da complexidade da integração, e por causa da mistura de linguagens.}
 ** o que mais mesmo? **
-
--JUnit + Bom senso - Não usar nenhuma ferramenta específica, apenas JUnit para rodar os testes, e o bom senso da 
-equipe para escrever testes legíveis e expressivos.
+	\item{JUnit + Bom senso - Não usar nenhuma ferramenta específica, apenas JUnit para rodar os testes, e o bom senso da 
+equipe para escrever testes legíveis e expressivos.}
+\end{itemize}
 
 Acabamos por optar pela última opção, que era bem mais simples e poderíamos criar uma nova forma de desenvolver 
 testes em Java. A nossa solução para testes foi publicada no blog da Caelum: 
@@ -81,8 +78,7 @@ funcionalidade. Para os testes unitários, decidimos apenas usar de refatoraçã
 *****Extract Method - colocar a citação para o livro do Martin Fowler****, possibilitando a escrita de testes bastante
 legíveis, mas com um pouco mais de ruidos sintáticos do Java. Um exemplo de teste unitário, tirado do código do calopsita:
 
-TODO- colorir isso
-
+\begin{lstlisting}
 public class IterationTest {
 	@Test
 	public void addingACardInAnIteration() throws Exception {
@@ -97,6 +93,7 @@ public class IterationTest {
 		mockery.assertIsSatisfied();
 	}
 }
+\end{lstlisting}
 
 Mesmo com mais ruído sintático é possível entender facilmente o intuito do teste:
 
@@ -149,14 +146,18 @@ e são classificados como tal.
 Geralmente, em Java, usamos o Hibernate, e usamos ***citação de design pattern disso?**** DAOs para encapsular 
 o acesso a dados. Mas frequentemente nos encontramos escrevendo o seguinte tipo de método, dentro de um DAO:
 
+\begin{lstlisting}
 public List<Aluno> listaAlunosInteressadosNaTurma(Turma turma) {...}
+\end{lstlisting}
 
 Esse código não está orientado a objetos, embora receba e retorne objetos. Esse mesmo código poderia ser escrito como:
 
+\begin{lstlisting}
 public class Turma {
    //...
    List<Aluno> getAlunosInteressados() {...}
 }
+\end{lstlisting}
 
 que é um código bem mais orientado a objetos. O Hibernate já possibilita esse tipo de código quando você
 tem relacionamentos configurados no seu modelo, através de *****citação***** proxies, fazendo a consulta ao banco
