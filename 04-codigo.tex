@@ -14,14 +14,13 @@ difundida, então existem várias ferramentas de teste como o RSpec~\footnote{ht
 correspondente a esse arquivo. Foi descartado por causa da sua sintaxe pouco produtiva e de algumas limitações, 
 como a impossibilidade de compartilhar passos entre features ****melhorar essa frase****}
 	\item{Cucumber + JRuby - poderíamos também usar o próprio Cucumber do Ruby, usando o JRuby para poder integrar código 
-Java aos testes. Foi descartada por causa da complexidade da integração, e por causa da mistura de linguagens.}
-** o que mais mesmo? **
+Java aos testes. Foi descartada por causa da complexidade da integração, e por causa da mistura de linguagens (isso poderia afastar eventuais colaboradores).}
 	\item{JUnit + Bom senso - Não usar nenhuma ferramenta específica, apenas JUnit para rodar os testes, e o bom senso da 
 equipe para escrever testes legíveis e expressivos.}
 \end{itemize}
 
 Acabamos por optar pela última opção, que era bem mais simples e poderíamos criar uma nova forma de desenvolver 
-testes em Java. A nossa solução para testes foi publicada no blog da Caelum~\footnote{http://blog.caelum.com.br/2009/02/28/behavior-driven-development-com-junit/}. Essa solução é uma arquitetura de 
+testes em Java. A nossa solução para testes foi publicada no blog da Caelum~\footnote{http://blog.caelum.com.br/2009/02/28/behavior-driven-development-com-junit/} e é uma arquitetura de 
 testes que possibilita a escrita de testes de aceitação, em Java, quase em linguagem natural. Um exemplo de teste 
 escrito nessa arquitetura, tirado do código do calopsita:
 
