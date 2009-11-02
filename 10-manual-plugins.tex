@@ -1,3 +1,124 @@
 \section{Apêndice II - Criando plugins}
 
+A criação de plugins no calopsita é baseada em pontos de extensão. Os pontos de extensão já implementados são:
+
+\begin{itemize}
+	\item{\textbf{Gadget} - Implemente uma entidade do Hibernate com essa interface, e então você pode adicionar informações
+		aos cartões que possuirem esse gadget. Por exemplo se você quiser adicionar uma estimativa de velocidade, tempo total 
+		ou dificuldade do cartão}
+	\item{\textbf{Transformer} - Implemente essa interface e anote a classe gerada com @Component. Assim você consegue
+		modificar as listagens, por exemplo mudando a ordenação ou removendo determinados itens.}
+	\item{\textbf{PluginConfig} - Implemente essa interface e anote a classe gerada com @Component. Com ela é possível
+		adicionar itens aos menus do sistema, baseados nos parâmetros da requisição}
+\end{itemize}
+
+Além disso, você pode criar novas telas para o sistema. Para isso basta criar um controlador do 
+VRaptor~\footnote{http://vraptor.caelum.com.br/documentacao} e as respectivas jsps de resultado.
+Todas as classes geradas precisam estar abaixo do pacote \textbf{br.com.caelum.calopsita} para que o
+VRaptor consiga enxergá-las.
+
+Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, precisamos criar as classes:
+
+\begin{itemize}
+	\item{o Gadget para adicionar informação ao cartão:
+		\begin{lstlisting}
+			package br.com.caelum.calopsita.plugins.velocidade;
+			
+			@Entity
+			public class VelocidadeCard implements Gadget {
+				@Id
+				@GeneratedValue
+				private Long id; // o id do banco
+				
+				@OneToOne
+				private Card card; // o cartão que esse gadget vai adicionar informação
+				
+				private Integer velocidade; // a informação a mais
+				
+				// getters e setters
+			}
+		\end{lstlisting}	
+	}
+	\item{um Transformer para ordenar os cartões por velocidade:
+		\begin{lstlisting}
+			package br.com.caelum.calopsita.plugins.velocidade;
+			@Component
+			public class OrdenaPorVelocidadeTransformer implements Transformer<Card> {
+
+				public boolean accepts(Class<?> type) {
+					return type.equals(Card.class); // vai transformar listas de cartões
+				}
+
+				public List<Card> transform(List<Card> list, Session session) {
+					Collections.sort(list, new VelocidadeComparator()); // ordena a lista de acordo com o comparator abaixo
+					return list;
+				}
+
+				public static class VelocidadeComparator implements Comparator<Card> {
+					public int compare(Card esquerda, Card direita) {
+						// pega o gadget do tipo dado do cartão. Null se o cartão não tiver o gadget
+						VelocidadeCard velocidadeEsquerda = esquerda.getGadget(VelocidadeCard.class); 
+						VelocidadeCard velocidadeDireita = direita.getGadget(VelocidadeCard.class);
+						
+						// decide se o cartão da esquerda é maior que o da direita
+						// de acordo com o contrato do comparator
+						if (velocidadeEsquerda == null) {
+							return 1;
+						} else if (velocidadeDireita == null) {
+							return -1;
+						}
+						return velocidadeEsquerda.getVelocidade() - velocidadeDireita.getVelocidade();
+					}
+				}
+			}
+
+		\end{lstlisting}
+	}
+	
+	\item{um Controlador do VRaptor que vai tratar as requisições para esse plugin:
+	
+		\begin{lstlisting}
+			package br.com.caelum.calopsita.plugins.velocidade;
+			
+			@Resource
+			public class VelocidadeController {
+				
+				private Result result;
+				public VelocidadeController(Result result) {
+					this.result = result;
+				}
+				// seguindo o padrão das urls
+				@Path("/projects/{project.id}/velocidade")
+				@Get
+				public List<Card> estima(Project project) {
+					return project.getAllCards();
+				}
+	
+				@Path("/projects/{velocidadeCard.card.project.id}/velocidade")
+				@Post
+				public void adiciona(VelocidadeCard velocidadeCard) {
+					// salva o velocidadeCard no banco
+					// redireciona para a estimativa de cartões
+					result.use(logic()).redirectTo(VelocidadeController.class).estima(velocidadeCard.getCard().getProject());
+				}
+				
+			}
+		\end{lstlisting}
+	}
+	
+	\item{um jsp que responda mostre a tela de estimar cartões. Logo precisa estar em /WEB-INF/jsp/velocidade/estima.jsp
+		\begin{verbatim}
+			<!-- estilo da página, organização e etc -->
+			<c:forEach items="${cardList}" var="card">
+				<form action="<c:url value="/projects/${project.id}/velocidade" method="POST">
+					<!-- campos do formulário passar valores para a lógica -->
+				</form>"
+			</c:forEach>
+		\end{verbatim}
+	}
+\end{itemize}
+
+Para instalar o plugin, basta colocar as classes criadas no classpath (dentro de um jar, ou no WEB-INF/classes),
+jsps na pasta /WEB-INF/jsp, e eventuais javascripts e css's na pasta web.
+
 
