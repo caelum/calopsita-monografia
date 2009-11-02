@@ -22,55 +22,64 @@ Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, 
 \begin{itemize}
 	\item{o Gadget para adicionar informação ao cartão:
 		\begin{lstlisting}
-			package br.com.caelum.calopsita.plugins.velocidade;
-			
-			@Entity
-			public class VelocidadeCard implements Gadget {
-				@Id
-				@GeneratedValue
-				private Long id; // o id do banco
-				
-				@OneToOne
-				private Card card; // o cartao que esse gadget vai adicionar informacao
-				
-				private Integer velocidade; // a informacao a mais
-				
-				// getters e setters
-			}
+package br.com.caelum.calopsita.plugins.velocidade;
+
+@Entity
+public class VelocidadeCard implements Gadget {
+	@Id
+	@GeneratedValue
+	private Long id; // o id do banco
+	
+	@OneToOne
+	private Card card; // o cartao correspondente
+	
+	private Integer velocidade; // a informacao a mais
+	
+	// getters e setters
+}
 		\end{lstlisting}	
 	}
 	\item{um Transformer para ordenar os cartões por velocidade:
 		\begin{lstlisting}
-			package br.com.caelum.calopsita.plugins.velocidade;
-			@Component
-			public class OrdenaPorVelocidadeTransformer implements Transformer<Card> {
+package br.com.caelum.calopsita.plugins.velocidade;
+@Component
+public class OrdenaPorVelocidadeTransformer 
+					implements Transformer<Card> {
 
-				public boolean accepts(Class<?> type) {
-					return type.equals(Card.class); // vai transformar listas de cartoes
-				}
+	public boolean accepts(Class<?> type) {
+		// vai transformar listas de cartoes
+		return type.equals(Card.class); 
+	}
 
-				public List<Card> transform(List<Card> list, Session session) {
-					Collections.sort(list, new VelocidadeComparator()); // ordena a lista de acordo com o comparator abaixo
-					return list;
-				}
+	public List<Card> transform(List<Card> list, 
+						Session session) {
+		// ordena a lista de acordo com o comparator abaixo
+		Collections.sort(list, new VelocidadeComparator()); 
+		return list;
+	}
 
-				public static class VelocidadeComparator implements Comparator<Card> {
-					public int compare(Card esquerda, Card direita) {
-						// pega o gadget do tipo dado do cartao. Null se o cartao nao tiver o gadget
-						VelocidadeCard velocidadeEsquerda = esquerda.getGadget(VelocidadeCard.class); 
-						VelocidadeCard velocidadeDireita = direita.getGadget(VelocidadeCard.class);
-						
-						// decide se o cartao da esquerda e maior que o da direita
-						// de acordo com o contrato do comparator
-						if (velocidadeEsquerda == null) {
-							return 1;
-						} else if (velocidadeDireita == null) {
-							return -1;
-						}
-						return velocidadeEsquerda.getVelocidade() - velocidadeDireita.getVelocidade();
-					}
-				}
+	public static class VelocidadeComparator 
+				implements Comparator<Card> {
+		public int compare(Card esquerda, Card direita) {
+			// pega o gadget do tipo dado do cartao. 
+			// Null se o cartao nao tiver o gadget
+			VelocidadeCard velocidadeEsquerda = 
+						esquerda.getGadget(VelocidadeCard.class); 
+			VelocidadeCard velocidadeDireita = 
+						direita.getGadget(VelocidadeCard.class);
+			
+			// decide se o cartao da esquerda e maior que o da direita
+			// de acordo com o contrato do comparator
+			if (velocidadeEsquerda == null) {
+				return 1;
+			} else if (velocidadeDireita == null) {
+				return -1;
 			}
+			return velocidadeEsquerda.getVelocidade() 
+					- velocidadeDireita.getVelocidade();
+		}
+	}
+}
 
 		\end{lstlisting}
 	}
@@ -78,31 +87,32 @@ Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, 
 	\item{um Controlador do VRaptor que vai tratar as requisições para esse plugin:
 	
 		\begin{lstlisting}
-			package br.com.caelum.calopsita.plugins.velocidade;
-			
-			@Resource
-			public class VelocidadeController {
-				
-				private Result result;
-				public VelocidadeController(Result result) {
-					this.result = result;
-				}
-				// seguindo o padrao das urls
-				@Path("/projects/{project.id}/velocidade")
-				@Get
-				public List<Card> estima(Project project) {
-					return project.getAllCards();
-				}
+package br.com.caelum.calopsita.plugins.velocidade;
+
+@Resource
+public class VelocidadeController {
 	
-				@Path("/projects/{velocidadeCard.card.project.id}/velocidade")
-				@Post
-				public void adiciona(VelocidadeCard velocidadeCard) {
-					// salva o velocidadeCard no banco
-					// redireciona para a estimativa de cartoes
-					result.use(logic()).redirectTo(VelocidadeController.class).estima(velocidadeCard.getCard().getProject());
-				}
-				
-			}
+	private Result result;
+	public VelocidadeController(Result result) {
+		this.result = result;
+	}
+	// seguindo o padrao das urls
+	@Path("/projects/{project.id}/velocidade")
+	@Get
+	public List<Card> estima(Project project) {
+		return project.getAllCards();
+	}
+
+	@Path("/projects/{velocidadeCard.card.project.id}/velocidade")
+	@Post
+	public void adiciona(VelocidadeCard velocidadeCard) {
+		// salva o velocidadeCard no banco
+		// redireciona para a estimativa de cartoes
+		result.use(logic()).redirectTo(VelocidadeController.class)
+				.estima(velocidadeCard.getCard().getProject());
+	}
+	
+}
 		\end{lstlisting}
 	}
 	
@@ -117,12 +127,13 @@ Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, 
 	 tabsize=2}
 	
 		\begin{lstlisting}
-			<!-- estilo da pagina, organizacao e etc -->
-			<c:forEach items="${cardList}" var="card">
-				<form action="<c:url value="/projects/${project.id}/velocidade" method="POST">
-					<!-- campos do formulario passar valores para a logica -->
-				</form>"
-			</c:forEach>
+<!-- estilo da pagina, organizacao e etc -->
+<c:forEach items="${cardList}" var="card">
+	<form action="<c:url value="/projects/${project.id}/velocidade" 
+		method="POST">
+		<!-- campos do formulario passar valores para a logica -->
+	</form>"
+</c:forEach>
 		\end{lstlisting}
 	}
 \end{itemize}
