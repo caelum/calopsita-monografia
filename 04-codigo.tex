@@ -13,14 +13,21 @@ difundida, então existem várias ferramentas de teste como o RSpec~\footnote{ht
 	\item{JBehave~\footnote{http://jbehave.org/} - funciona associando um arquivo texto a um código Java. No arquivo texto fica a descrição da funcionalidade, tal como seria escrita num cartão de estória. Foi descartado por causa da sua sintaxe pouco produtiva e de algumas limitações, como a impossibilidade de compartilhar passos (associações entre código Java e etapas da funcionalidade) entre funcionalidades.}
 	\item{Cucumber + JRuby~\footnote{http://jruby.org/} - poderíamos também usar o próprio Cucumber do Ruby, usando o JRuby para poder integrar código 
 Java aos testes. Foi descartada por causa da complexidade da integração, e por causa da mistura de linguagens (isso poderia afastar eventuais colaboradores).}
-	\item{JUnit + Bom senso - Não usar nenhuma ferramenta específica, apenas JUnit para rodar os testes, e o bom senso da 
+	\item{JUnit - Não usar nenhuma ferramenta específica, apenas JUnit para rodar os testes, e o bom senso da 
 equipe para escrever testes legíveis e expressivos.}
 \end{itemize}
 
 Acabamos por optar pela última opção, que era bem mais simples e poderíamos criar uma nova forma de desenvolver 
 testes em Java. A nossa solução para testes foi publicada no blog da Caelum~\footnote{http://blog.caelum.com.br/2009/02/28/behavior-driven-development-com-junit/} e é uma arquitetura de 
-testes que possibilita a escrita de testes de aceitação, em Java, quase em linguagem natural. Um exemplo de teste 
-escrito nessa arquitetura, tirado do código do calopsita:
+testes que possibilita a escrita de testes de aceitação, em Java, quase em linguagem natural. Baseada no Cucumber, criamos algumas convenções para aumentar a legibilidade, de acordo com suas responsabilidades:
+
+\begin{itemize}
+	\item{GivenSteps given - objeto que vai preparar o contexto inicial do teste em questão. Ex: Entrar em uma página, inserir determinados objetos no banco, logar-se com um dado usuário, etc.}
+	\item{WhenSteps when - objeto que vai executar as ações do teste em si, utilizando o contexto definido pelo objeto given. É a parte mais importante do teste. Ex: Preencher um formulário, clicar no botao Enviar, selecionar um item em alguma comboBox, etc.}
+	\item{ThenSteps then - objeto que verifica se o resultado das ações executadas é o esperado. Ex: O usuário está logado? Apareceu a mensagem ``Inserido com sucesso''? Deu erro de validação?}
+\end{itemize}
+
+Um exemplo de teste escrito nessa arquitetura, tirado do código do calopsita:
 
 \begin{lstlisting}
 /**
@@ -58,7 +65,7 @@ Create a card story:
 
 card creation:
 	
-	given there is an user Named "David" and
+	given there is an user named "David" and
 		there is a project named "Papyrus" owned by "David" and
 		i am logged in as "David"
 
@@ -112,6 +119,12 @@ Dessa forma, a manutenção dos testes fica muito fácil, e pode ser feita facil
 
 
 \subsection{VRaptor e Injeção de Dependências}
+
+*****
+por que vraptor ao inves de struts? o que ele tinha de bom? framework caseiro? comunidade? caelum?
+quais as vantagens do vraptor 3? o que trouxe de novo? inspirado por rails? rest? extensibilidade?
+quando falar de rest, citar jim webber =D, falar que ele viu o codigo do calops, parte de testes, etc
+*****
 
 Como a escolha do Calopsita foi Java com VRaptor, começamos a desenvolver com o VRaptor na versão 2.6. 
 Ao mesmo tempo, a versão nova do VRaptor, a 3.0, começou a ser desenvolvida, e por volta de julho já tinha 
