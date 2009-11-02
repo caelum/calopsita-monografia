@@ -272,8 +272,19 @@ que transforma a interface procedural numa interface fluente~\cite{dsl} e orient
 
 Um dos problemas do Selenium é quando você tenta configurá-lo em um processo de Integração Contínua~\cite{ci}. Por precisar
 de recursos externos ao teste (servidor do selenium e navegadores sendo abertos), as máquinas que vão rodar o teste de fato
-precisam de um servidor gráfico rodando, dificultando bastante a instalação
-http://www.youtube.com/watch?v=5oFlh\_Ka65U\&feature=related
+precisam de um servidor gráfico rodando, dificultando bastante a instalação dessas máquinas. Por esse motivo, resolvemos
+migrar os testes para o HtmlUnit.
+
+Como a API SeleniumDSL é toda baseada em interface, decidimos criar, usando o \calopsita como base, uma implementação para
+HtmlUnit, transformando assim o SeleniumDSL num Adapter~\cite{gof}: não foi preciso mudar a implementação dos testes no 
+\calopsita, tudo continuou funcionando quando a implementação do SeleniumDSL foi trocada. Além disso, a interface fluente
+do SeleniumDSL tem um único ponto de entrada, assim trocar da implementação em Selenium para a em HtmlUnit envolve apenas
+a mudança de uma linha de código. Por isso, criamos uma Factory~\cite{gof} que decide qual das implementações do SeleniumDSL
+vai ser usada, fazendo com que aproveitássemos as vantagens das duas formas de fazer testes para a web: usar o Selenium 
+durante o desenvolvimento dos testes, para facilitar a depuração, e usar o HtmlUnit para rodar os testes no ambiente de
+integração contínua, para maior rapidez nos testes e maior simplicidade. Essa implementação de HtmlUnit
+para SeleniumDSL rendeu uma palestra num evento interno da Caelum~\footnote{http://www.youtube.com/watch?v=5oFlh\_Ka65U\&feature=related}.
+
 HtmlUnit x Selenium
 
 \subsection{Organização do código}
