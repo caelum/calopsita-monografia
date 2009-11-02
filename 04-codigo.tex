@@ -129,7 +129,7 @@ quando falar de rest, citar jim webber =D, falar que ele viu o codigo do calops,
 Como a escolha do Calopsita foi Java com VRaptor, começamos a desenvolver com o VRaptor na versão 2.6. 
 Ao mesmo tempo, a versão nova do VRaptor, a 3.0, começou a ser desenvolvida, e por volta de julho já tinha 
 uma versão alfa funcional. O VRaptor 3.0 possibilita o desenvolvimento de aplicações RESTful \cite{rest}
-e o uso massivo de injeção de dependências\cite{dsl}. Dessa forma, era possível adicionar mais 
+e o uso massivo de injeção de dependências\cite{di}. Dessa forma, era possível adicionar mais 
 características e boas práticas ao Calopsita. O uso de uma interface web RESTful traz várias vantagens para 
 uma aplicação web. Usando os verbos HTTP do jeito certo, você consegue aproveitar a semântica da web para a 
 sua aplicação, além de conseguir aproveitar recursos dos servidores, como caching. Além disso, a aplicação 
@@ -141,18 +141,18 @@ personalização e resolução dos problemas que existiam nele. A versão final 
 julho e outubro o calopsita auxiliou no desenvolvimento do VRaptor 3, que é um projeto \opensource desenvolvido pela Caelum.
 
 Usar injeção de dependências faz com que a aplicação fique naturalmente mais testável e menos acoplada. Isso aliado a
-Factory Methods\cite{gof}, e o uso de interfaces ao invés de implementações \cite{interfaces-effective} fez com que as
+Factory Methods\cite{gof}, e o uso de interfaces ao invés de implementações \cite{effective} fez com que as
  classes do calopsita ficassem bem testáveis unitariamente, possibilitando 
-uma cobertura por testes de mais de 85\% (que é bem difícil de se conseguir em projetos java). Isso também auxiliou bastante
+uma cobertura por testes de mais de 90\% (que é bem difícil de se conseguir em projetos java). Isso também auxiliou bastante
 o desenvolvimento da arquitetura em plugins do calopsita.
 
 \subsection{ActiveRecord}
 
-O padrão Active Record \cite{activeRecord} ficou bem famoso após o surgimento do Ruby on Rails\footnote{http://rubyonrails.org}, que o usa 
-para fazer a persistência dos dados. Em Java, geralmente usamos o padrão Data Mapper \cite{dataMapper}, pois temos 
+O padrão Active Record~\cite{activeRecord} ficou bem famoso após o surgimento do Ruby on Rails\footnote{http://rubyonrails.org}, que o usa 
+para fazer a persistência dos dados. Em Java, geralmente usamos o padrão Data Mapper~\cite{dataMapper}, pois temos 
 ótimos frameworks, como o Hibernate e a JPA, que nos ajudam com a parte de persistência e são classificados como tal.
 
-Geralmente, em Java, usamos o Hibernate, e usamos DAOs\cite{dao} para encapsular 
+Geralmente, em Java, usamos o Hibernate, e usamos DAOs~\cite{dao} para encapsular 
 o acesso a dados. Mas frequentemente nos encontramos escrevendo o seguinte tipo de método, dentro de um DAO:
 
 \begin{lstlisting}
@@ -169,14 +169,15 @@ public class Turma {
 \end{lstlisting}
 
 que é um código bem mais orientado a objetos. O Hibernate já possibilita esse tipo de código quando você
-tem relacionamentos configurados no seu modelo, através de *****citação***** proxies, fazendo a consulta ao banco
+tem relacionamentos configurados no seu modelo, através de proxies~\cite{gof}, fazendo a consulta ao banco
 só da primeira vez que o método é acessado. Mas nem sempre temos um relacionamento direto, queremos só os alunos
 ativos, por exemplo. Nesse caso é preciso o acesso ao banco de dados a partir do modelo e precisamos injetá-lo.
-Em Ruby isso é possível através de ***citação**** mixins, que interpretam invocações a métodos que não existem no
-modelo, e traduzindo a invocação para uma consulta ao banco de dados. Em Java precisamos dos métodos explicitamente
-declarados, logo não é possível fazer uma herança que interprete métodos arbitrários.
+Em Ruby isso é possível através de mixins~\footnote{http://www.rubycentral.com/pickaxe/tut_modules.html}, que 
+interpretam invocações a métodos que não existem no modelo, e traduzem a invocação para uma consulta ao banco 
+de dados. Em Java precisamos dos métodos explicitamente declarados, logo não é possível fazer uma herança que 
+interprete métodos arbitrários.
 
-A saída foi adotar o padrão Repository do Domain Driven Design *****citação*****, e usar injeção de dependências para
+A saída foi adotar o padrão Repository do Domain Driven Design~\cite{ddd}, e usar injeção de dependências para
 que o modelo receba o seu respectivo repositório de dados. Desse modo, adicionamos métodos que apenas delegam para o
 repositório, que vai fazer a consulta ao banco de fato.
 
@@ -185,7 +186,8 @@ diferentes, algumas delas feitas internamente pelo Hibernate para criar listagen
 modelos são criados a partir de parâmetros da requisição Web. Quando o Active Record começou a ser implementado no 
 calopsita, o VRaptor não suportava esse tipo de injeção de dependência, então o próprio calopsita implementou essa
 injeção sobrescrevendo alguns componentes do VRaptor. Mas um pouco antes do VRaptor lançar sua versão final surgiu
-um projeto \opensource chamado IOGI, que permite criar objetos imutáveis a partir de parâmetros da requisição.
+um projeto \opensource chamado IOGI~\footnote{http://github.com/rafaeldff/iogi}, que permite criar objetos imutáveis 
+a partir de parâmetros da requisição.
 Além disso ele possibilita a injeção de dependências, o que fez com que não precisássemos fazer isso no calopsita,
 diminuindo a quantidade de código de infraestrutura existente.
 
