@@ -28,7 +28,7 @@ Mais do que isso, o autor, já em 1970 sugeria que o desenvolvimento iterativo �
 
 Em segundo lugar, métodos tradicionais prezam pelo conhecido ``Big Design Up Front'', isto é, em planejar toda a arquitetura de um sistema antes de começar a produzí-lo e manter esse \textit{design} até o produto final surgir. Essa idéia pressupõe que, de início, se saiba tudo o que será necessário do sistema e que essas necessidades não mudem. A experiência mostra que, na produção de \software, o padrão é não conhecer de antemão o que se precisa e as necessidades mudarem com o tempo.
 
-De fato, verificamos a verdade nessa afirmação quando, no início do projeto, os cliente queriam um papel Administrador do Sistema no Calopsita que restringiria partes do sistema que podem ser editados por cada tipo de usuário. Essa funcionalidade, assim como diversas outras, acabou não sendo implementado por se mostrar desnecessária.
+De fato, verificamos a verdade nessa afirmação quando, no início do projeto, os clientes queriam um papel Administrador do Sistema no Calopsita que restringiria partes do sistema que podem ser editados por cada tipo de usuário. Essa funcionalidade, assim como diversas outras, acabou não sendo implementado por se mostrar desnecessária.
 
 Finalmente, tanto os desenvolvedores quanto os clientes do \calopsita valorizam o \textit{feedback} rápido e atribuem a isso muitos projetos bem-sucedidos. Os clientes têm seus trabalhos de mestrado relacionados com métodos ágeis e alguns anos de experiência nessas metodologias. Os desenvolvedores trabalham diariamente com Scrum e XP e possuem certificações pela Scrum Alliance. 
 
@@ -36,7 +36,9 @@ Acreditamos que as metodologias ágeis são uma resposta ao modo engessado com q
 
 \subsection{Abordagem Ágil}
 
-Durante o desenvolvimento do \calopsita, utilizamos alguns métodos típicos de XP e Scrum que melhor funcionavam para nosso time. Acreditamos que não exista uma única maneira de desenvolver \software de maneira ágil e esse é, como mencionado, um dos fatores que motivaram a criação do \calopsita: precisávamos de uma ferramenta que se adequasse às nossas necessidades. Como, durante a maior parte do desenvolvimento, os programadores trabalhavam do mesmo lugar, pudemos adotar um Kanban:
+Embora não tenhamos usado Scrum para desenvolver o \calopsita, utilizamos alguns métodos e ferramentas típicos desse \textit{framework} e de XP que melhor funcionavam para nosso time. Acreditamos que não exista uma única maneira de desenvolver \software de maneira ágil e esse é, como mencionado, um dos fatores que motivaram a criação do \calopsita: precisávamos de uma ferramenta que se adequasse às nossas necessidades. 
+
+Como, durante a maior parte do desenvolvimento, os programadores trabalhavam no mesmo espaço físico, pudemos adotar um Kanban:
 
 \begin{figure}[H]
   \centering
@@ -46,7 +48,7 @@ Durante o desenvolvimento do \calopsita, utilizamos alguns métodos típicos de 
   \caption{KanBan do \calopsita}
 \end{figure}
 
-Para mantermos a qualidade de nosso código, utilizamos desde o começo do projeto um servidor de integração contínua~\cite{ci}, o CruiseControl.rb~\footnote{http://cruisecontrolrb.thoughtworks.com/}. Esse servidor é capaz de consultar o repositório de código de tempos em tempos verificando por mudanças no código. Uma vez detectada alguma alteração, ele baixa o novo código, compila e roda seus testes de forma automática. Se durante esse processo, qualquer um dos testes falhar, um email é disparado para toda a equipe, garantido que o bug introduzido seja corrigido o mais rapidamente possível.
+Para mantermos nosso código funcional a cada mudança, utilizamos desde o começo do projeto um servidor de integração contínua~\cite{ci}, o CruiseControl.rb~\footnote{http://cruisecontrolrb.thoughtworks.com/}. Esse servidor é capaz de consultar o repositório de código de tempos em tempos verificando por mudanças no código. Uma vez detectada alguma alteração, ele baixa o novo código, compila e roda seus testes de forma automática. Se durante esse processo, qualquer um dos testes falhar, um email é disparado para toda a equipe, garantido que o bug introduzido seja corrigido o mais rapidamente possível.
 
 \begin{figure}[H]
   \centering
@@ -56,4 +58,11 @@ Para mantermos a qualidade de nosso código, utilizamos desde o começo do proje
   \caption{Cruisecontrol.rb do \calopsita}
 \end{figure}
 
+A qualidade do código, tanto em aspectos de legibilidade quanto em arquitetura, era assegurada por discussões técnicas na lista do projeto, por discussões com profissionais da Caelum e pelo uso extensivo de pareamento quando programando. As vantagens da programação pareada~\cite{pair}, contudo, vão além da manutenção da qualidade de código -- atribuimos a essa prática o nivelamento do conhecimento não apenas sobre o código do Calopsita, mas também sobre os conceitos aplicados em diversas partes do sistema.
+
+Outro fator que colaborou bastante na qualidade do código é a cultura de refatorações que a equipe adota. A regra é que, sempre que se encontra código que poderia ser melhor, melhora-se ele. Isso faz com que o código se mantenha sempre atual e o melhor possível na visão da equipe de desenvolvimento.
+
+Para mantermos o foco do projeto no que era mais valioso para o cliente a cada momento, a interação com esses foi fundamental para o bom andamento do projeto. Tivemos reuniões semanais ou quinzenais durante todo o ano, onde os clientes testavam o \calopsita ambiente de homologação, aprovavam tarefas,  repriorizavam os cartões de funcionalidades e definiam uma meta para a iteração seguinte. 
+
+Com a estabilização do \calopsita, diversos projetos da Caelum também começaram a usar o sistema para gerencia dos ítens por fazer e iterações. Assim, passamos a ter mais clientes e, portanto, mais pedidos de funcionalidades e correções. Nesse momento, usar o próprio \calopsita para auxiliar em seu desenvolvimento se mostrou bastante conveniente: os clientes colocavam seus pedidos no sistema e priorizavam seus cartoẽs.
 
