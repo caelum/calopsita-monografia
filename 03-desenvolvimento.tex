@@ -16,7 +16,7 @@ Esses dados foram colhidos do gráfico de impacto do GitHub e as divisões de li
 
 Nota-se dessa imagem um pico de linhas de código enviadas ao repositório no mês de maio, mês seguinte a começarmos a gerenciar o próprio \calopsita usando a parte que já estava pronta do projeto. Contudo, houve trabalho de janeiro até o momento atual, com uma considerável queda em setembro para que focássemos nessa monografia.
 
-\subsection{Abordagem ágil}
+\subsection{Gerenciamento do projeto}
 
 Por tratar-se de um projeto de médio porte, seria indicado optar por alguma metodologia de gerenciamento de \software. Métodos tradicionais nem sequer foram considerados. Há algumas razões para isso.
 
@@ -26,13 +26,17 @@ Primeiramente porque, buscando informações históricas sobre o modelo \textit{
 
 Mais do que isso, o autor, já em 1970 sugeria que o desenvolvimento iterativo é mais apropriado para o desenvolvimento de projetos de \software. Isso apenas aumenta nossa consternação com relação ao que se vê no mercado de trabalho ainda hoje -- diversas empresas que clamam usar RUP~\cite{rup} ignoram sua parte mais importante, o desenvolvimento iterativo.
 
-Em segundo lugar, métodos tradicionais prezam pelo conhecido "Big Design Up Front" 
+Em segundo lugar, métodos tradicionais prezam pelo conhecido ``Big Design Up Front'', isto é, em planejar toda a arquitetura de um sistema antes de começar a produzí-lo e manter esse \textit{design} até o produto final surgir. Essa idéia pressupõe que, de início, se saiba tudo o que será necessário do sistema e que essas necessidades não mudem. A experiência mostra que, na produção de \software, o padrão é não conhecer de antemão o que se precisa e as necessidades mudarem com o tempo.
 
- 
+De fato, verificamos a verdade nessa afirmação quando, no início do projeto, os cliente queriam um papel Administrador do Sistema no Calopsita que restringiria partes do sistema que podem ser editados por cada tipo de usuário. Essa funcionalidade, assim como diversas outras, acabou não sendo implementado por se mostrar desnecessária.
 
-\subsection{metodos}
+Finalmente, tanto os desenvolvedores quanto os clientes do \calopsita valorizam o \textit{feedback} rápido e atribuem a isso muitos projetos bem-sucedidos. Os clientes têm seus trabalhos de mestrado relacionados com métodos ágeis e alguns anos de experiência nessas metodologias. Os desenvolvedores trabalham diariamente com Scrum e XP e possuem certificações pela Scrum Alliance. 
 
-Durante o desenvolvimento do \calopsita, utilizamos alguns métodos presentes em XP e Scrum que melhor funcionavam para nosso time. Aliás, acreditamos que não exista uma única maneira de desenvolver \software de maneira ágil e esse é um dos fatores que motivaram a criação do \calopsita: precisávamos de uma ferramenta que se adequasse às nossas necessidades. Nosso time resolveu adotar como ferramenta de tracking do projeto o KanBan:
+Acreditamos que as metodologias ágeis são uma resposta ao modo engessado com que métodos tradicionais tratam a produção de \software e que, aplicando os valores descritos no Manifesto Ágil, obtemos produtos de qualidade, que atendem às necessidades reais dos clientes e dão satisfação aos desenvolvedores.  
+
+\subsection{Abordagem Ágil}
+
+Durante o desenvolvimento do \calopsita, utilizamos alguns métodos típicos de XP e Scrum que melhor funcionavam para nosso time. Acreditamos que não exista uma única maneira de desenvolver \software de maneira ágil e esse é, como mencionado, um dos fatores que motivaram a criação do \calopsita: precisávamos de uma ferramenta que se adequasse às nossas necessidades. Como, durante a maior parte do desenvolvimento, os programadores trabalhavam do mesmo lugar, pudemos adotar um Kanban:
 
 \begin{figure}[H]
   \centering
@@ -42,7 +46,7 @@ Durante o desenvolvimento do \calopsita, utilizamos alguns métodos presentes em
   \caption{KanBan do \calopsita}
 \end{figure}
 
-Para mantermos a qualidade de nosso código, utilizamos desde o começo do projeto um servidor de integração contínua~\cite{ci}, o CruiseControl.rb~\footnote{http://cruisecontrolrb.thoughtworks.com/}. Esse servidor é capaz de **pingar** o repositório de código de tempos em tempos verificando por mudançar no código, e uma vez detectada alguma alteração, ele baixa o novo código, compila e roda seus testes de forma automática. Se durante esse processo, qualquer um dos testes falha, um email é disparado para toda a equipe, garantido que o bug introduzido seja corrigido o mais rapidamente possível.
+Para mantermos a qualidade de nosso código, utilizamos desde o começo do projeto um servidor de integração contínua~\cite{ci}, o CruiseControl.rb~\footnote{http://cruisecontrolrb.thoughtworks.com/}. Esse servidor é capaz de consultar o repositório de código de tempos em tempos verificando por mudanças no código. Uma vez detectada alguma alteração, ele baixa o novo código, compila e roda seus testes de forma automática. Se durante esse processo, qualquer um dos testes falhar, um email é disparado para toda a equipe, garantido que o bug introduzido seja corrigido o mais rapidamente possível.
 
 \begin{figure}[H]
   \centering
@@ -52,9 +56,4 @@ Para mantermos a qualidade de nosso código, utilizamos desde o começo do proje
   \caption{Cruisecontrol.rb do \calopsita}
 \end{figure}
 
-Clientes reais e distribuidos
-Muito pareamento
-Kanban + \calopsita
-Usamos XP e ?????
-TDD e Integração Contínua
 
