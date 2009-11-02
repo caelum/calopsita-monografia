@@ -13,55 +13,40 @@ Crystal
 Antes de iniciar o desenvolvimento do \calopsita, resolvemos analisar quais seriam as outras alternativas disponíveis no mercado. Fizemos uma análise bem extensa, tanto de produtos pagos, quanto de livres e \opensource. A idéia era descobrir quais os pontos fortes de cada ferramenta, e implementá-los no \calopsita. Embora as ferramentas pagas não sejam exatamente concorrentes, mostrar que nosso sistema tem as mesmas ou mais funcionalidades que as alternativas pagas, pode fazer com que atraiamos mais usuários e colaboradores.
 
 \begin{itemize}
-\item Scrumy - https://scrumy.com/
-pago / proprietario
-interface baseada em drag and drop
-leve
-nao é customizavel
-snapshots do projeto no passado e futuro (board image)
-live update
-nao permite estimativas
-nao permite marcacao horas
-nao trabalha com templates nem personas
-burndown
+\item{Scrumy - https://scrumy.com/
 
-\item ScrumNinja - http://scrumninja.com
-pago / proprietario
-pouco customizavel
-estimativa (1, 2 ou 3)
-interface baseada em estados (start, deliver, etc)
-leve
-graficos de progresso
-sem marcacao de horas
-nao trabalha com templates nem personas
-API para atualizar
+É uma ferramenta paga e proprietária, com uma interface baseada em \textit{drag'n drop}. Não permite nenhum tipo de
+customização, nem estimativas, marcação de horas, uso de templates ou personas. Quanto aos gráficos, o único disponibilizado
+é o \textit{burndown}. Como diferencial, permite a visualização do
+projeto em algum ponto do passado, atualizando o kanban para representar o estado do projeto naquele ponto, além de
+permitir atualizações automáticas, ou seja, caso dois usuários estejam mexendo nele ao mesmo tempo, um enxerga as alterações
+do outro sem precisar recarregar a página.}
 
-\item scrum'd - http://scrumd.com/
-pago / proprietario
-nao customizavel
-estorias estimadas em pontos
-tarefas estimadas em horas
-burndown
-import/export tarefas e estorias
-nao trabalha com templates nem personas
+\item{ScrumNinja - http://scrumninja.com
 
+É uma ferramenta paga e proprietária, bem pouco customizável, sem a possibilidade de marcação de horas nem de
+trabalhar com templates ou personas. Tem suporte a estimativas, uma interface baseada em estados (start, deliver, etc) e
+gráficos de progresso. Um diferencial está no fato de que possui uma API que pode ser utilizada para a atualização dos
+cartões.}
 
-\item Pivotal Tracker - http://www.pivotaltracker.com/
-gratuito / proprietario
-import/export tarefas e estorias
-classificacao de estoria em bug/feature/chore/release
-estimativa (1, 2 ou 3)
-nao trabalha com templates nem personas
-estados
-marcacao de velocidade
+\item{Scrum'd - http://scrumd.com/
 
-\item XPlanner - xplanner.org/
-free/open source
-nao trabalha com templates nem personas
-graficos
-estimativas
-marcação de horas
-nao customizavel
+É uma ferramenta paga e proprietária, não customizável, que permite a estimativa de histórias em pontos e de tarefas
+em horas. Faz uso de \textit{burndown} e não trabalha com templates nem personas. Como diferencial, permite a importação e
+exportação de tarefas e estórias.}
+
+\item{Pivotal Tracker - http://www.pivotaltracker.com/
+
+É uma ferramenta proprietária, porém gratuita, que permite a estimativa de estórias em pontos, além da
+marcação da velocidade do time. Também não trabalha com templates nem personas, mas como diferencial permite a importação e
+exportação de tarefas e estórias, bem como permite a classificação de uma estória em bug/feature/chore/release.}
+
+\item{XPlanner - xplanner.org/
+
+É uma ferramenta free e open source, que inclusive vem sendo utilizada pela disciplina de Programação Extrema.
+Ele tem bastantes funcionalidades, mas no entanto, sua interface de uso não é das mais agradáveis. O uso do XPlanner
+por todos do time foi também um fator motivador na criação do \calopsita. Quanto às suas funcionalidades, o XPlanner
+permite o uso de estimativas e marcação de horas, mas não é customizável nem trabalha com templates ou personas.}
 
 \item VersionOne - http://www.versionone.com
 **varias metodologias**
@@ -114,21 +99,21 @@ graficos
 \end{itemize}
 
 \begin{sidewaystable}
-	\begin{tabular}{|l|l|l|l|l|l|l|l}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|}
 		\hline
 		\multicolumn{8}{|c|}{Aplicações similares} \\
 		\hline
-		 & PivotalTracker & Scrumy & ScrumNinja & Scrumd & VersionOne & BlueSoft & Mingle \\
-		Gratuito & X & & & & & & \\
-		OpenSource & - & & & & & & \\
-		Graficos & X & & & & & & \\
-		Estimativas & X & & & & & & \\
-		Priorizacao & X & & & & & & \\
-		Marcacao Horas & - & & & & & & \\
-		Customizavel & & & & & & & \\
-		Templates Metodologias & & & & & & & \\
-		Templates Cartão & & & & & & & \\
-		Personas & & & & & & & \\
+		 & Calopsita & Scrumy & ScrumNinja & Scrum'd & Pivotal Tracker & XPlanner & \\
+		Gratuito & X & - & - & - & X & X & \\
+		OpenSource & X & - & - & - & - & X & \\
+		Graficos & X & X & X & X & X & X & \\
+		Estimativas & X & - & X & X & X & X & \\
+		Priorizacao & X & X & X & X & X & X & \\
+		Marcacao Horas & F & - & - & - & X & X & \\
+		Customizavel & X & - & X & - & X & - & \\
+		Templates Metodologias & F & - & - & - & - & - & \\
+		Templates Cartão & X & - & - & - & - & - & \\
+		Personas & F & - & - & - & - & - & \\
 		\hline
 	\end{tabular}
 \end{sidewaystable}
