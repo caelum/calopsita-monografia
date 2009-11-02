@@ -1,7 +1,9 @@
 \section{Código}
 Todo o código do \calopsita está hospedado no GitHub, local onde também pode ser visualizado todo o histórico e atividades do projeto desde sua concepção.
 
-Antes de iniciar o desenvolvimento do \calopsita, foi discutido quais seriam as escolhas de linguagens e frameworks a serem utilizados. As opções eram: Ruby on Rails ou Java com VRaptor. Como a maioria da equipe era mais familiar com Java do que com Ruby, a escolha foi pelo Java com VRaptor.
+Antes de iniciar o desenvolvimento do \calopsita, foi discutido quais seriam as escolhas de linguagens e frameworks a 
+serem utilizados. As opções eram: Ruby on Rails ou Java com VRaptor. Como a maioria da equipe era mais familiar com Java 
+do que com Ruby, a escolha foi pelo Java com VRaptor.
 
 \subsection{BDD} \label{bdd}
 Desde o começo resolvemos adotar boas práticas de desenvolvimento, como {\it Behavior Driven Development} (BDD) \cite{bdd}, 
@@ -96,7 +98,8 @@ card creation:
 Isso é bastante próximo da linguagem natural, em inglês, e possibilita a leitura fácil até para leigos.
 
 Essa arquitetura de testes foi adotada apenas para testes de aceitação, que eram escritos a cada solicitação de
-funcionalidade. Para os testes unitários, decidimos apenas usar de refatoração, em especial a Extract Method~\cite{refactoring}, possibilitando a escrita de testes bastante
+funcionalidade. Para os testes unitários, decidimos apenas usar de refatoração, em especial a 
+Extract Method~\cite{refactoring}, possibilitando a escrita de testes bastante
 legíveis, mas com um pouco mais de ruidos sintáticos do Java. Um exemplo de teste unitário, tirado do código do \calopsita:
 
 \begin{lstlisting}
@@ -164,8 +167,8 @@ o desenvolvimento da arquitetura em plugins do \calopsita.
 
 \subsection{ActiveRecord}
 
-O padrão Active Record~\cite{activeRecord} ficou bem famoso após o surgimento do Ruby on Rails~\footnote{http://rubyonrails.org},
-que o usa 
+O padrão Active Record~\cite{activeRecord} ficou bem famoso após o surgimento do Ruby on 
+Rails~\footnote{http://rubyonrails.org}, que o usa 
 para fazer a persistência dos dados. Em Java, geralmente usamos o padrão Data Mapper~\cite{dataMapper}, pois temos 
 ótimos frameworks, como o Hibernate e a JPA, que nos ajudam com a parte de persistência e são classificados como tal.
 
@@ -232,10 +235,39 @@ pensar nas operações.
 No processo de desenvolvimento do \calopsita, foram criados testes de aceitação *****citação***** para todas as
 funcionalidades pedidas pelos clientes do projeto. Esses testes simulam a interação do usuário com o sistema, executando
 passos como preencher formulários, clicar em botões, arrastar e soltar componentes. Esses testes de aceitação
-foram escritos em dois passos, o primeiro em linguagem praticamente natural como visto na seção \ref{bdd}.
+foram escritos em dois passos, o primeiro em linguagem praticamente natural como visto na seção \ref{bdd}, e o segundo
+foi a implementação real do teste.
 
+Para executar os testes, precisamos da aplicação rodando de verdade num servidor e, então, simular a interação com 
+o sistema. E essa interação pode ser simulada de duas formas:
+\begin{itemize}
+	\item{abrindo um navegador, como o Firefox ou o Safari, e simulando as ações do usuário via javascript. A principal
+	ferramenta para isso é o Selenium~\footnote{http://seleniumhq.org/}. Uma das vantagens dessa abordagem é podemos
+	acompanhar os passos do teste visualmente, ficando fácil identificar os erros do teste. Entre as desvantagens podemos
+	citar a demora da execução dos testes, pois envolve a criação de novos processos no sistema operacional: o navegador
+	precisa ser aberto, além de requerir um servidor do Selenium rodando.}
+	\item{criar as páginas da aplição em memória. A principal ferramenta para isso, em Java, é o 
+	HtmlUnit~\footnote{http://htmlunit.sourceforge.net/}. Uma das vantagens é que, por fazer tudo em memória, a execução
+	dos testes é bem mais rápida. Mas por ser em memória, não é possível visualizar a execução do teste, o que torna
+	a depuração bem mais complicada.}
+\end{itemize}
+
+O \calopsita começou usando o Selenium para os seus testes de aceitação. Mas a interface do Selenium para Java é bastante
+difícil de utilizar, além de não ser nada orientada a objetos: uma única interface com quase 150 métodos que contém todas
+as ações para uma página possíveis. Por causa disso, muitos projetos surgiram para tornar essa interface mais agradável
+de trabalhar. Um desses projetos é o SeleniumDSL~\footnote{http://github.com/caelum/selenium-dsl}, que é um projeto 
+\opensource desenvolvido por pessoas da Caelum, inclusive os membros do \calopsita. O Selenium DSL é um Façade~\cite{gof}
+que transforma a interface procedural numa interface fluente~\cite{dsl} e orientada a objetos.
+
+Um dos problemas do Selenium é quando você tenta configurá-lo em um processo de Integração Contínua~\cite{ci}. Por precisar
+de recursos externos ao teste (servidor do selenium e navegadores sendo abertos), as máquinas que vão rodar o teste de fato
+precisam de um servidor gráfico rodando, dificultando bastante a instalação
 http://www.youtube.com/watch?v=5oFlh\_Ka65U\&feature=related
 HtmlUnit x Selenium
 
 \subsection{Organização do código}
-O \calopsita está sendo desenvolvido com a linguagem Java, utilizando ainda Hibernate e javascript. Como framework MVC começamos utilizando o VRaptor 2 e durante o desenvolvimento do VRaptor 3 resolvemos fazer a migração. Muita coisa que precisavamos ainda não contava com o suporte do VRaptor 3, portanto nossa adoção ajudou no desenvolvimento desse framework. Ainda foi a adoção desse framework que nos permitiu a utilização de url's amigáveis, restful, etc. Sua principal vantagem é: blabla
+O \calopsita está sendo desenvolvido com a linguagem Java, utilizando ainda Hibernate e javascript. Como 
+framework MVC começamos utilizando o VRaptor 2 e durante o desenvolvimento do VRaptor 3 resolvemos fazer a migração. 
+Muita coisa que precisavamos ainda não contava com o suporte do VRaptor 3, portanto nossa adoção ajudou no 
+desenvolvimento desse framework. Ainda foi a adoção desse framework que nos permitiu a utilização de url's 
+amigáveis, restful, etc. Sua principal vantagem é: blabla
