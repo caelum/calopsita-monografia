@@ -298,7 +298,40 @@ para SeleniumDSL rendeu uma palestra num evento interno da Caelum~\footnote{http
 
 \subsection{Arquitetura em plugins}
 
+Para facilitar a contribuição de pessoas ao projeto, decidimos por adotar uma arquitetura em plugins no desenvolvimento
+do \calopsita. Desse modo existe um núcleo bem definido do sistema, e os plugins podem definir pontos de extensão que
+podem adicionar informação e funcionalidades ao sistema.
 
+O núcleo consiste nas entidades básicas do sistema:
+
+\begin{itemize}
+	\item{\textbf{Card} - \textit{Cartões} - representam funcionalidades, etapas de desenvolvimento, tarefas, 
+		estorias de usuário etc. 
+		São a unidade básica da metodologia ágil, que são geralmente representados por cartões colados em um quadro branco.}
+	\item{\textbf{CardType} - \textit{Tipos de cartão} - adicionam ao cartão uma semântica. Com isso podemos dizer que um
+		cartão é uma tarefa, uma estória ou um épico, por exemplo. Com tipos de cartão você pode também criar 
+		\textit{templates} de gadgets que serão aplicados aos cartões desse tipo.}
+	\item{\textbf{Iteration} - \textit{Iterações} - representa uma iteração, que é uma unidade de trabalho de qualquer
+		metodologia ágil.}
+	\item{\textbf{Project} - \textit{Projetos} - representa um projeto gerenciado pelo calopsita}
+	\item{\textbf{User} - \textit{Usuários} - representa um usuário do sistema.}
+\end{itemize}
+
+Com essas entidades é possível controlar a parte importante do sistema. Mas além delas existe a parte dos plugins,
+que permitem desenvolver as funcionalidades específicas da metodologia ágil adotada pelo projeto. Os plugins são baseados
+em pontos de extensão, e cada ponto de extensão é uma interface que deve ser implementada pelo plugin. Os pontos de extensão
+existentes são os seguintes.
+
+\begin{itemize}
+	\item{\textbf{Gadget} - Com ele você pode adicionar informações e comportamento aos cartões. Por exemplo adicionar 
+		velocidade, tempo estimado e data de início e fim.}
+	\item{\textbf{PluginConfig} - Responsável por integrar o plugin ao sistema, adicionando links aos menus.}
+	\item{\textbf{Transformer} - Responsável por modificar listagens, adicionando, removendo ou ordenando elementos.}	
+\end{itemize}
+
+Além disso, se o plugin precisar adicionar telas ao sistema, ele precisa implementá-las, usando o VRaptor3,
+criando um controlador e as jsps necessárias. Os pontos de extensão existentes ainda não possibilitam modificar telas
+já existentes, nem mudar formulários, por exemplo, mas podem ser implementados na medida em que forem necessários.
 
 \subsection{Organização do código}
 
