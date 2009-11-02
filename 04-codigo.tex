@@ -145,11 +145,23 @@ quais as vantagens do vraptor 3? o que trouxe de novo? inspirado por rails? rest
 quando falar de rest, citar jim webber =D, falar que ele viu o codigo do calops, parte de testes, etc
 *****
 
-Como a escolha do \calopsita foi Java com VRaptor, começamos a desenvolver com o VRaptor na versão 2.6. 
+Quando desenvolvemos aplicações web temos geralmente duas escolhas: ser orientado a componentes ou orientado
+a ações. Aplicações orientadas a componentes na Web costumam ser meio artificiais demais, pois a Web não
+possui suporte nativo a esse tipo de abordagem. Além disso, os \textit{frameworks} existentes para isso em
+Java são bastante difíceis de se trabalhar e pouco produtivos. Então resolvemos desenvolver o \calopsita orientado
+a ações. Dentre os \textit{frameworks} orientados a ações disponíveis para Java, resolvemos usar o 
+VRaptor~\footnote{http://vraptor.caelum.com.br}, por termos mais familiaridade e por acreditar que ele é mais 
+produtivo e simples que os outros.
+
+Começamos a desenvolver o \calopsita com o VRaptor na versão 2.6, que era a mais atual na época. 
 Ao mesmo tempo, a versão nova do VRaptor, a 3.0, começou a ser desenvolvida, e por volta de julho já tinha 
-uma versão alfa funcional. O VRaptor 3.0 possibilita o desenvolvimento de aplicações RESTful \cite{rest}
-e o uso massivo de injeção de dependências\cite{di}. Dessa forma, era possível adicionar mais 
-características e boas práticas ao \calopsita. O uso de uma interface web RESTful traz várias vantagens para 
+uma versão alfa funcional. Decidimos então migrar o \calopsita para o VRaptor 3, pois ele trazia mais idéias
+e boas práticas, muitas provenientes do Ruby on Rails. Além disso, poderíamos usar o \calopsita para auxiliar
+o desenvolvimento do VRaptor 3, que é um projeto \opensource e é desenvolvido também por um dos membros do
+\calopsita.
+
+O VRaptor 3.0 possibilita o desenvolvimento de aplicações RESTful \cite{rest}
+e o uso massivo de injeção de dependências\cite{di}. O uso de uma interface web RESTful traz várias vantagens para 
 uma aplicação web. Usando os verbos HTTP do jeito certo, você consegue aproveitar a semântica da web para a 
 sua aplicação, além de conseguir aproveitar recursos dos servidores, como caching. Além disso, a aplicação 
 se torna automaticamente um web-service, facilitando a integração com outros sistemas.
@@ -157,12 +169,12 @@ se torna automaticamente um web-service, facilitando a integração com outros s
 Por volta de julho, o \calopsita foi totalmente migrado para VRaptor 3, deixando o desenvolvimento mais produtivo. 
 Nessa época, o VRaptor ainda não tinha uma versão estável, mas a maneira com o que ele foi feito possibilitava a fácil
 personalização e resolução dos problemas que existiam nele. A versão final só saiu no começo de outubro, então durante 
-julho e outubro o \calopsita auxiliou no desenvolvimento do VRaptor 3, que é um projeto \opensource desenvolvido pela Caelum.
+julho e outubro o \calopsita auxiliou no desenvolvimento e teste das versões beta do VRaptor 3.
 
 Usar injeção de dependências faz com que a aplicação fique naturalmente mais testável e menos acoplada. Isso aliado a
 Factory Methods\cite{gof}, e o uso de interfaces ao invés de implementações \cite{effective} fez com que as
- classes do \calopsita ficassem bem testáveis unitariamente, possibilitando 
-uma cobertura por testes de mais de 90\% (que é bem difícil de se conseguir em projetos java). Isso também auxiliou bastante
+classes do \calopsita ficassem bem testáveis unitariamente, possibilitando uma cobertura por testes de mais de 
+90\% (que é bem difícil de se conseguir em projetos java). Isso também auxiliou bastante
 o desenvolvimento da arquitetura em plugins do \calopsita.
 
 \subsection{ActiveRecord}
@@ -244,7 +256,8 @@ ficado impressionado com a clareza e organização do código.
 \subsection{SeleniumDSL e testes de aceitação}
 *****achar citação de Testes de aceitação*******
 No processo de desenvolvimento do \calopsita, foram criados testes de aceitação *****citação***** para todas as
-funcionalidades pedidas pelos clientes do projeto. Esses testes simulam a interação do usuário com o sistema, executando
+funcionalidades pedidas pelos clientes do projeto. Esses testes são feitos a partir dos cartões pedidos pelos clientes,
+e são usados para validar se o cartão está pronto. Geralmente simulam a interação do usuário com o sistema, executando
 passos como preencher formulários, clicar em botões, arrastar e soltar componentes. Esses testes de aceitação
 foram escritos em dois passos, o primeiro em linguagem praticamente natural como visto na seção \ref{bdd}, e o segundo
 foi a implementação real do teste.
@@ -285,7 +298,6 @@ durante o desenvolvimento dos testes, para facilitar a depuração, e usar o Htm
 integração contínua, para maior rapidez nos testes e maior simplicidade. Essa implementação de HtmlUnit
 para SeleniumDSL rendeu uma palestra num evento interno da Caelum~\footnote{http://www.youtube.com/watch?v=5oFlh\_Ka65U\&feature=related}.
 
-HtmlUnit x Selenium
 
 \subsection{Organização do código}
 O \calopsita está sendo desenvolvido com a linguagem Java, utilizando ainda Hibernate e javascript. Como 
