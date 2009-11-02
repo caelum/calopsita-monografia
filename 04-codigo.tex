@@ -217,7 +217,19 @@ das requisições Web não precisam lidar com operações do banco de dados, ele
 para fazer isso.
 
 \subsection{REST}
-O termo REST (Representational State Transfer) foi cunhado por Roy Thomas Fielding em sua tese de doutorado~\cite{rest-roy}.
+O termo REST (Representational State Transfer) foi cunhado por Roy Thomas Fielding em sua tese de doutorado~\cite{rest-roy}, 
+onde descreve as idéias que levaram à criação do protocolo HTTP.
+
+É um modelo arquitetural para sistemas distribuídos e a idéia básica é que existe um conjunto fixo de operações permitidas 
+(verbos) e diversas aplicações se comunicam aplicando este conjunto fixo de operações em recursos existentes, podendo ainda 
+solicitar diversas representações destes recursos.
+
+A web é o maior exemplo de uso de uma arquitetura REST, onde os verbos são as operações disponíveis no protocolo (GET, POST,
+PUT, DELETE, HEADER, TRACE, OPTIONS), os recursos são identificados pelas URIs e as representações podem ser definidas
+através de \textit{Mime Types}~\cite{mimetypes}.
+
+Ao desenhar aplicações REST, pensamos nos recursos a serem disponibilizados pela aplicação e em seus formatos, ao invés de
+pensar nas operações.
 
 \subsection{SeleniumDSL e testes de aceitação}
 http://www.youtube.com/watch?v=5oFlh\_Ka65U\&feature=related
