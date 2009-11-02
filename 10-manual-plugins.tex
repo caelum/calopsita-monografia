@@ -31,9 +31,9 @@ Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, 
 				private Long id; // o id do banco
 				
 				@OneToOne
-				private Card card; // o cartão que esse gadget vai adicionar informação
+				private Card card; // o cartao que esse gadget vai adicionar informacao
 				
-				private Integer velocidade; // a informação a mais
+				private Integer velocidade; // a informacao a mais
 				
 				// getters e setters
 			}
@@ -46,7 +46,7 @@ Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, 
 			public class OrdenaPorVelocidadeTransformer implements Transformer<Card> {
 
 				public boolean accepts(Class<?> type) {
-					return type.equals(Card.class); // vai transformar listas de cartões
+					return type.equals(Card.class); // vai transformar listas de cartoes
 				}
 
 				public List<Card> transform(List<Card> list, Session session) {
@@ -56,11 +56,11 @@ Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, 
 
 				public static class VelocidadeComparator implements Comparator<Card> {
 					public int compare(Card esquerda, Card direita) {
-						// pega o gadget do tipo dado do cartão. Null se o cartão não tiver o gadget
+						// pega o gadget do tipo dado do cartao. Null se o cartao nao tiver o gadget
 						VelocidadeCard velocidadeEsquerda = esquerda.getGadget(VelocidadeCard.class); 
 						VelocidadeCard velocidadeDireita = direita.getGadget(VelocidadeCard.class);
 						
-						// decide se o cartão da esquerda é maior que o da direita
+						// decide se o cartao da esquerda e maior que o da direita
 						// de acordo com o contrato do comparator
 						if (velocidadeEsquerda == null) {
 							return 1;
@@ -87,7 +87,7 @@ Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, 
 				public VelocidadeController(Result result) {
 					this.result = result;
 				}
-				// seguindo o padrão das urls
+				// seguindo o padrao das urls
 				@Path("/projects/{project.id}/velocidade")
 				@Get
 				public List<Card> estima(Project project) {
@@ -98,7 +98,7 @@ Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, 
 				@Post
 				public void adiciona(VelocidadeCard velocidadeCard) {
 					// salva o velocidadeCard no banco
-					// redireciona para a estimativa de cartões
+					// redireciona para a estimativa de cartoes
 					result.use(logic()).redirectTo(VelocidadeController.class).estima(velocidadeCard.getCard().getProject());
 				}
 				
@@ -107,14 +107,23 @@ Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, 
 	}
 	
 	\item{um jsp que responda mostre a tela de estimar cartões. Logo precisa estar em /WEB-INF/jsp/velocidade/estima.jsp
-		\begin{verbatim}
-			<!-- estilo da página, organização e etc -->
+	\lstset{language=html,frame=ltrb,framesep=5pt,basicstyle=\footnotesize,
+	  keywordstyle=\ttfamily\color{OliveGreen},
+	 identifierstyle=\ttfamily\color{CadetBlue}\bfseries, 
+	 commentstyle=\color{Brown},
+	 stringstyle=\ttfamily,
+	 showstringspaces=false,
+	 showspaces=false,
+	 tabsize=2}
+	
+		\begin{lstlisting}
+			<!-- estilo da pagina, organizacao e etc -->
 			<c:forEach items="${cardList}" var="card">
 				<form action="<c:url value="/projects/${project.id}/velocidade" method="POST">
-					<!-- campos do formulário passar valores para a lógica -->
+					<!-- campos do formulario passar valores para a logica -->
 				</form>"
 			</c:forEach>
-		\end{verbatim}
+		\end{lstlisting}
 	}
 \end{itemize}
 
