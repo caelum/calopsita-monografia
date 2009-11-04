@@ -2,24 +2,35 @@
 
 Todo o código do \calopsita está hospedado no GitHub, onde podem ser visualizados todo o histórico e atividades realizados no projeto desde sua concepção.
 
-Antes de iniciar o desenvolvimento do \calopsita, foi discutido quais seriam as escolhas de linguagens e frameworks a serem utilizados. As opções se reduziram a duas: Ruby on Rails ou Java com VRaptor. Como a maioria da equipe era mais familiar com Java do que com Ruby, a escolha foi pelo Java com VRaptor. Durante o desenvolvimento foram usadas diversos conceitos e boas práticas de desenvolvimento de software, como é explicado a seguir.
+Antes de iniciar o desenvolvimento do \calopsita, foi discutido quais seriam as escolhas de linguagens e frameworks a serem utilizados. As opções se reduziram a duas: Ruby on Rails ou Java com VRaptor. Como a maioria da equipe era mais familiar com Java do que com Ruby, a escolha foi pelo Java com VRaptor. Durante o desenvolvimento foram usadas diversos conceitos e boas práticas de desenvolvimento de software, como explicado a seguir.
 
-\subsection{BDD} \label{bdd}
-Desde o começo resolvemos adotar boas práticas de desenvolvimento, como {\it Behavior Driven Development} (BDD) \cite{bdd}, refatoração constante e programação pareada. Principalmente para usar BDD precisávamos de ferramentas que nos ajudassem a escrever testes mais expressivos e legíveis. No mundo do Ruby on Rails essa prática já está bastante difundida, então existem várias ferramentas de teste como o RSpec~\footnote{http://rspec.info/} e o Cucumber~\footnote{http://cukes.info/}, além da linguagem ser dinâmica e possibilitar a escrita de DSLs e interfaces fluentes~\cite{dsl} de uma maneira bastante direta. Em Java a prática de BDD ainda não está muito forte, então não existem ferramentas muito avançadas, além da linguagem ser estática e burocrática, que torna o desenvolvimento de tais ferramentas 
-muito mais difícil. Mesmo assim, foram pesquisadas as alternativas:
+\subsection{BDD} 
+\label{bdd}
+
+Desde o começo, resolvemos adotar boas práticas de desenvolvimento como o uso de \textit{Behavior Driven Development} (BDD) \cite{bdd}, refatoração constante e programação pareada. Principalmente para usar BDD, precisávamos de ferramentas que nos ajudassem a escrever testes mais expressivos e legíveis. 
+
+No mundo do Ruby on Rails essa prática já está bastante difundida e, portanto, existem várias ferramentas de teste como o RSpec~\footnote{http://rspec.info/} e o Cucumber~\footnote{http://cukes.info/} que implementam BDD. O dinamismo da linguagem ajuda, possibilitando a escrita de DSLs e interfaces fluentes~\cite{dsl} de uma maneira bastante direta. Em Java, a tendência do uso de BDD ainda não é forte e não existem ferramentas avançadas. Além disso, Java é uma linguagem estática e burocrática, o que torna o desenvolvimento de tais ferramentas muito mais difícil. 
+
+Apesar das limitações impostas pela escolha da linguagem, acreditamos que as vantagens de usar BDD compensavam as dificuldades. Dessa forma, foram pesquisadas as seguintes alternativas:
 
 \begin{itemize}
-	\item{JBehave~\footnote{http://jbehave.org/} - funciona associando um arquivo texto a um código Java. No arquivo texto fica a descrição da funcionalidade, tal como seria escrita num cartão de estória. Foi descartado por causa da sua sintaxe pouco produtiva e de algumas limitações, como a impossibilidade de compartilhar passos (associações entre código Java e etapas da funcionalidade) entre funcionalidades;}
-	\item{Cucumber + JRuby~\footnote{http://jruby.org/} - poderíamos também usar o próprio Cucumber do Ruby, usando o JRuby para poder integrar código Java aos testes. Foi descartada por causa da complexidade da integração, e por causa da mistura de linguagens (isso poderia afastar eventuais colaboradores);}
-	\item{JUnit - Não usar nenhuma ferramenta específica, apenas JUnit para rodar os testes, e o bom senso da equipe para escrever testes legíveis e expressivos.}
+	\item{\textbf{JBehave}~\footnote{http://jbehave.org/} -- funciona associando um arquivo de texto a um código Java. No arquivo texto, fica a descrição da funcionalidade, tal como seria escrita num cartão de estória;}
+	\item{\textbf{Cucumber + JRuby}~\footnote{http://jruby.org/} -- tal qual a opção anterior, associa texto a código. Faz isso de uma forma mais eficiente e elegante do que o JBehave, mas é uma solução para Ruby. Precisa usar JRuby para integrar código Java aos testes;}
+	\item{\textbf{JUnit} -- a ferramenta padrão para testes automatizados em Java. Não tem nenhuma preparação para BDD, então seria apenas instrumental e se somaria a uma determinação da equipe por escrever testes legíveis e expressivos.}
 \end{itemize}
 
-Acabamos por optar pela última opção, que era bem mais simples e poderíamos criar uma nova forma de desenvolver testes em Java. A nossa solução para testes foi publicada no blog da Caelum~\footnote{http://blog.caelum.com.br/2009/02/28/behavior-driven-development-com-junit/} e é uma arquitetura de testes que possibilita a escrita de testes de aceitação, em Java, quase em linguagem natural. Baseada no Cucumber, criamos algumas convenções para aumentar a legibilidade, de acordo com suas responsabilidades:
+O JBehave foi descartado por causa da sua sintaxe pouco produtiva, do uso extensivo de herança e de algumas limitações, como a impossibilidade de compartilhar passos (associações entre código Java e etapas da funcionalidade) entre casos de uso.
+
+Cucumber e JRuby foram descartados por causa da complexidade da integração e por causa da mistura de linguagens -- o \calopsita é um projeto \opensource e a mistura de linguagens poderia afastar eventuais colaboradores.
+
+A última opção foi escolhida por ser mais simples e permitir criar uma nova forma de desenvolver testes em Java. A solução para testes foi publicada no blog da Caelum~\footnote{http://blog.caelum.com.br/2009/02/28/behavior-driven-development-com-junit/} e é uma arquitetura de testes que possibilita a escrita de testes de aceitação, em Java, quase em linguagem natural. 
+
+Inspirados no Cucumber, algumas convenções foram criadas para aumentar a legibilidade, de acordo com suas responsabilidades:
 
 \begin{itemize}
-	\item{GivenSteps given - objeto que vai preparar o contexto inicial do teste em questão. Ex: Entrar em uma página, inserir determinados objetos no banco, logar-se com um dado usuário, etc;}
-	\item{WhenSteps when - objeto que vai executar as ações do teste em si, utilizando o contexto definido pelo objeto given. É a parte mais importante do teste. Ex: Preencher um formulário, clicar no botao Enviar, selecionar um item em alguma comboBox, etc;}
-	\item{ThenSteps then - objeto que verifica se o resultado das ações executadas é o esperado. Ex: O usuário está logado? Apareceu a mensagem ``Inserido com sucesso''? Deu erro de validação?}
+	\item{\texttt{GivenSteps given} -- objeto que vai preparar o contexto inicial do teste em questão. Ex: Entrar em uma página, inserir determinados objetos no banco, logar-se com um dado usuário, etc;}
+	\item{\texttt{WhenSteps when} -- objeto que vai executar as ações do teste em si, utilizando o contexto definido pelo objeto \texttt{given}. É a parte mais importante do teste. Ex: Preencher um formulário, clicar no botao Enviar, selecionar um item em alguma comboBox, etc;}
+	\item{\texttt{ThenSteps then} -- objeto que verifica se o resultado das ações executadas é o esperado. Ex: O usuário está logado? Apareceu a mensagem ``Inserido com sucesso''? Deu erro de validação?}
 \end{itemize}
 
 Um exemplo de teste escrito nessa arquitetura, tirado do código do \calopsita:
@@ -49,7 +60,7 @@ public class CreateACardStory extends DefaultStory {
 }
 \end{lstlisting}
 
-Repare que se removermos os ruídos sintáticos, ficariámos com:
+Repare que se os ruídos sintáticos pudessem ser removidos, o mesmo código seria lido com:
 
 \begin{verbatim}
 In order to plan what has to be done
@@ -75,12 +86,12 @@ card creation:
 
 Isso é bastante próximo da linguagem natural, em inglês, e possibilita a leitura fácil até para leigos.
 
-Essa arquitetura de testes foi adotada apenas para testes de aceitação, que eram escritos a cada solicitação de funcionalidade. Para os testes unitários, decidimos apenas usar de refatoração, em especial a Extract Method~\cite{refactoring}, possibilitando a escrita de testes bastante legíveis, mas com um pouco mais de ruidos sintáticos do Java. Um exemplo de teste unitário, tirado do código do \calopsita:
+Essa arquitetura de testes foi adotada apenas para testes de aceitação, que eram escritos a cada solicitação de funcionalidade. Para os testes unitários, a solução para aumentar a legibilidade foi  apenas usar refatoração, em especial a Extract Method~\cite{refactoring}, para criar a mesma sensação, apesar de conter um pouco mais de ruidos sintáticos do Java. Um exemplo de teste unitário, tirado do código do \calopsita:
 
 \begin{lstlisting}
 public class IterationTest {
 	@Test
-	public void addingACardInAnIteration() throws Exception {
+	public void addingACardToAnIteration() throws Exception {
 		Iteration iteration = givenAnIteration();
 		Card card = givenACard();
 
@@ -94,21 +105,21 @@ public class IterationTest {
 }
 \end{lstlisting}
 
-Mesmo com mais ruído sintático é possível entender facilmente o intuito do teste:
+Novamente, removendo a burocracia da linguagem de programação, obtemos o seguinte resultado.
 
 \begin{verbatim}
-Adicionando um cartão em uma iteração:
-	dado uma Iteração e
-	dado um cartão
-  
-	deve atualizar o cartão
-  
-	quando eu adicionar o cartão na iteração
-  
-	no final, garanta que a iteração do cartão é a iteração acima
+Adding a card to an iteration
+	given an iteration
+	given a card
+
+	should update the card
+
+	when I add the card to iteration
+
+	assert that the card's iteration is the given iteration
 \end{verbatim}
 
-Dessa forma, a manutenção dos testes fica muito fácil, e pode ser feita facilmente por qualquer pessoa, pois o teste deixa bem claro que está fazendo.
+Dessa forma, a manutenção dos testes fica muito fácil e pode ser feita facilmente por qualquer pessoa, já que o teste deixa bem claro que está fazendo.
 
 
 \subsection{VRaptor e Injeção de Dependências}
@@ -117,25 +128,24 @@ Dessa forma, a manutenção dos testes fica muito fácil, e pode ser feita facil
 por que vraptor ao inves de struts? o que ele tinha de bom? framework caseiro? comunidade? caelum? quais as vantagens do vraptor 3? o que trouxe de novo? inspirado por rails? rest? extensibilidade?
 *****
 
-Quando desenvolvemos aplicações web temos geralmente duas escolhas: ser orientado a componentes ou orientado a ações. Aplicações orientadas a componentes na Web costumam ser meio artificiais demais, pois a Web não possui suporte nativo a esse tipo de abordagem. Além disso, os \textit{frameworks} existentes para isso em Java são bastante difíceis de se trabalhar e pouco produtivos. Então resolvemos desenvolver o \calopsita orientado a ações. Dentre os \textit{frameworks} orientados a ações disponíveis para Java, resolvemos usar o 
-VRaptor~\footnote{http://vraptor.caelum.com.br}, por termos mais familiaridade e por acreditar que ele é mais produtivo e simples que os outros.
+Quando desenvolvendo aplicações web, tem-se geralmente duas escolhas: orientação a componentes ou a ações. Aplicações orientadas a componentes na Web costumam dar uma sensação de artificialidade. Isso porque a Web não possui suporte nativo a esse tipo de abordagem. Além disso, os \textit{frameworks} existentes para isso em Java são difíceis de se trabalhar e atrapalham a produtividade. 
 
-Começamos a desenvolver o \calopsita com o VRaptor na versão 2.6, que era a mais atual na época. 
-Ao mesmo tempo, a versão nova do VRaptor, a 3.0, começou a ser desenvolvida, e por volta de julho já tinha 
-uma versão alfa funcional. Decidimos então migrar o \calopsita para o VRaptor 3, pois ele trazia mais idéias
-e boas práticas, muitas provenientes do Ruby on Rails. Além disso, poderíamos usar o \calopsita para auxiliar
-o desenvolvimento do VRaptor 3, que é um projeto \opensource e é desenvolvido também por um dos membros do
-\calopsita.
+A decisão de desenvolver o \calopsita orientado a ações vem da propensão da arquitetura da web a lidar com ações curtas e pontuais. Dentre os \textit{frameworks} orientados a ações disponíveis para Java, o VRaptor~\footnote{http://vraptor.caelum.com.br} foi eleito, tanto pela maior familiaridade da equipe, quanto por esse \textit{framework} se mostrar mais produtivo e simples que os outros.
 
-O VRaptor 3.0 possibilita o desenvolvimento de aplicações RESTful \cite{rest} e o uso massivo de injeção de dependências\cite{di}. O uso de uma interface web RESTful traz várias vantagens para uma aplicação web. Usando os verbos HTTP do jeito certo, você consegue aproveitar a semântica da web para a sua aplicação, além de conseguir aproveitar recursos dos servidores, como caching. Além disso, a aplicação se torna automaticamente um web-service, facilitando a integração com outros sistemas.
+Começamos a desenvolver o \calopsita com o VRaptor na versão 2.6, a mais atual na época. Paralelamente, a versão nova do VRaptor, a 3.0, começou a ser desenvolvida. Por volta de julho, já havia uma versão alfa funcional. Então, o \calopsita foi migrado para o VRaptor 3, já que ele trazia idéias melhores
+e boas práticas, muitas provenientes do Ruby on Rails. 
 
-Por volta de julho, o \calopsita foi totalmente migrado para VRaptor 3, deixando o desenvolvimento mais produtivo. Nessa época, o VRaptor ainda não tinha uma versão estável, mas a maneira com o que ele foi feito possibilitava a fácil personalização e resolução dos problemas que existiam nele. A versão final só saiu no começo de outubro, então entre julho e outubro o \calopsita auxiliou no desenvolvimento e teste das versões beta do VRaptor 3.
+Além disso, vislumbrou-se a possibilidade de o \calopsita auxiliar no desenvolvimento do VRaptor 3. Ambos são projetos \opensource e há desenvolvedores em comum entre os dois projetos. Nessa relação entre os projetos, ambos \calopsita e VRaptor 3 amadureceram e cresceram.
 
-Usar injeção de dependências faz com que a aplicação fique naturalmente mais testável e menos acoplada. Isso aliado a Factory Methods\cite{gof}, e o uso de interfaces ao invés de implementações \cite{effective} fez com que as classes do \calopsita ficassem bem testáveis unitariamente, possibilitando uma cobertura por testes de mais de 90\% (que é bem difícil de se conseguir em projetos java). Isso também auxiliou bastante o desenvolvimento da arquitetura em plugins do \calopsita.
+O VRaptor 3.0 possibilita o desenvolvimento de aplicações RESTful~\cite{rest} e o uso massivo de injeção de dependências~\cite{di}. O uso de uma interface web RESTful traz várias vantagens para uma aplicação web. Usando os verbos HTTP da forma recomendada na concepção do protocolo, pode-se aproveitar a semântica da web para uma aplicação. Além disso, o uso do REST permite aproveitar recursos dos servidores, como caching. Também, a aplicação se torna automaticamente um web-service, cada página um recurso, facilitando a integração com outros sistemas.
+
+Em julho, o \calopsita foi totalmente migrado para VRaptor 3, sensivelmente aumentando a produtividade no desenvolvimento. Nessa época, o VRaptor ainda não tinha uma versão estável, mas a maneira com o que ele foi feito possibilitava a fácil personalização e resolução dos problemas que existiam nele. A versão final só saiu no começo de outubro, mas entre julho e outubro o \calopsita auxiliou no desenvolvimento e teste das versões beta do VRaptor 3.
+
+Usar injeção de dependências faz com que a aplicação fique naturalmente mais testável e com menor acoplamento. Isso aliado a Factory Methods~\cite{gof} e o uso de interfaces ao invés de implementações~\cite{effective} fez com que as classes do \calopsita ficassem melhor testáveis unitariamente, possibilitando uma cobertura por testes de mais de 90\% -- cobertura rara em projetos java. A injeção de dependências também auxiliou bastante o desenvolvimento da arquitetura em plugins do \calopsita.
 
 \subsection{ActiveRecord}
 
-O padrão Active Record~\cite{fowler} ficou bem famoso após o surgimento do Ruby on Rails~\footnote{http://rubyonrails.org}, que o usa para fazer a persistência dos dados. Em Java, geralmente usamos o padrão Data Mapper~\cite{fowler}, pois temos ótimos frameworks, como o Hibernate e a JPA, que nos ajudam com a parte de persistência e são classificados como tal.
+O padrão Active Record~\cite{fowler} se tornou conhecido após o surgimento do Ruby on Rails~\footnote{http://rubyonrails.org}, que o usa para fazer a persistência dos dados. Em Java, o padrão Data Mapper~\cite{fowler} é o mais utilizado, pois temos ótimas ferramentas ORM (Mapeamento Objeto-Relacional), como o Hibernate, que nos ajudam com a parte de persistência e são classificados como tal.
 
 Geralmente, em Java, usamos o Hibernate, e usamos DAOs~\cite{dao} para encapsular o acesso a dados. Mas frequentemente nos encontramos escrevendo o seguinte tipo de método, dentro de um DAO:
 
