@@ -36,9 +36,11 @@ Acreditamos que as metodologias ágeis são uma resposta ao modo engessado com q
 
 \subsection{Abordagem Ágil}
 
-Embora não tenhamos usado Scrum para desenvolver o \calopsita, utilizamos alguns métodos e ferramentas típicos desse \textit{framework} e de XP que melhor funcionavam para nosso time. Acreditamos que não exista uma única maneira de desenvolver \software de maneira ágil e esse é, como mencionado, um dos fatores que motivaram a criação do \calopsita: precisávamos de uma ferramenta que se adequasse às nossas necessidades. 
+Embora não tenhamos usado Scrum para desenvolver o \calopsita, utilizamos alguns métodos e ferramentas típicos desse \textit{framework} e de XP que melhor funcionavam para nosso time. Acreditamos que o uso de metodologias e frameworks são excelentes para times e pessoas em migração das formas tradicionais, mas seu uso não se mostrou necessário no nosso time. Todos, clientes e desenvolvedores, têm grande experiência com métodos ágeis e, dessa forma, optamos por simplesmente seguir os preceitos ágeis e adaptar os métodos que nos ajudassem mais a cada etapa. 
 
-Como, durante a maior parte do desenvolvimento, os programadores trabalhavam no mesmo espaço físico, pudemos adotar um Kanban:
+\subsubsection*{Kanban}
+
+Como, durante a maior parte do desenvolvimento, os programadores trabalhavam no mesmo espaço físico, pudemos adotar um quadro branco com Kanban:
 
 \begin{figure}[H]
   \centering
@@ -47,6 +49,10 @@ Como, durante a maior parte do desenvolvimento, os programadores trabalhavam no 
   }
   \caption{KanBan do \calopsita}
 \end{figure}
+
+O quadro branco é uma forma bastante eficiente de comunicação -- basta olhar para ele para entender, de imediato, o que há para ser feito, o que já está pronto e quais tarefas estão em andamento. Além disso, nosso quadro conta com a Visão do Projeto, isto é, a meta maior para o projeto, onde queremos chegar.
+
+\subsubsection*{Integração Contínua}
 
 Para mantermos nosso código funcional a cada mudança, utilizamos desde o começo do projeto um servidor de integração contínua~\cite{ci}, o CruiseControl.rb~\footnote{http://cruisecontrolrb.thoughtworks.com/}. Esse servidor é capaz de consultar o repositório de código de tempos em tempos verificando por mudanças no código. Uma vez detectada alguma alteração, ele baixa o novo código, compila e roda seus testes de forma automática. Se durante esse processo, qualquer um dos testes falhar, um email é disparado para toda a equipe, garantido que o bug introduzido seja corrigido o mais rapidamente possível.
 
@@ -58,11 +64,30 @@ Para mantermos nosso código funcional a cada mudança, utilizamos desde o come�
   \caption{Cruisecontrol.rb do \calopsita}
 \end{figure}
 
+\subsubsection*{Pareamento e refatoração}
+
 A qualidade do código, tanto em aspectos de legibilidade quanto em arquitetura, era assegurada por discussões técnicas na lista do projeto, por discussões com profissionais da Caelum e pelo uso extensivo de pareamento quando programando. As vantagens da programação pareada~\cite{pair}, contudo, vão além da manutenção da qualidade de código -- atribuimos a essa prática o nivelamento do conhecimento não apenas sobre o código do Calopsita, mas também sobre os conceitos aplicados em diversas partes do sistema.
 
 Outro fator que colaborou bastante na qualidade do código é a cultura de refatorações que a equipe adota. A regra é que, sempre que se encontra código que poderia ser melhor, melhora-se ele. Isso faz com que o código se mantenha sempre atual e o melhor possível na visão da equipe de desenvolvimento.
+
+\subsubsection*{Interação com clientes}
 
 Para mantermos o foco do projeto no que era mais valioso para o cliente a cada momento, a interação com esses foi fundamental para o bom andamento do projeto. Tivemos reuniões semanais ou quinzenais durante todo o ano, onde os clientes testavam o \calopsita ambiente de homologação, aprovavam tarefas,  repriorizavam os cartões de funcionalidades e definiam uma meta para a iteração seguinte. 
 
 Com a estabilização do \calopsita, diversos projetos da Caelum também começaram a usar o sistema para gerencia dos ítens por fazer e iterações. Assim, passamos a ter mais clientes e, portanto, mais pedidos de funcionalidades e correções. Nesse momento, usar o próprio \calopsita para auxiliar em seu desenvolvimento se mostrou bastante conveniente: os clientes colocavam seus pedidos no sistema e priorizavam seus cartões.
 
+\subsubsection*{Personas}
+
+Trabalhando com diversos clientes traz um aumento considerável na complexidade de comunicação entre as partes envolvidas no projeto. Tanto a comunicação entre clientes diferentes quanto com a equipe de desenvolvimento foi facilitada com o uso de \textit{Personas}. Os pedidos eram feitos em nome de um personagem cujos valores eram cohecidos pela equipe e pelos clientes. 
+
+Por exemplo, nossa \textit{persona} Fabs representa um usuário do sistema que é um tanto distraído e quer que o sistema não tenha ambiguidades que possam confundí-lo. Com essa descrição, todos sabem que essa persona representa a preocupação com usabilidade e interação homem-computador. Um cartão desse personagem, tirado do nosso \textit{backlog}, pode ser visto abaixo.
+
+\begin{tabular}{|p{10cm}|}
+	\hline
+	Para não me confundir sobre qual cartão eu peguei \\
+	Como Fabs \\
+	Quero que os cartões na priorização e na iteração mantenham a mesma forma quando são arrastados. \\
+	\hline
+\end{tabular}
+
+A lista e descrições das \textit{personas} usadas na construção do Calopsita podem ser encontradas no apêndice~\ref{sec:personas}.
