@@ -164,10 +164,6 @@ Esse recurso responde adicionando uma iteração quando é chamado via POST e li
 
 \subsection{VRaptor e Injeção de Dependências}
 
-*****
-por que vraptor ao inves de struts? o que ele tinha de bom? framework caseiro? comunidade? caelum? quais as vantagens do vraptor 3? o que trouxe de novo? inspirado por rails? rest? extensibilidade?
-*****
-
 Quando desenvolvendo aplicações web, tem-se geralmente duas escolhas: orientação a componentes ou a ações. Aplicações orientadas a componentes na Web costumam dar uma sensação de artificialidade. Isso porque a Web não possui suporte nativo a esse tipo de abordagem. Além disso, os \textit{frameworks} existentes para isso em Java são difíceis de se trabalhar e atrapalham a produtividade. 
 
 A decisão de desenvolver o \calopsita orientado a ações vem da propensão da arquitetura da web a lidar com ações curtas e pontuais. Dentre os \textit{frameworks} orientados a ações disponíveis para Java, o VRaptor~\footnote{http://vraptor.caelum.com.br} foi eleito, tanto pela maior familiaridade da equipe, quanto por esse \textit{framework} se mostrar mais produtivo e simples que os outros.
@@ -240,3 +236,18 @@ Mas além delas, há a parte dos plugins, que permitem desenvolver as funcionali
 
 Além disso, se o plugin precisar adicionar telas ao sistema, ele precisa implementá-las, usando o VRaptor3 para criar um controlador e as JSPs necessárias. Os pontos de extensão existentes ainda não possibilitam modificar telas já existentes, nem mudar formulários, por exemplo, mas podem ser implementados à medida em que forem necessários.
 
+\subsection{Cartões e subcartões}
+
+Cada cartão no \calopsita leva consigo tanto suas informações específicas, como descrição e criador, mas também uma lista de outros cartões. Se a arquitetura do \calopsita fosse fixa para tipos de cartões e determinasse que apenas haveriam as categorias ``Estória'', ``Tarefa'' e ``Bug'', como se vê em diversos outros projetos semelhantes, certamente haveria aí uma implementação do padrão de projeto Composite~\cite{gof}.
+
+Com a preferência pela flexibilidade, um cartão tem uma lista de cartões e uma lista de \textit{gadgets}. A presença ou ausência de \textit{gadgets} é que caracteriza cada tipo de cartão. Exemplificando, define-se o seguinte conjunto de \textit{gadgets} aos cartões:
+
+\begin{itemize}
+	\item{Estórias: têm \textit{gadgets} Priorizável, Planejável e Pontuável;}
+	\item{Tarefas: têm o \textit{gadget} de participação do Kanban;}
+	\item{Bug: têm \textit{gadgets} Priorizável e Planejável;}
+\end{itemize}
+
+Nesse exemplo, na tela de priorização, aparecerão apenas os cartões de Estórias e Bugs. Já no gráfico de \textit{Burn Down}, apenas as Estórias aparecem porque apenas elas contam pontos.
+
+Dessa forma, o \calopsita usa Composite conceitualmente, apesar da implementação não estar estritamente de acordo com o proposto nos padrões de projeto. Os \textit{gadgets} somados a um cartão poder conter outros cartões, suprem o papel feito pelo polimorfismo daquela descrição e servem à resolução do mesmo problema. 
