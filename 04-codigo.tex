@@ -147,52 +147,59 @@ Usar injeção de dependências faz com que a aplicação fique naturalmente mai
 
 O padrão Active Record~\cite{fowler} se tornou conhecido após o surgimento do Ruby on Rails~\footnote{http://rubyonrails.org}, que o usa para fazer a persistência dos dados. Em Java, o padrão Data Mapper~\cite{fowler} é o mais utilizado, pois temos ótimas ferramentas ORM (Mapeamento Objeto-Relacional), como o Hibernate, que nos ajudam com a parte de persistência e são classificados como tal.
 
-Geralmente, em Java, usamos o Hibernate, e usamos DAOs~\cite{dao} para encapsular o acesso a dados. Mas frequentemente nos encontramos escrevendo o seguinte tipo de método, dentro de um DAO:
+É comum, em Java, usar o Hibernate e DAOs~\cite{dao} para encapsular o acesso a dados. Mas, frequentemente, nos pode-se encontrar o seguinte exemplo de método, numa classe de acesso a dados:
 
 \begin{lstlisting}
-public List<Aluno> listaAlunosInteressadosNaTurma(Turma turma) {...}
+public List<Cartao> listaCartoesDoProjeto(Projeto projeto) {...}
 \end{lstlisting}
 
 Esse código não está orientado a objetos, embora receba e retorne objetos. Esse mesmo código poderia ser escrito como:
 
 \begin{lstlisting}
-public class Turma {
+public class Projeto {
 	//...
-	List<Aluno> getAlunosInteressados() {...}
+	List<Aluno> getCartoes() {...}
 }
 \end{lstlisting}
 
-que é um código bem mais orientado a objetos. O Hibernate já possibilita esse tipo de código quando você tem relacionamentos configurados no seu modelo, através de proxies~\cite{gof}, fazendo a consulta ao banco só da primeira vez que o método é acessado. Mas nem sempre temos um relacionamento direto, queremos só os alunos ativos, por exemplo. Nesse caso é preciso o acesso ao banco de dados a partir do modelo e precisamos injetá-lo. Em Ruby isso é possível através de mixins~\footnote{http://www.rubycentral.com/pickaxe/tut\_modules.html}, que interpretam invocações a métodos que não existem no modelo, e traduzem a invocação para uma consulta ao banco de dados. Em Java precisamos dos métodos explicitamente declarados, logo não é possível fazer uma herança que interprete métodos arbitrários.
+Esse segundo exemplo é um trecho bem mais orientado a objetos -- é responsabilidade do projeto conhecer seus cartões. O Hibernate já possibilita esse tipo de código quando se tem relacionamentos configurados no modelo, através de Proxies~\cite{gof}. No modo padrão de execução dessa biblioteca, ao fazer uma consulta ao banco de dados, os dados não são diretamente carregados. Apenas na primeira vez que um método do objeto carregado é acessado, seus dados são trazidos do banco. 
 
-A saída foi adotar o padrão Repository do Domain Driven Design~\cite{ddd}, e usar injeção de dependências para que o modelo receba o seu respectivo repositório de dados. Desse modo, adicionamos métodos que apenas delegam para o repositório, que vai fazer a consulta ao banco de fato.
+Nem sempre, contudo, tem-se um relacionamento direto. Suponha, por exemplo, que é necessário obter apenas os cartões ativos. Nesse caso é preciso acessar o banco de dados a partir do modelo e, assim, é necessário injetá-lo. Em Ruby, isso é possível através de \textit{mixins}~\footnote{http://www.rubycentral.com/pickaxe/tut\_modules.html}, que interpretam invocações a métodos que não existem no modelo e traduzem-na para uma consulta ao banco de dados. Em Java, é obrigatório declarar explicitamente os métodos, logo não é possível fazer uma herança que interprete métodos arbitrários.
 
-Injetar dependências em modelos não é uma tarefa trivial, pois os modelos são criados várias vezes, em várias condições diferentes, algumas delas feitas internamente pelo Hibernate para criar listagens, por exemplo. Além disso, esses modelos são criados a partir de parâmetros da requisição Web. Quando o Active Record começou a ser implementado no \calopsita, o VRaptor não suportava esse tipo de injeção de dependência, então o próprio \calopsita implementou essa injeção sobrescrevendo alguns componentes do VRaptor. Mas um pouco antes do VRaptor lançar sua versão final surgiu um projeto \opensource chamado IOGI~\footnote{http://github.com/rafaeldff/iogi}, que permite criar objetos imutáveis a partir de parâmetros da requisição. Além disso ele possibilita a injeção de dependências, o que fez com que não precisássemos fazer isso no \calopsita, diminuindo a quantidade de código de infraestrutura existente.
+A saída foi adotar o padrão Repository do livro Domain Driven Design~\cite{ddd} e usar injeção de dependências para que o modelo receba o seu respectivo repositório de dados. Desse modo, adiciona-se métodos que apenas delegam para o repositório, a classe que vai fazer a consulta ao banco de fato.
 
-Desse modo criamos modelos ricos, que encapsulam o seu acesso e representação no banco de dados. Assim os controladores das requisições Web não precisam lidar com operações do banco de dados, eles apenas usam a interface do próprio modelo para fazer isso.
+Injetar dependências em modelos não é uma tarefa trivial, porque obejtos de modelos são criados várias vezes, em diversas condições diferentes. Algumas delas, por exemplo, são feitas pelo Hibernate para criar listagens. Outras vezes, esses modelos são criados a partir de parâmetros da requisição web. 
+
+Quando o Active Record começou a ser implementado no \calopsita, o VRaptor não suportava esse tipo de injeção de dependências, então o próprio \calopsita implementou essa injeção sobrescrevendo alguns componentes do VRaptor. Um pouco antes do VRaptor lançar sua versão final, contudo, surgiu um projeto \opensource chamado IOGI~\footnote{http://github.com/rafaeldff/iogi}, que permite criar objetos imutáveis a partir de parâmetros da requisição. Além disso, o IOGI possibilita a injeção de dependências, extinguindo a necessidade de fazer isso no \calopsita e diminuindo a quantidade de código de infraestrutura existente.
+
+Desse modo, criamos modelos ricos, que encapsulam o seu acesso e representação no banco de dados. Assim os controladores das requisições Web não precisam lidar com operações do banco de dados, eles apenas usam a interface do próprio modelo para fazer isso.
 
 \subsection{REST}
-O termo REST (Representational State Transfer) foi cunhado por Roy Thomas Fielding em sua tese de doutorado~\cite{rest-roy}, onde descreve as idéias que levaram à criação do protocolo HTTP.
 
-É um modelo arquitetural para sistemas distribuídos e a idéia básica é que existe um conjunto fixo de operações permitidas (verbos) e diversas aplicações se comunicam aplicando este conjunto fixo de operações em recursos existentes, podendo ainda solicitar diversas representações destes recursos.
+O termo REST (Representational State Transfer) foi cunhado por Roy Thomas Fielding em sua tese de doutorado~\cite{rest-roy}, onde ele descreve as idéias que levaram à criação do protocolo HTTP.
+
+É um modelo arquitetural para sistemas distribuídos e a proposta central é que existe um conjunto fixo de operações permitidas (verbos) e diversas aplicações que se comunicam aplicando este conjunto fixo de operações em recursos existentes. As aplicações podem, ainda, solicitar diversas representações destes recursos.
 
 A web é o maior exemplo de uso de uma arquitetura REST, onde os verbos são as operações disponíveis no protocolo (GET, POST, PUT, DELETE, HEADER, TRACE, OPTIONS), os recursos são identificados pelas URIs e as representações podem ser definidas através de \textit{Mime Types}~\cite{mimetypes}.
 
-Ao desenhar aplicações REST, pensamos nos recursos a serem disponibilizados pela aplicação e em seus formatos, ao invés de pensar nas operações.
+Ao desenhar aplicações REST, pensa-se nos recursos a serem disponibilizados pela aplicação e em seus formatos, em vez de pensar nas operações. Isso é facilmente reconhecido por URIs bastante expressivas.
 
-Jim Webber~\footnote{http://jim.webber.name/bio.html}, arquiteto chefe da ThoughtWorks~\footnote{http://www.thoughtworks.com/}, tem investido grande parte de seu tempo no estudo de arquiteturas REST. Recentemente ministrou uma palestra num evento interno da Caelum, onde falava sobre \textit{Hypermedia}~\cite{rest-jim}. Jim está escrevendo um livro junto com Ian Robinson e Savas Parastatidis e tivemos a oportunidade de ler o livro. Nele, Jim defende que aplicações RESTful de verdade devem ter hypermedia, e deu um exemplo de implementação em .NET. Resolvemos, junto com Guilherme Silveira, escrever implementãções disso em Java~\footnote{http://github.com/caelum/rest-client} e Ruby~\footnote{http://github.com/caelum/restfulie}, tendo esse trabalho citado por Jim em seu blog~\footnote{http://jim.webber.name/2009/10/27/f01ecbd8-9494-42b3-b38c-abb2435d5967.aspx}. Durante o tempo que Jim esteve no Brasil, tivemos a oportunidade de mostrar o código do \calopsita para ele, que disse ter ficado impressionado com a clareza e organização do código.
+No Calopsita, as idéias de REST são utilizadas dentro das limitações que a arquitetura Java nos impõe. Por exemplo, uma mesma URI de iteração (recurso) é capaz de adicionar, mostrar, atualizar e remover uma iteração.
+
+\begin{verbatim}
+	.../projects/5/iterations/
+\end{verbatim}
+
+Esse recurso responde adicionando uma iteração quando é chamado via POST e listando todas as iterações quando chamado via GET. As outras operações, que poderiam ser acessadas por outros métodos HTTP não fazem sentido nesse contexto, então não são implementados.
 
 \subsection{SeleniumDSL e testes de aceitação}
-No processo de desenvolvimento do \calopsita, foram criados testes de aceitação para todas as
-funcionalidades pedidas pelos clientes do projeto. Esses testes são feitos a partir dos cartões pedidos pelos clientes,
-e são usados para validar se o cartão está pronto. Geralmente simulam a interação do usuário com o sistema, executando
-passos como preencher formulários, clicar em botões, arrastar e soltar componentes. Esses testes de aceitação
-foram escritos em dois passos, o primeiro em linguagem praticamente natural como visto na seção \ref{bdd}, e o segundo
-foi a implementação real do teste.
 
-Para executar os testes, precisamos da aplicação rodando de verdade num servidor e, então, simular a interação com o sistema. E essa interação pode ser simulada de duas formas:
+No processo de desenvolvimento do \calopsita, foram criados testes de aceitação para cada funcionalidade pedida pelos clientes do projeto. Esses testes são feitos a partir dos cartões criados por eles e são usados para validar se o cartão está pronto. Testes de aceitação simulam a interação do usuário com o sistema, executando passos como preencher formulários, clicar em botões, arrastar e soltar componentes. Esses testes de aceitação foram escritos em duas etapas: a primeira, em linguagem praticamente natural como visto na seção \ref{bdd}, e a infraestrutura para que essa primeira funcione corretamente, isto é, a implementação real das ações do teste.
+
+Para executar os testes, precisamos ter a aplicação rodando em um servidor e, então, simular a interação de um usuário com o sistema. Esta, pode ser simulada de duas formas:
 
 \begin{itemize}
-	\item{abrindo um navegador, como o Firefox ou o Safari, e simulando as ações do usuário via javascript. A principal	ferramenta para isso é o Selenium~\footnote{http://seleniumhq.org/}. Uma das vantagens dessa abordagem é podemos acompanhar os passos do teste visualmente, ficando fácil identificar os erros do teste. Entre as desvantagens podemos citar a demora da execução dos testes, pois envolve a criação de novos processos no sistema operacional: o navegador precisa ser aberto, além de requerir um servidor do Selenium rodando;}
+	\item{Abrindo um navegador, como o Firefox ou o Safari, e simulando as ações do usuário via javascript. A principal	ferramenta para isso é o Selenium~\footnote{http://seleniumhq.org/}. Uma das vantagens dessa abordagem é podemos acompanhar os passos do teste visualmente, ficando fácil identificar os erros do teste. Entre as desvantagens podemos citar a demora da execução dos testes, pois envolve a criação de novos processos no sistema operacional: o navegador precisa ser aberto, além de requerir um servidor do Selenium rodando;}
 	\item{criar as páginas da aplição em memória. A principal ferramenta para isso, em Java, é o HtmlUnit~\footnote{http://htmlunit.sourceforge.net/}. Uma das vantagens é que, por fazer tudo em memória, a execução dos testes é bem mais rápida. Mas por ser em memória, não é possível visualizar a execução do teste, o que torna a depuração bem mais complicada.}
 \end{itemize}
 
