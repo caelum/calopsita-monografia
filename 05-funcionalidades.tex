@@ -1,35 +1,41 @@
 \section{Funcionalidades}
 
-O \calopsita é feito utilizando uma arquitetura de plugins. Ou seja, a aplicação tem um núcleo, contendo a parte básica do sistema e todo o resto é feito ou configurado com a criação de plugins, dando um grande poder de customização.
-Entre as funcionalidades que fazem parte do núcleo estão a criação e administração de usuários,
-projetos, cartões, iterações e ações para log.
+No \calopsita, também por sua arquitetura de plugins, as funcionalidades estão separadas em duas grandes partes: o núcleo e os plugins. A primeira, contém apenas partes diretamente relacionadas com desenvolvimento ágil, no sentido mais amplo e irrestrito do termo -- sem interferência de metodologias, seus métodos e métricas. Essas partes variáveis de cada projeto ou dependente de metodologia são deixadas para os plugins, que dão ao sistema uma melhor adaptabilidade.
 
-O \calopsita, ao contrário de outros sistemas com o mesmo propósito, não possui o conceito de histórias, apenas de cartões. Isso foi feito pensando em trazer maior grau de customização para os usuários, uma vez que cartões podem ter subcartões. Essa funcionalidade permite uma hierarquia tão profunda quanto se deseje, e permite que o projeto seja visto no nível de detalhe mais apropriado pra cada envolvido no projeto, seja um gerente, desenvolvedor, product owner, etc.
+\subsection{Calopsita Core}
 
-A arquitetura de plugins
+As funcionalidades que fazem parte do núcleo do \calopsita consistem da criação e administração de usuários, projetos, cartões e iterações. Parece ser um núcleo minimal e essa é a intenção, contudo a proposta dos cartões é um tanto diferente e precisa ser explicada.
 
-\begin{figure}[H]
-  \centering
-  \fbox{
-    \includegraphics[width=110mm]{images/plugins_uml.png}
-  }
-  \caption{Arquitetura de plugins}
-\end{figure}
+\subsubsection*{Cartões}
 
-PluginConfig -> menu
-PluginController -> logica + views
-Gadget -> info nos cartoes
+Diferente de outros sistemas com o mesmo propósito, o \calopsita não possui o conceito de estórias, mas apenas de cartões. Isso foi feito pensando em trazer maior grau de customização para os usuários. Cada cartão pode ter subcartões e o que define a funcionalidade desse cartão é o conjunto de \textit{gadgets} que ele possui. 
 
-tudo isso ligado ao core por injeção de dependencia do spring
+A vantagem é que pode-se criar uma hierarquia, tão profunda quanto se desejar, para organizar tudo o que há para ser feito em um projeto. Isso também permite que o projeto possa ser visto no nível de detalhe mais apropriado pra cada envolvido no projeto, seja ele gerente, desenvolvedor ou cliente. 
+
+\subsubsection*{Tipos de Cartões}
+
+Um tipo de cartão é, para o \calopsita, um agrupamento de \textit{gadgets} que definem o comportamento de um determinado cartão. Perceba que a noção é puramente semântica, já que os \textit{gadgets} podem ser habilitados e desabilitados individualmente, por cartão.
 
 
-Esses são os plugins que implementamos:
-priorizacao
+*****************
+Falta coisa aqui... muita, btw
+*****************
+
+ 
+
+\subsection{Calopsita Plugins}
+
+\textbf{Priorização}
+\textbf{Gráficos}
+\textbf{Estimativas}
+\textbf{Marcação de horas}
+\textbf{Customizável}
+\textbf{Templates de metodologias}
+\textbf{Templates de cartões}
+\textbf{Personas}
+
+
 burnup
 burn down
-marcar horas
-estimativa
-templates de metodologias
-templates de cartão
 
 
