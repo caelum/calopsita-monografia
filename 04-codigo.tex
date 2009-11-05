@@ -199,31 +199,39 @@ No processo de desenvolvimento do \calopsita, foram criados testes de aceitaçã
 Para executar os testes, precisamos ter a aplicação rodando em um servidor e, então, simular a interação de um usuário com o sistema. Esta, pode ser simulada de duas formas:
 
 \begin{itemize}
-	\item{Abrindo um navegador, como o Firefox ou o Safari, e simulando as ações do usuário via javascript. A principal	ferramenta para isso é o Selenium~\footnote{http://seleniumhq.org/}. Uma das vantagens dessa abordagem é podemos acompanhar os passos do teste visualmente, ficando fácil identificar os erros do teste. Entre as desvantagens podemos citar a demora da execução dos testes, pois envolve a criação de novos processos no sistema operacional: o navegador precisa ser aberto, além de requerir um servidor do Selenium rodando;}
-	\item{criar as páginas da aplição em memória. A principal ferramenta para isso, em Java, é o HtmlUnit~\footnote{http://htmlunit.sourceforge.net/}. Uma das vantagens é que, por fazer tudo em memória, a execução dos testes é bem mais rápida. Mas por ser em memória, não é possível visualizar a execução do teste, o que torna a depuração bem mais complicada.}
+	\item{Abrindo um navegador, como o Firefox ou o Safari, e simulando as ações do usuário via javascript. A principal	ferramenta para isso é o Selenium~\footnote{http://seleniumhq.org/}. 
+
+Uma das vantagens dessa abordagem é que se pode acompanhar os passos do teste visualmente, facilitando a identificação de erros no teste. Entre as desvantagens, salta à vista a demora da execução dos testes, pois envolve a criação de novos processos no sistema operacional: o navegador precisa ser aberto e o Selenium requer uma instância de seu servidor rodando;}
+	\item{Criar as páginas da aplição em memória. A principal ferramenta para isso, em Java, é o HtmlUnit~\footnote{http://htmlunit.sourceforge.net/}. 
+
+Uma das vantagens é que, por fazer tudo em memória, a execução dos testes é bem mais rápida. Mas, exatamente por ser em memória, não é possível visualizar a execução do teste, o que torna a depuração mais complicada.}
 \end{itemize}
 
-O \calopsita começou usando o Selenium para os seus testes de aceitação. Mas a interface do Selenium para Java é bastante difícil de utilizar, além de não ser nada orientada a objetos: uma única interface com quase 150 métodos que contém todas as ações para uma página possíveis. Por causa disso, muitos projetos surgiram para tornar essa interface mais agradável de trabalhar. Um desses projetos é o SeleniumDSL~\footnote{http://github.com/caelum/selenium-dsl}, que é um projeto \opensource desenvolvido por pessoas da Caelum, inclusive os membros do \calopsita. O Selenium DSL é um Façade~\cite{gof} que transforma a interface procedural numa interface fluente~\cite{dsl} e orientada a objetos.
+O \calopsita começou usando o Selenium para os seus testes de aceitação. Mas a interface de uso do Selenium é difícil de utilizar e não é orientada a objetos: uma única interface com quase 150 métodos que contêm todas as ações existentes para uma página. Por causa disso, muitos projetos surgiram para tornar essa interface mais agradável de trabalhar. Um desses projetos é o SeleniumDSL~\footnote{http://github.com/caelum/selenium-dsl}, que é um projeto \opensource desenvolvido por pessoas da Caelum, inclusive os membros do \calopsita. O Selenium DSL é um Façade~\cite{gof} que transforma a interface procedural numa interface fluente~\cite{dsl} e orientada a objetos.
 
-Um dos problemas do Selenium é quando você tenta configurá-lo em um processo de Integração Contínua~\cite{ci}. Por precisar de recursos externos ao teste (servidor do selenium e navegadores sendo abertos), as máquinas que vão rodar o teste de fato precisam de um servidor gráfico rodando, dificultando bastante a instalação dessas máquinas. Por esse motivo, resolvemos migrar os testes para o HtmlUnit.
+O Selenium também causa problemas quando se tenta configurá-lo em um processo de Integração Contínua~\cite{ci}. Por precisar de recursos externos ao teste (seu servidor e navegadores), as máquinas que vão rodar o teste de fato precisam de sua parte gráfica rodando, dificultando bastante a instalação dessas máquinas. Por esse motivo, resolvemos migrar os testes para o HtmlUnit.
 
-Como a API SeleniumDSL é toda baseada em interface, decidimos criar, usando o \calopsita como base, uma implementação para HtmlUnit, transformando assim o SeleniumDSL num Adapter~\cite{gof}: não foi preciso mudar a implementação dos testes no \calopsita, tudo continuou funcionando quando a implementação do SeleniumDSL foi trocada. Além disso, a interface fluente do SeleniumDSL tem um único ponto de entrada, assim trocar da implementação em Selenium para a em HtmlUnit envolve apenas a mudança de uma linha de código. Por isso, criamos uma Factory~\cite{gof} que decide qual das implementações do SeleniumDSL vai ser usada, fazendo com que aproveitássemos as vantagens das duas formas de fazer testes para a web: usar o Selenium durante o desenvolvimento dos testes, para facilitar a depuração, e usar o HtmlUnit para rodar os testes no ambiente de integração contínua, para maior rapidez nos testes e maior simplicidade. Essa implementação de HtmlUnit para SeleniumDSL rendeu uma palestra num evento interno da Caelum~\footnote{http://www.youtube.com/watch?v=5oFlh\_Ka65U\&feature=related}.
+Como a API SeleniumDSL é toda baseada em interfaces, decidimos criar, usando o \calopsita como base, uma implementação para HtmlUnit, transformando assim o SeleniumDSL num Adapter~\cite{gof}: não foi preciso mudar a implementação dos testes no \calopsita, tudo continuou funcionando quando a implementação do SeleniumDSL foi trocada. 
 
-\subsection{Arquitetura em plugins}
+Além disso, a interface fluente do SeleniumDSL tem um único ponto de entrada e, assim, trocar da implementação em Selenium para a em HtmlUnit envolve apenas a mudança de uma linha de código. Por isso, criamos uma Factory~\cite{gof} que decide qual das implementações do SeleniumDSL vai ser usada, fazendo com que aproveitássemos as vantagens das duas formas de criar testes para a web: usar o Selenium durante o desenvolvimento dos testes, para facilitar a depuração, e usar o HtmlUnit para rodar os testes no ambiente de integração contínua, para maior rapidez nos testes e simplicidade. Essa implementação de HtmlUnit para SeleniumDSL foi assunto de uma palestra num evento interno da Caelum~\footnote{http://www.youtube.com/watch?v=5oFlh\_Ka65U\&feature=related}.
 
-Para facilitar a contribuição de pessoas ao projeto, decidimos por adotar uma arquitetura em plugins no desenvolvimento do \calopsita. Desse modo existe um núcleo bem definido do sistema, e os plugins podem definir pontos de extensão que podem adicionar informação e funcionalidades ao sistema.
+\subsection{Arquitetura de plugins}
 
-O núcleo consiste nas entidades básicas do sistema:
+Para facilitar a contribuição ao projeto, decidimos por adotar uma arquitetura de plugins no \calopsita. Desse modo existe um núcleo bem definido do sistema e os plugins definem pontos de extensão que podem adicionar informações e funcionalidades ao sistema.
+
+O núcleo consiste nas seguintes entidades básicas do sistema:
 
 \begin{itemize}
-	\item{\textbf{Card} - \textit{Cartões} - representam funcionalidades, etapas de desenvolvimento, tarefas, estorias de usuário etc. São a unidade básica da metodologia ágil, que são geralmente representados por cartões colados em um quadro branco;}
-	\item{\textbf{CardType} - \textit{Tipos de cartão} - adicionam ao cartão uma semântica. Com isso podemos dizer que um cartão é uma tarefa, uma estória ou um épico, por exemplo. Com tipos de cartão você pode também criar \textit{templates} de gadgets que serão aplicados aos cartões desse tipo;}
-	\item{\textbf{Iteration} - \textit{Iterações} - representa uma iteração, que é uma unidade de trabalho de qualquer metodologia ágil;}
+	\item{\textbf{Card} - \textit{Cartões} - representam funcionalidades, etapas de desenvolvimento, tarefas, estórias de usuário etc. São a unidade básica das metodologias ágeis. Em ambientes físicos, são usualmente representados por cartões colados em quadros brancos;}
+	\item{\textbf{CardType} - \textit{Tipos de cartão} - adicionam ao cartão uma semântica. Com isso podemos dizer que um cartão \textbf{é uma} tarefa, uma estória ou um épico, por exemplo. Com tipos de cartão também pode-se criar \textit{templates} de gadgets que serão aplicados aos cartões desse tipo por padrão;}
+	\item{\textbf{Iteration} - \textit{Iterações} - representa uma iteração, que é uma unidade de trabalho de metodologias ágeis. Iterações representam um ciclo de trabalho e entrega de funcionalidades;}
 	\item{\textbf{Project} - \textit{Projetos} - representa um projeto gerenciado pelo calopsita;}
 	\item{\textbf{User} - \textit{Usuários} - representa um usuário do sistema.}
 \end{itemize}
 
-Com essas entidades é possível controlar a parte importante do sistema. Mas além delas existe a parte dos plugins, que permitem desenvolver as funcionalidades específicas da metodologia ágil adotada pelo projeto. Os plugins são baseados em pontos de extensão, e cada ponto de extensão é uma interface que deve ser implementada pelo plugin. Os pontos de extensão existentes são os seguintes.
+Com essas entidades é possível controlar a parte central do sistema, comum a qualquer metodologia ágil. 
+
+Mas além delas, há a parte dos plugins, que permitem desenvolver as funcionalidades específicas de cada metodologia ou adaptação de metodologia adotada pelo projeto. Os plugins são classes que implementam uma interface dos pontos de extensão, isto é, ao escrever essa classe, o comportamento do sistema é alterado adicionando uma funcionalidade ou simplesmente modificando listagens. Os pontos de extensão existentes são os seguintes:
 
 \begin{itemize}
 	\item{\textbf{Gadget} - Com ele você pode adicionar informações e comportamento aos cartões. Por exemplo adicionar velocidade, tempo estimado e data de início e fim;}
@@ -231,12 +239,5 @@ Com essas entidades é possível controlar a parte importante do sistema. Mas al
 	\item{\textbf{Transformer} - Responsável por modificar listagens, adicionando, removendo ou ordenando elementos.}
 \end{itemize}
 
-Além disso, se o plugin precisar adicionar telas ao sistema, ele precisa implementá-las, usando o VRaptor3, criando um controlador e as jsps necessárias. Os pontos de extensão existentes ainda não possibilitam modificar telas já existentes, nem mudar formulários, por exemplo, mas podem ser implementados na medida em que forem necessários.
+Além disso, se o plugin precisar adicionar telas ao sistema, ele precisa implementá-las, usando o VRaptor3 para criar um controlador e as JSPs necessárias. Os pontos de extensão existentes ainda não possibilitam modificar telas já existentes, nem mudar formulários, por exemplo, mas podem ser implementados à medida em que forem necessários.
 
-\subsection{Organização do código}
-
-
-***JAVASCRIPT***
-
-
-O \calopsita está sendo desenvolvido com a linguagem Java, utilizando ainda Hibernate e javascript. Como framework MVC começamos utilizando o VRaptor 2 e durante o desenvolvimento do VRaptor 3 resolvemos fazer a migração. Muita coisa que precisavamos ainda não contava com o suporte do VRaptor 3, portanto nossa adoção ajudou no desenvolvimento desse framework. Ainda foi a adoção desse framework que nos permitiu a utilização de url's amigáveis, restful, etc. Sua principal vantagem é: *******blabla*******
