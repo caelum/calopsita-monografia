@@ -1,10 +1,11 @@
 \section{Desenvolvimento}
 
-Já desde o início de janeiro, a proposta inicial do \calopsita foi montada. Durante o mês de janeiro, estudamos tecnologias que poderiam ser interessantes no desenvolvimento do projeto e conseguimos o apoio do professor Alfredo Goldman, que aceitou nos orientar, da Caelum, que nos cedeu horas do trabalho e dos mestrandos Mariana Bravo e Hugo Corbucci, nossos clientes eleitos.
+Já desde o início de janeiro, a proposta inicial do \calopsita{} foi montada. Durante o mês de janeiro, estudamos tecnologias que poderiam ser interessantes no desenvolvimento do projeto e conseguimos o apoio do professor Alfredo Goldman, que aceitou nos orientar, da Caelum, que nos cedeu horas do trabalho e dos mestrandos Mariana Bravo e Hugo Corbucci, nossos clientes eleitos.
 
-Também desde então temos o grupo de discussões~\footnote{http://groups.google.com/group/\calopsita-development} e um repositório no GitHub para o projeto~\footnote{http://github.com/caelum/\calopsita}. Esse repositório foi movido durante o desenvolvimento, mas seu histórico completo se manteve. Abaixo, um gráfico de número de linhas enviadas ao repositório no decorrer do ano ilustra a distribuição do trabalho de código durante o ano.
+Também desde então temos o grupo de discussões~\footnote{http://groups.google.com/group/\calopsita-development} e um repositório no GitHub para o projeto~\footnote{http://github.com/caelum/\calopsita}. Esse repositório foi movido durante o desenvolvimento, mas seu histórico completo se manteve. Na figura \ref{figura:github}, vê-se um gráfico de número de linhas enviadas ao repositório no decorrer do ano. Ele ilustra a distribuição da geração de código ao longo do ano.
 
 \begin{figure}[H]
+  \label{figura:github}
   \centering
   \fbox{
     \includegraphics[width=110mm]{images/impacto.png}
@@ -12,9 +13,9 @@ Também desde então temos o grupo de discussões~\footnote{http://groups.google
   \caption{Linhas de impacto - GitHub}
 \end{figure}
 
-Esses dados foram colhidos do gráfico de impacto do GitHub e as divisões de linhas por desenvolvedor foram removidas porque, como adotamos programação pareada na maioria do tempo, ele não necessariamente representa a cota de cada desenvolvedor no projeto.
+Esses dados foram coletados do gráfico de impacto do GitHub e as divisões de linhas por desenvolvedor foram removidas porque, como adotamos programação pareada na maioria do tempo, ele não necessariamente representa a participação única de cada desenvolvedor no projeto.
 
-Nota-se dessa imagem um pico de linhas de código enviadas ao repositório no mês de maio, mês seguinte a começarmos a gerenciar o próprio \calopsita usando a parte que já estava pronta do projeto. Contudo, houve trabalho de janeiro até o momento atual, com uma considerável queda em setembro para que focássemos nessa monografia.
+Nota-se dessa imagem um pico de linhas de código enviadas ao repositório no mês de maio, mês seguinte a começarmos a gerenciar o próprio \calopsita{} usando a parte que já estava pronta do projeto. Contudo, houve trabalho de janeiro até o momento atual, com uma considerável queda em setembro para que focássemos nessa monografia.
 
 \subsection{Gerenciamento do projeto}
 
@@ -22,27 +23,30 @@ Por tratar-se de um projeto de médio porte, seria indicado optar por alguma met
 
 Primeiramente porque, buscando informações históricas sobre o modelo \textit{Waterfall}, descobrimos que mesmo o artigo~\cite{waterfall} que primeiro descreveu o modelo avisava que sua implementação é quase utópica e propensa a falhas.
 
-``I believe in this concept, but the implementation described above is risky and invites failure.''
+\begin{quote}
+\textit{``I believe in this concept, but the implementation described above is risky and invites failure.'}'
+\end{quote}
 
-Mais do que isso, o autor, já em 1970 sugeria que o desenvolvimento iterativo é mais apropriado para o desenvolvimento de projetos de \software. Isso apenas aumenta nossa consternação com relação ao que se vê no mercado de trabalho ainda hoje -- diversas empresas que clamam usar RUP~\cite{rup} ignoram sua parte mais importante, o desenvolvimento iterativo.
+Mais do que isso, o autor, já em 1970, sugeria que o desenvolvimento iterativo é mais apropriado para o desenvolvimento de projetos de \software. Isso apenas aumenta nossa consternação com relação ao que se vê no mercado de trabalho ainda hoje -- diversas empresas que clamam usar RUP~\cite{rup} ignoram sua parte mais importante, o desenvolvimento iterativo.
 
-Em segundo lugar, métodos tradicionais prezam pelo conhecido ``Big Design Up Front'', isto é, em planejar toda a arquitetura de um sistema antes de começar a produzí-lo e manter esse \textit{design} até o produto final surgir. Essa idéia pressupõe que, de início, se saiba tudo o que será necessário do sistema e que essas necessidades não mudem. A experiência mostra que, na produção de \software, o padrão é não conhecer de antemão o que se precisa e as necessidades mudarem com o tempo.
+Em segundo lugar, métodos tradicionais prezam pelo conhecido \textit{``Big Design Up Front'}', isto é, em planejar toda a arquitetura de um sistema antes de começar a produzí-lo e manter esse \textit{design} até o produto final surgir. Essa ideia pressupõe que, de início, se saiba tudo o que será necessário do sistema e que essas necessidades não mudem. A experiência mostra que, na produção de \software, o padrão é não conhecer de antemão o que se precisa e as necessidades mudarem com o tempo.
 
-De fato, verificamos a verdade nessa afirmação quando, no início do projeto, os clientes queriam um papel Administrador do Sistema no Calopsita que restringiria partes do sistema que podem ser editados por cada tipo de usuário. Essa funcionalidade, assim como diversas outras, acabou não sendo implementado por se mostrar desnecessária.
+De fato, verificamos a verdade nessa afirmação quando, no início do projeto, os clientes queriam um papel Administrador do Sistema no \calopsita{} que restringiria partes do sistema que podem ser editados por cada tipo de usuário. Essa funcionalidade, assim como diversas outras, acabou não sendo implementado por se mostrar desnecessária.
 
-Finalmente, tanto os desenvolvedores quanto os clientes do \calopsita valorizam o \textit{feedback} rápido e atribuem a isso muitos projetos bem-sucedidos. Os clientes têm seus trabalhos de mestrado relacionados com métodos ágeis e alguns anos de experiência nessas metodologias. Os desenvolvedores trabalham diariamente com Scrum e XP e possuem certificações pela Scrum Alliance. 
+Finalmente, tanto os desenvolvedores quanto os clientes do \calopsita{} valorizam o \textit{feedback} rápido e atribuem a isso muitos projetos bem-sucedidos. Os clientes têm seus trabalhos de mestrado relacionados com métodos ágeis e alguns anos de experiência nessas metodologias. Os desenvolvedores trabalham diariamente com Scrum e XP\footnote{Referências para Scrum e XP} e possuem certificações pela Scrum Alliance. 
 
-Acreditamos que as metodologias ágeis são uma resposta ao modo engessado com que métodos tradicionais tratam a produção de \software e que, aplicando os valores descritos no Manifesto Ágil, obtemos produtos de qualidade, que atendem às necessidades reais dos clientes e dão satisfação aos desenvolvedores.  
+Acreditamos que as metodologias ágeis são uma resposta ao modo engessado com que métodos tradicionais tratam a produção de \software{} e que, aplicando os valores descritos no Manifesto Ágil, obtemos produtos de qualidade, que atendem às necessidades reais dos clientes e dão satisfação aos desenvolvedores.  
 
 \subsection{Abordagem Ágil}
 
-Embora não tenhamos usado Scrum para desenvolver o \calopsita, utilizamos alguns métodos e ferramentas típicos desse \textit{framework} e de XP que melhor funcionavam para nosso time. Acreditamos que o uso de metodologias e frameworks são excelentes para times e pessoas em migração das formas tradicionais, mas seu uso não se mostrou necessário no nosso time. Todos, clientes e desenvolvedores, têm grande experiência com métodos ágeis e, dessa forma, optamos por simplesmente seguir os preceitos ágeis e adaptar os métodos que nos ajudassem mais a cada etapa. 
+Embora não tenhamos usado Scrum para desenvolver o \calopsita{}, utilizamos alguns métodos e ferramentas típicos desse \textit{framework} e de XP que melhor funcionavam para nosso time. Acreditamos que o uso de metodologias e \textit{frameworks} são excelentes para times e pessoas em migração das formas tradicionais, mas seu uso não se mostrou necessário no nosso time. Todos, clientes e desenvolvedores, têm grande experiência com métodos ágeis e, dessa forma, optamos por simplesmente seguir os preceitos ágeis e adaptar os métodos que nos ajudassem mais a cada etapa. 
 
 \subsubsection*{Kanban}
 
-Como, durante a maior parte do desenvolvimento, os programadores trabalhavam no mesmo espaço físico, pudemos adotar um quadro branco com Kanban:
+Como, durante a maior parte do desenvolvimento, os programadores trabalhavam no mesmo espaço físico, pudemos adotar um quadro branco com Kanban\footnote{Referência sobre Lean ou mesmo sobre Kanban} como mostra a figura \ref{figura:kaban}.
 
 \begin{figure}[H]
+  \label{figura:kaban}
   \centering
   \fbox{
     \includegraphics[width=110mm]{images/calopsita-kanban.jpg}
@@ -54,9 +58,10 @@ O quadro branco é uma forma bastante eficiente de comunicação -- basta olhar 
 
 \subsubsection*{Integração Contínua}
 
-Para mantermos nosso código funcional a cada mudança, utilizamos desde o começo do projeto um servidor de integração contínua~\cite{ci}, o CruiseControl.rb~\footnote{http://cruisecontrolrb.thoughtworks.com/}. Esse servidor é capaz de consultar o repositório de código de tempos em tempos verificando por mudanças no código. Uma vez detectada alguma alteração, ele baixa o novo código, compila e roda seus testes de forma automática. Se durante esse processo, qualquer um dos testes falhar, um email é disparado para toda a equipe, garantido que o bug introduzido seja corrigido o mais rapidamente possível.
+Para mantermos nosso código funcional a cada mudança, utilizamos desde o começo do projeto um servidor de integração contínua~\cite{ci}, o CruiseControl.rb~\footnote{http://cruisecontrolrb.thoughtworks.com/}. Esse servidor é capaz de consultar o repositório de código de tempos em tempos verificando por mudanças no código. Uma vez detectada alguma alteração, ele baixa o novo código, compila e roda seus testes de forma automática. Se durante esse processo, qualquer um dos testes falhar, um email é disparado para toda a equipe, garantido que o bug introduzido seja corrigido o mais rapidamente possível. A figura \ref{figura:cruisecontrol} mostra os últimos resultados do processo.
 
 \begin{figure}[H]
+  \label{figura:cruisecontrol}
   \centering
   \fbox{
     \includegraphics[width=110mm]{images/cruisecontrol-calopsita.png}
@@ -66,28 +71,31 @@ Para mantermos nosso código funcional a cada mudança, utilizamos desde o come�
 
 \subsubsection*{Pareamento e refatoração}
 
-A qualidade do código, tanto em aspectos de legibilidade quanto em arquitetura, era assegurada por discussões técnicas na lista do projeto, por discussões com profissionais da Caelum e pelo uso extensivo de pareamento quando programando. As vantagens da programação pareada~\cite{pair}, contudo, vão além da manutenção da qualidade de código -- atribuimos a essa prática o nivelamento do conhecimento não apenas sobre o código do Calopsita, mas também sobre os conceitos aplicados em diversas partes do sistema.
+A qualidade do código, tanto em aspectos de legibilidade quanto em arquitetura, era assegurada por discussões técnicas na lista do projeto, por discussões com profissionais da Caelum e pelo uso extensivo de programação em pares. As vantagens da programação em pares~\cite{pair}, contudo, vão além da manutenção da qualidade de código -- atribuímos a essa prática o nivelamento do conhecimento não apenas sobre o código do Calopsita, mas também sobre os conceitos aplicados em diversas partes do sistema.
 
 Outro fator que colaborou bastante na qualidade do código é a cultura de refatorações que a equipe adota. A regra é que, sempre que se encontra código que poderia ser melhor, melhora-se ele. Isso faz com que o código se mantenha sempre atual e o melhor possível na visão da equipe de desenvolvimento.
 
 \subsubsection*{Interação com clientes}
 
-Para mantermos o foco do projeto no que era mais valioso para o cliente a cada momento, a interação com esses foi fundamental para o bom andamento do projeto. Tivemos reuniões semanais ou quinzenais durante todo o ano, onde os clientes testavam o \calopsita ambiente de homologação, aprovavam tarefas,  repriorizavam os cartões de funcionalidades e definiam uma meta para a iteração seguinte. 
+Para mantermos o foco do projeto no que era mais valioso para o cliente a cada momento, a interação com esses foi fundamental para o bom andamento do projeto. Tivemos reuniões semanais ou quinzenais durante todo o ano, onde os clientes testavam o \calopsita{} ambiente de homologação, aprovavam tarefas,  repriorizavam os cartões de funcionalidades e definiam uma meta para a iteração seguinte. 
 
-Com a estabilização do \calopsita, diversos projetos da Caelum também começaram a usar o sistema para gerencia dos ítens por fazer e iterações. Assim, passamos a ter mais clientes e, portanto, mais pedidos de funcionalidades e correções. Nesse momento, usar o próprio \calopsita para auxiliar em seu desenvolvimento se mostrou bastante conveniente: os clientes colocavam seus pedidos no sistema e priorizavam seus cartões.
+Com a estabilização do \calopsita{}, diversos projetos da Caelum também começaram a usar o sistema para gerencia dos ítens por fazer e iterações. Assim, passamos a ter mais clientes e, portanto, mais pedidos de funcionalidades e correções. Nesse momento, usar o próprio \calopsita{} para auxiliar em seu desenvolvimento se mostrou bastante conveniente: os clientes colocavam seus pedidos no sistema e priorizavam seus cartões.
 
 \subsubsection*{Personas}
 
-Trabalhando com diversos clientes traz um aumento considerável na complexidade de comunicação entre as partes envolvidas no projeto. Tanto a comunicação entre clientes diferentes quanto com a equipe de desenvolvimento foi facilitada com o uso de \textit{Personas}. Os pedidos eram feitos em nome de um personagem cujos valores eram cohecidos pela equipe e pelos clientes. 
+Trabalhando com diversos clientes traz um aumento considerável na complexidade de comunicação entre as partes envolvidas no projeto. Tanto a comunicação entre clientes diferentes quanto com a equipe de desenvolvimento foi facilitada com o uso de \textit{Personas}. Os pedidos eram feitos em nome de um personagem cujos valores eram conhecidos pela equipe e pelos clientes. 
 
-Por exemplo, nossa \textit{persona} Fabs representa um usuário do sistema que é um tanto distraído e quer que o sistema não tenha ambiguidades que possam confundí-lo. Com essa descrição, todos sabem que essa persona representa a preocupação com usabilidade e interação homem-computador. Um cartão desse personagem, tirado do nosso \textit{backlog}, pode ser visto abaixo.
+Por exemplo, nossa \textit{persona} Fabs representa um usuário do sistema que é um tanto distraído e quer que o sistema não tenha ambiguidades que possam confundí-lo. Com essa descrição, todos sabem que essa persona representa a preocupação com usabilidade e interação homem-computador. Um cartão desse personagem, tirado do nosso \textit{backlog}, pode ser visto na tabela \ref{tabela:fabs}.
 
-\begin{tabular}{|p{10cm}|}
-	\hline
-	Para não me confundir sobre qual cartão eu peguei \\
-	Como Fabs \\
-	Quero que os cartões na priorização e na iteração mantenham a mesma forma quando são arrastados. \\
-	\hline
-\end{tabular}
+\begin{figure}[H]
+  \label{tabela:fabs}
+  \begin{tabular}{|p{10cm}|}
+    \hline
+    Para não me confundir sobre qual cartão eu peguei \\
+    Como Fabs \\
+    Quero que os cartões na priorização e na iteração mantenham a mesma forma quando são arrastados. \\
+    \hline
+  \end{tabular}
+\end{figure}
 
-A lista e descrições das \textit{personas} usadas na construção do Calopsita podem ser encontradas no apêndice~\ref{sec:personas}.
+A lista e descrições das \textit{personas} usadas na construção do \calopsita{} podem ser encontradas no apêndice~\ref{sec:personas}.

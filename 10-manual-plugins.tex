@@ -1,21 +1,16 @@
 \section{Apêndice II - Criando plugins}
 
-A criação de plugins no calopsita é baseada em pontos de extensão. Os pontos de extensão já implementados são:
+A criação de plugins no \calopsita{} é baseada em pontos de extensão. Os pontos de extensão já implementados são:
 
 \begin{itemize}
-	\item{\textbf{Gadget} - Implemente uma entidade do Hibernate com essa interface, e então você pode adicionar informações
-		aos cartões que possuirem esse gadget. Por exemplo se você quiser adicionar uma estimativa de velocidade, tempo total 
-		ou dificuldade do cartão}
-	\item{\textbf{Transformer} - Implemente essa interface e anote a classe gerada com @Component. Assim você consegue
-		modificar as listagens, por exemplo mudando a ordenação ou removendo determinados itens.}
-	\item{\textbf{PluginConfig} - Implemente essa interface e anote a classe gerada com @Component. Com ela é possível
-		adicionar itens aos menus do sistema, baseados nos parâmetros da requisição}
+	\item{\textbf{Gadget} - Implemente uma entidade do Hibernate com essa interface, e então você pode adicionar informações aos cartões que possuirem esse gadget. Por exemplo se você quiser adicionar uma estimativa de velocidade, tempo total ou dificuldade do cartão}
+	\item{\textbf{Transformer} - Implemente essa interface e anote a classe gerada com @Component. Assim você consegue modificar as listagens, por exemplo mudando a ordenação ou removendo determinados itens.}
+	\item{\textbf{PluginConfig} - Implemente essa interface e anote a classe gerada com @Component. Com ela é possível adicionar itens aos menus do sistema, baseados nos parâmetros da requisição}
 \end{itemize}
 
 Além disso, você pode criar novas telas para o sistema. Para isso basta criar um controlador do 
 VRaptor~\footnote{http://vraptor.caelum.com.br/documentacao} e as respectivas jsps de resultado.
-Todas as classes geradas precisam estar abaixo do pacote \textbf{br.com.caelum.calopsita} para que o
-VRaptor consiga enxergá-las.
+Todas as classes geradas precisam estar abaixo do pacote \textbf{br.com.caelum.calopsita} para que o VRaptor consiga enxergá-las.
 
 Por exemplo, se fôssemos fazer um plugin para estimar velocidade dos cartões, precisamos criar as classes:
 
@@ -138,7 +133,6 @@ public class VelocidadeController {
 	}
 \end{itemize}
 
-Para instalar o plugin, basta colocar as classes criadas no classpath (dentro de um jar, ou no WEB-INF/classes),
-jsps na pasta /WEB-INF/jsp, e eventuais javascripts e css's na pasta web.
+Para instalar o plugin, basta colocar as classes criadas no classpath (dentro de um jar, ou no WEB-INF/classes), jsps na pasta /WEB-INF/jsp, e eventuais javascripts e css's na pasta web.
 
 

@@ -10,13 +10,13 @@ Scrum
 Crystal
 
 
-Antes de iniciar o desenvolvimento do \calopsita, resolvemos analisar quais seriam as outras alternativas disponíveis no mercado. Fizemos uma análise bem extensa, tanto de produtos pagos, quanto de livres e \opensource. A idéia era descobrir quais os pontos fortes de cada ferramenta, e implementá-los no \calopsita. Embora as ferramentas pagas não sejam exatamente concorrentes, mostrar que nosso sistema tem as mesmas ou mais funcionalidades que as alternativas pagas, pode fazer com que atraiamos mais usuários e colaboradores.
+Antes de iniciar o desenvolvimento do \calopsita{}, resolvemos analisar quais seriam as outras alternativas disponíveis no mercado. Fizemos uma análise bem extensa, tanto de produtos pagos, quanto de livres e \opensource{}. A idéia era descobrir quais os pontos fortes de cada ferramenta, e implementá-los no \calopsita{}. Embora as ferramentas pagas não sejam exatamente concorrentes, mostrar que nosso sistema tem as mesmas ou mais funcionalidades que as alternativas pagas, pode fazer com que atraiamos mais usuários e colaboradores.
 
 \begin{itemize}
 \item{Scrumy - https://scrumy.com/
 
 É uma ferramenta paga e proprietária, com uma interface baseada em \textit{drag'n drop}. Não permite nenhum tipo de
-customização, nem estimativas, marcação de horas, uso de templates ou personas. Quanto aos gráficos, o único disponibilizado
+customização, nem estimativas, marcação de horas, uso de \textit{templates} ou \textit{personas}. Quanto aos gráficos, o único disponibilizado
 é o \textit{burndown}. Como diferencial, permite a visualização do
 projeto em algum ponto do passado, atualizando o kanban para representar o estado do projeto naquele ponto, além de
 permitir atualizações automáticas, ou seja, caso dois usuários estejam mexendo nele ao mesmo tempo, um enxerga as alterações
@@ -25,45 +25,39 @@ do outro sem precisar recarregar a página.}
 \item{ScrumNinja - http://scrumninja.com
 
 É uma ferramenta paga e proprietária, bem pouco customizável, sem a possibilidade de marcação de horas nem de
-trabalhar com templates ou personas. Tem suporte a estimativas, uma interface baseada em estados (start, deliver, etc) e
-gráficos de progresso. Um diferencial está no fato de que possui uma API que pode ser utilizada para a atualização dos
-cartões.}
+trabalhar com \textit{templates} ou \textit{personas}. Tem suporte a estimativas, uma interface baseada em estados (start, deliver, etc) e
+gráficos de progresso. Um diferencial está no fato de que possui uma API que pode ser utilizada para a atualização dos cartões.}
 
 \item{Scrum'd - http://scrumd.com/
 
 É uma ferramenta paga e proprietária, não customizável, que permite a estimativa de histórias em pontos e de tarefas
-em horas. Faz uso de \textit{burndown} e não trabalha com templates nem personas. Como diferencial, permite a importação e
-exportação de tarefas e estórias.}
+em horas. Faz uso de \textit{burndown} e não trabalha com \textit{templates} nem \textit{personas}. Como diferencial, permite a importação e exportação de tarefas e histórias.}
 
 \item{Pivotal Tracker - http://www.pivotaltracker.com/
 
-É uma ferramenta proprietária, porém gratuita, que permite a estimativa de estórias em pontos, além da
-marcação da velocidade do time. Também não trabalha com templates nem personas, mas como diferencial permite a importação e
-exportação de tarefas e estórias, bem como permite a classificação de uma estória em bug/feature/chore/release.}
+É uma ferramenta proprietária, porém gratuita, que permite a estimativa de estórias em pontos, além da marcação da velocidade do time. Também não trabalha com \textit{templates} nem \textit{personas}, mas como diferencial permite a importação e exportação de tarefas e histórias, bem como permite a classificação de uma história em bug/feature/chore/release.}
 
 \item{XPlanner - xplanner.org/
 
-É uma ferramenta free e open source, que inclusive vem sendo utilizada pela disciplina de Programação Extrema.
+É uma ferramenta livre e \opensource{}, que inclusive vem sendo utilizada pela disciplina de Programação Extrema.
 Ele tem bastantes funcionalidades, mas no entanto, sua interface de uso não é das mais agradáveis. O uso do XPlanner
-por todos do time foi também um fator motivador na criação do \calopsita. Quanto às suas funcionalidades, o XPlanner
-permite o uso de estimativas e marcação de horas, mas não é customizável nem trabalha com templates ou personas.}
+por todos do time foi também um fator motivador na criação do \calopsita{}. Quanto às suas funcionalidades, o XPlanner
+permite o uso de estimativas e marcação de horas, mas não é customizável nem trabalha com \textit{templates} ou \textit{personas}.}
 
 \item{VersionOne - http://www.versionone.com
 
 Ferramenta paga  e proprietária, customizável e com suporte a marcação de velocidade, geração de \textit{burndown}. Não trabalha
-com templates nem personas, mas tem como diferencial a possibilidade de planejamento de releases. É a única ferramenta analisada
-com suporte a diferentes metodologias.}
+com \textit{templates} nem \textit{personas}, mas tem como diferencial a possibilidade de planejamento de releases. É a única ferramenta analisada com suporte a diferentes metodologias.}
 
 \item{Pronto - http://www.bluesoft.com.br/pronto-demo
 
-Ferramenta \opensource, com código hospedado no GitHub~\footnote{http://github.com/andrefaria/pronto-agile}.
-Permite a marcação de horas trabalhadas, bem como a geração de gráficos (embora durante nossos testes, a geração de \textit{burndowns} apresentou problemas). Não permite customizações nem o uso de templates ou personas. Como
-diferencial permite que usuários tenham perfis diferentes (product owner, scrum master, desenvolvedor, testador, etc) e
+Ferramenta \opensource{}, com código hospedado no GitHub~\footnote{http://github.com/andrefaria/pronto-agile}. Permite a marcação de horas trabalhadas, bem como a geração de gráficos (embora durante nossos testes, a geração de \textit{burndowns} apresentou problemas). Não permite customizações nem o uso de \textit{templates} ou \textit{personas}. Como
+diferencial permite que usuários tenham perfis diferentes (\textit{product owner}, \textit{scrum master}, desenvolvedor, testador, etc) e
 permite informar se a tarefa for concluída usando pareamento, apontando a dupla envolvida.}
 
 \item{PPTS - http://ses-ppts.sourceforge.net/
 
-É uma ferramenta \opensource que possibilita a priorização de tarefas, bem como saber quais pessoas estiveram envolvidas
+É uma ferramenta \opensource{} que possibilita a priorização de tarefas, bem como saber quais pessoas estiveram envolvidas
 em quais tarefas. Permite a geração de gráficos diversos, bem como a estimativa de tarefas e a geração de relatório com
 a velocidade do time. Como diferencial, permite a customização de menus.}
 
@@ -75,8 +69,8 @@ no fato de que permite integração com a IDE Eclipse.}
 \item{Mingle - http://studios.thoughtworks.com/mingle-agile-project-management
 
 Ferramenta proprietária criada pela ThoughtWorks. Tem geração de gráficos, estimativas, priorização, marcação de horas.
-Permite uma certa customização, mas não permite o uso de templates nem de personas. Como ponto positivo, está o fato de
-que se adapta a diferentes metodologias ágeis, como o \calopsita.}
+Permite uma certa customização, mas não permite o uso de \textit{templates} nem de \textit{personas}. Como ponto positivo, está o fato de
+que se adapta a diferentes metodologias ágeis, como o \calopsita{}.}
 
 \end{itemize}
 
@@ -107,10 +101,10 @@ que se adapta a diferentes metodologias ágeis, como o \calopsita.}
 	\item E - Priorização
 	\item F - Marcação de horas
 	\item G - Customizável
-	\item H - Templates de metodologias
-	\item I - Templates de cartões
-	\item J - Personas
+	\item H - \textit{Templates} de metodologias
+	\item I - \textit{Templates} de cartões
+	\item J - \textit{Personas}
 \end{itemize}
 
-* - no backlog para ser feito
+* - no \textit{backlog} para ser feito
 
