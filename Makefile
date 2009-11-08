@@ -18,4 +18,4 @@ poster: poster.tex
 	rm poster.aux -f
 	rm poster.out -f
 	
-	rm *~
+	acroread poster.pdf
