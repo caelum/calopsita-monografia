@@ -5,5 +5,7 @@ paper: monografia.tex
 	rm monografia.log -f
 	rm monografia.aux -f
 	rm monografia.out -f
+	
+	rm *~
 
 	evince monografia.pdf 
