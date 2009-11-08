@@ -9,3 +9,13 @@ paper: monografia.tex
 	rm *~
 
 	evince monografia.pdf 
+	
+poster: poster.tex
+	pdflatex poster.tex
+	pdflatex poster.tex	
+	rm poster.toc -f
+	rm poster.log -f
+	rm poster.aux -f
+	rm poster.out -f
+	
+	rm *~
