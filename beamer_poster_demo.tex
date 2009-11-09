@@ -1,0 +1,123 @@
+\documentclass[serif,mathserif,final]{beamer}
+\mode<presentation>{\usetheme{Calopsita}}
+\usepackage{amsmath,amsfonts,amssymb,pxfonts,eulervm,xspace}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\graphicspath{{./figures/}}
+\usepackage[orientation=landscape,size=a0,scale=1.2,debug]{beamerposter}
+
+%-- Header and footer information ----------------------------------
+\newcommand{\footleft}{http://www.shawnlankton.com/category/latex/}
+\newcommand{\footright}{shawn at shawn lankton dot com}
+\newcommand{\calopsita}{Calopsita}
+\newcommand{\opensource}{\textit{open source}}
+
+\title{Calopsita: Um gerenciador de projetos que utilizam metodologias ágeis}
+\author{Cauê Haucke Porta Guerra, Cecilia Fernandes, Lucas Cavalcanti dos Santos\\ Orientador: Prof. Dr. Alfredo Goldman}
+\institute{Instituto de Matemática e Estatística\\
+Universidade de São Paulo}
+%-------------------------------------------------------------------
+
+
+%-- Main Document --------------------------------------------------
+\begin{document}
+\begin{frame}{}
+  \begin{columns}[t]
+
+    %-- Column 1 ---------------------------------------------------
+    \begin{column}{0.32\linewidth}
+
+      %-- Block 1-1
+      \begin{block}{Introdução}
+        O \calopsita{} é um projeto que nasceu da necessidade de se trabalhar e gerenciar diferentes projetos ágeis, cada um com suas particularidades. Em especial, surgiu da necessidade de se trabalhar com equipes distribuídas em projetos ágeis\footnote{definição de projetos ágeis antes}. 
+
+				Essa necessidade ficou evidente em projetos de consultoria da empresa na qual os três idealizadores do \calopsita{} trabalham: o \textit{Product Owner}
+				dos projetos é externo, mas ainda tem que escrever cartões de histórias, priorizá-los e acompanhar o desenvolvimento da iteração, ainda que a distância.
+
+				Não é intenção do \calopsita{} substituir métricas coladas em paredes e quadros brancos, mas sim prover uma ferramenta que permita o desenvolvimento ágil distribuído -- tanto comercial quanto \opensource{}.  
+
+				Esse objetivo convergia para os mestrados de dois amigos, Hugo Corbucci e Mariana Bravo, então resolvemos convidá-los para serem nossos clientes de projeto -- convite esse que foi aceito prontamente. Além deles, contamos com o apoio do nosso orientador, que acompanhava o andamento do projeto pela lista de discussões e conversas esporádicas, e com alguns amigos da Caelum, que foram de fundamental importância nas discussões sobre a arquitetura do sistema e que, mais tarde, também tornaram-se clientes e passaram a pedir por novas funcionalidades e reportar bugs. 
+
+				Já desde abril, o sistema é usado para gerenciar seu próprio desenvolvimento e, hoje, auxilia no desenvolvimento de vários outros projetos, tanto da Caelum como pessoais.
+
+				Nesse trabalho, temos três temas principais relacionados ao \calopsita{}. Primeiramente, o processo de desenvolvimento, isto é, quais foram os métodos ágeis adotados para gerenciamento do sistema, a importante interação com clientes e a infraestrutura que viabilizou o crescimento e estabilidade do sistema. 
+
+				Em seguida, veremos uma parte mais técnica que explica as inovações presentes no código do \calopsita{}, de onde elas vieram, o que as motivou e nossas impressões sobre esses avanços no estado da arte do mercado Java.
+
+				Finalmente, falaremos do sistema produzido, comparando-o com outras ferramentas de proposta similar já existentes, \opensource{} e comerciais, do feedback dos clientes atuais e dos passos futuros a serem implementados.
+      \end{block}
+
+      %-- Block 1-2
+      \begin{block}{Motivation}
+        You can make a poster very quickly and easily by cutting and pasting
+        the \LaTeX~codes from the paper!
+      \end{block}
+
+      %-- Block 1-3
+      \begin{block}{Columns}
+        The columns will automatically align with each other and try to look
+        as nice as possible.  You may have to add {\tt$\backslash$vspace\{1pt\}}
+        commands to adjust the spacing here and there.  Remember that you can
+        use positive or negative numbers.
+      \end{block}
+
+    \end{column}%1
+
+    %-- Column 2 ---------------------------------------------------
+    \begin{column}{0.32\linewidth}
+
+      %-- Block 2-1
+      \begin{block}{Lists}
+        \begin{itemize}
+          \item You can make
+          \item lists, that
+          \item allow people to see quickly
+        \end{itemize}
+      \end{block}
+
+      %-- Block 2-2
+      \begin{block}{Math}
+        Include math within the text is as simple as $1+1=2$.  You can also
+        highlight more important equations like this:
+        \begin{equation*}
+          \int_0^1\sin(x)+\cos^2(x)+\alpha x~d\!x
+        \end{equation*}
+      \end{block}
+
+      %-- Block 2-3
+      \begin{block}{Pictures}
+        \begin{figure}[htb]
+          \centering
+          \includegraphics[width=.6\columnwidth]{science}
+        \end{figure}
+      \end{block}
+
+    \end{column}%2
+
+    %-- Column 3 ---------------------------------------------------
+    \begin{column}{0.32\linewidth}
+
+      %-- Block 3-1
+      \begin{block}{Experiments}
+        Remember to put lots of figures on your poster... Nobody reads anymore!
+      \end{block}
+
+      %-- Block 3-2
+      \begin{block}{Conclusion}
+        Much less annoying than PowerPoint.  Copy and Paste from your
+        document. Overall, a great idea!
+      \end{block}
+
+      %-- Block 3-3
+      \begin{block}{Logo}
+        To change the logo (if you don't want to represent for Georgia Tech).
+        Replace the file {\tt logo.png} and with the logo of your choice!
+        Make sure the background is black.
+      \end{block}
+
+    \end{column}%3
+
+  \end{columns}
+\end{frame}
+\end{document}

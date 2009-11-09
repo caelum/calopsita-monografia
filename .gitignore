@@ -6,3 +6,6 @@
 *.ps
 *.synctex.gz
 *~
+*.nav
+*.snm
+*.toc
