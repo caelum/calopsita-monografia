@@ -69,11 +69,18 @@
       \end{block}
 
       %-- Block 2-3
-      \begin{block}{Pictures}
-        \begin{figure}[htb]
-          \centering
-          \includegraphics[width=.6\columnwidth]{science}
-        \end{figure}
+			\begin{block}{Implementação}
+				O \calopsita{} foi desenvolvido buscando o máximo de expressividade. Além disso, aproveitamos
+				para testar novas tecnologias e padrões:
+				
+				\begin{itemize}
+					\item{SeleniumDSL: DSL para manipulação do Selenium. Acresentamos suporte ao HtmlUnit, permitindo
+					que nossos testes de integração fossem executados mais rapidamente;}
+					\item{Vraptor3: como o \calopsita{} foi o primeiro projeto a utilizar o Vraptor3, ainda em suas
+					versões betas, o uso que fazíamos dele fez com que vários pontos fossem alterados - melhorar}
+					\item{ActiveRecord: adotamos como persistência no lugar de DataMapper}
+					\item{REST: Aproveitando o suporte de VRaptor a REST}
+				\end{itemize}
       \end{block}
 
     \end{column}%2
@@ -82,21 +89,30 @@
     \begin{column}{0.32\linewidth}
 
       %-- Block 3-1
-      \begin{block}{Experiments}
-        Remember to put lots of figures on your poster... Nobody reads anymore!
-      \end{block}
+      \begin{block}{Resultados}
+        \begin{figure}[htb]
+         \centering
+				\fbox{
+         	\includegraphics[width=.8\columnwidth]{images/planejamento}
+				}
+				\caption{Planejamento}
+        \end{figure}
+				
+				\begin{figure}[htb]
+         \centering
+				\fbox{
+         	\includegraphics[width=.8\columnwidth]{images/priorizacao}
+				}
+				\caption{Priorização}
+        \end{figure}
 
-      %-- Block 3-2
-      \begin{block}{Conclusion}
-        Much less annoying than PowerPoint.  Copy and Paste from your
-        document. Overall, a great idea!
-      \end{block}
-
-      %-- Block 3-3
-      \begin{block}{Logo}
-        To change the logo (if you don't want to represent for Georgia Tech).
-        Replace the file {\tt logo.png} and with the logo of your choice!
-        Make sure the background is black.
+				\begin{figure}[htb]
+         \centering
+				\fbox{
+         	\includegraphics[width=.8\columnwidth]{images/cartao}
+				}
+				\caption{Cartões}
+        \end{figure}
       \end{block}
 
     \end{column}%3
