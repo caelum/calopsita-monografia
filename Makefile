@@ -5,17 +5,17 @@ paper: monografia.tex
 	rm monografia.log -f
 	rm monografia.aux -f
 	rm monografia.out -f
-	
-	rm *~
 
-	evince monografia.pdf 
+	acroread monografia.pdf 
 	
-poster: poster.tex
-	pdflatex poster.tex
-	pdflatex poster.tex	
-	rm poster.toc -f
-	rm poster.log -f
-	rm poster.aux -f
-	rm poster.out -f
+poster: beamer_poster.tex
+	pdflatex beamer_poster.tex
+	pdflatex beamer_poster.tex	
+	rm beamer_poster.toc -f
+	rm beamer_poster.log -f
+	rm beamer_poster.aux -f
+	rm beamer_poster.out -f
+	rm beamer_poster.nav -f
+	rm beamer_poster.snm -f
 	
-	acroread poster.pdf
+	acroread beamer_poster.pdf
