@@ -35,7 +35,7 @@
 
 \DeclareOptionX{size}[a0]{
   \typeout{beamerposter: checking size input, please wait.}
-  \XKV@cc*+[\val\nr]{#1}{a0b,a0,a1,a2,a3,a4,custom}{%
+  \XKV@cc*+[\val\nr]{#1}{a0b,a0,a1,a2,a3,a4,b1,custom}{%
     \typeout{beamerposter: the input \val\ \nr\ was correct, we proceed.}
     \ifcase\nr\relax
     %a0b
@@ -74,6 +74,12 @@
     \setlength{\textwidth}{28.7cm}
     \setlength{\textheight}{20.0cm}
     \or
+    %b1
+    \setlength{\paperwidth}{100.0cm}
+    \setlength{\paperheight}{70.7cm}
+    \setlength{\textwidth}{28.7cm}
+    \setlength{\textheight}{20.0cm}
+	\or
     \customsizetrue
     \fi    
   }{%
