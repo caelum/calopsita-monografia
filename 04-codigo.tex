@@ -2,28 +2,30 @@
 
 Todo o código do \calopsita{} está hospedado no GitHub, onde podem ser visualizados todo o histórico e atividades realizados no projeto desde sua concepção.
 
-Antes de iniciar o desenvolvimento do \calopsita{}, foi discutido quais seriam as escolhas de linguagens e \textit{frameworks} a serem utilizados. As opções se reduziram a duas: Ruby on Rails ou Java com VRaptor. Como a maioria da equipe era mais familiar com Java do que com Ruby, a escolha foi pelo Java com VRaptor. Durante o desenvolvimento foram usadas diversos conceitos e boas práticas de desenvolvimento de software, como explicado a seguir.
+Antes de iniciar o desenvolvimento do \calopsita{}, foi discutido quais seriam as escolhas de linguagens e \textit{frameworks} a serem utilizados. As opções se reduziram a duas: Ruby on Rails ou Java com VRaptor. Como a maioria da equipe tinha mais familiaridade com Java do que com Ruby, a escolha foi pelo Java com VRaptor. Durante o desenvolvimento foram usadas diversos conceitos e boas práticas de desenvolvimento de \software{}, como explicado a seguir.
 
 
 \subsection{DDD}
 
-A sigla DDD significa \textit{Domain Driven Design}~\cite{ddd}, ou seja, Projeto Orientado a Domínios. A principal idéia por trás desse conceito é que os clientes e os desenvolvedores falem na mesma linguagem: a \textit{Domain Specific Language}(DSL).
+A sigla DDD significa \textit{Domain Driven Design}~\cite{ddd}, ou seja, Projeto Orientado ao Domínio. A principal idéia por trás desse conceito é que os clientes e os desenvolvedores falem na mesma linguagem: a linguagem específica de domínio (DSL -- \textit{Domain Specific Language}).
 
-Em um projeto de software temos dois lados claros dentro do time de desenvolvimento: o lado do négocio, onde ficam os clientes e gerentes do projeto, e o lado técnico, onde ficam os arquitetos e desenvolvedores. Os clientes e gerentes tendem a conversar usando termos totalmente voltados ao negócio por trás do software, enquanto os arquitetos e desenvolvedores tendem a conversar usando termos técnicos. O lado técnico não entende muito bem os termos do negócio e o lado do negócio não entende quase nada sobre os termos técnicos. Isso cria um impasse quando é necessário fazer uma reunião entre todos os envolvidos no projeto.
+Na forma tradicional de desenvolvimento de software há dois lados claros e quase que opositores no que diz respeito às pessoas envolvidas: o lado do négocio, onde ficam os clientes e gerentes do projeto, e o lado técnico, onde ficam os arquitetos e desenvolvedores. Os clientes e gerentes tendem a conversar usando termos totalmente voltados à realidade de quem vai usar o \software{}, enquanto os arquitetos e desenvolvedores tendem a conversar usando termos técnicos. 
 
-Uma saída para resolver esse impasse é criar uma linguagem ubíqua~\footnote{Ubiquitous Language}, uma linguagem que todos os envolvidos no projeto conhecem. Dessa forma, clientes, usuários, gerentes, desenvolvedores e arquitetos vão usar sempre os mesmos termos para descrever o sistema. Os especialistas no negócio devem definir e explicar os termos mais relevantes para o pessoal técnico, que devem usá-los durante a arquitetura e desenvolvimento do sistema. Da mesma forma, o pessoal técnico deve explicar os termos mais importantes da arquitetura do sistema para os especialistas no negócio.
+O resultado disso é que os técnicos não entendem completamente os termos do negócio e clientes não entendem quase nada sobre os termos técnicos. Isso cria um impasse e um desconforto quando é necessário fazer uma reunião entre todos os envolvidos no projeto.
+
+Uma saída para resolver esse impasse é combinar uma linguagem ubíqua (\textit{Ubiquitous Language}), isto é, uma linguagem que todos os envolvidos no projeto conhecem. Dessa forma, clientes, usuários, gerentes, desenvolvedores e arquitetos usarão sempre os mesmos termos para descrever o sistema. Os especialistas no negócio devem definir e explicar os termos mais relevantes para os técnicos, que devem usá-los na arquitetura e no desenvolvimento do sistema. Da mesma forma, o pessoal técnico deve explicar os termos mais importantes da arquitetura do sistema para os especialistas no negócio.
 
 No \calopsita{} o domínio são métodos ágeis, então foram definidos os seguintes termos para a linguagem ubíqua:
 
 \begin{itemize}
-	\item{\textbf{Projeto (\textit{Project})} - um projeto gerenciado por uma equipe ágil}
-	\item{\textbf{Iteração (\textit{Iteration})} - uma unidade de tempo que representa um ciclo iterativo do método ágil usado}
-	\item{\textbf{Cartão (\textit{Card})} - uma unidade de trabalho, que pode ser uma funcionalidade, uma tarefa, uma história, ou qualquer coisa que represente algo que precisa ser desenvolvido}
-	\item{\textbf{\textit{Gadget}} - algo que adiciona informações ao cartão}
-	\item{\textbf{\textit{Plugin}} - uma funcionalidade, ou conjunto de funcionalidades, que pode ser instalada no sistema}
+	\item{\textbf{Projeto (\textit{Project})} - um projeto gerenciado por uma equipe ágil;}
+	\item{\textbf{Iteração (\textit{Iteration})} - uma unidade de tempo que representa um ciclo iterativo do método ágil usado;}
+	\item{\textbf{Cartão (\textit{Card})} - uma unidade de trabalho, que pode ser uma funcionalidade, uma tarefa, uma história, ou qualquer unidade que represente algo que precisa ser desenvolvido;}
+	\item{\textbf{\textit{Gadget}} - algo que adiciona informações ao cartão;}
+	\item{\textbf{\textit{Plugin}} - uma funcionalidade ou conjunto de funcionalidades que pode ser instalada no sistema.}
 \end{itemize}
 
-Desse modo, toda a arquitetura do sistema se baseia nesses termos e na interação entre eles, então a comunicação entre desenvolvedores e clientes acontece sem muitos problemas.
+Desse modo, toda a arquitetura do sistema se baseia nesses termos e na interação entre eles, então a comunicação entre desenvolvedores e clientes acontece sem grandes problemas.
 
 \subsection{BDD} 
 \label{bdd}
