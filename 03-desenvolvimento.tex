@@ -1,8 +1,8 @@
 \section{Desenvolvimento}
 
-Já desde o início de janeiro, a proposta inicial do \calopsita{} foi montada. Durante o mês de janeiro, estudamos tecnologias que poderiam ser interessantes no desenvolvimento do projeto e conseguimos o apoio do professor Alfredo Goldman, que aceitou nos orientar, da Caelum, que nos cedeu horas do trabalho e dos mestrandos Mariana Bravo e Hugo Corbucci, nossos clientes eleitos.
+Já desde o início de janeiro, a proposta inicial do \calopsita{} foi montada. Durante o mês de janeiro, as tecnologias que poderiam ser interessantes no desenvolvimento do projeto foram estudadas e conseguiu-se o apoio do professor Alfredo Goldman, que aceitou orientar a equipe, da Caelum, que cedeu horas de trabalho para os desenvolvedores e dos mestrandos Mariana Bravo e Hugo Corbucci, os clientes eleitos.
 
-Também desde então temos o grupo de discussões~\footnote{http://groups.google.com/group/\calopsita-development} e um repositório no GitHub para o projeto~\footnote{http://github.com/caelum/\calopsita}. Esse repositório foi movido durante o desenvolvimento, mas seu histórico completo se manteve. Na figura \ref{figura:github}, vê-se um gráfico de número de linhas enviadas ao repositório no decorrer do ano. Ele ilustra a distribuição da geração de código ao longo do ano.
+Também desde então há o grupo de discussões~\footnote{http://groups.google.com/group/\calopsita-development} e um repositório no GitHub para o projeto~\footnote{http://github.com/caelum/\calopsita}. Esse repositório foi movido durante o desenvolvimento, mas seu histórico completo se manteve. Na figura \ref{figura:github}, vê-se um gráfico de número de linhas enviadas ao repositório no decorrer do ano. Ele ilustra a distribuição da geração de código ao longo do ano.
 
 \begin{figure}[H]
   \centering
@@ -12,9 +12,11 @@ Também desde então temos o grupo de discussões~\footnote{http://groups.google
   \caption{Linhas de impacto - GitHub}\label{figura:github}
 \end{figure}
 
-Esses dados foram coletados do gráfico de impacto do GitHub e as divisões de linhas por desenvolvedor foram removidas porque, como adotamos programação pareada na maioria do tempo, ele não necessariamente representa a participação única de cada desenvolvedor no projeto.
+Esses dados foram coletados do gráfico de impacto do GitHub e as divisões de linhas por desenvolvedor foram removidas porque, como a equipe adota programação pareada na maioria do tempo, as divisões não necessariamente representam a participação única de cada desenvolvedor no projeto.
 
-Nota-se dessa imagem um pico de linhas de código enviadas ao repositório no mês de maio, mês seguinte a começarmos a gerenciar o próprio \calopsita{} usando a parte que já estava pronta do projeto. Contudo, houve trabalho de janeiro até o momento atual, com uma considerável queda em setembro para que focássemos nessa monografia.
+Nota-se, dessa imagem, um pico de linhas de código enviadas ao repositório no mês de maio, mês seguinte a quando passou-se a gerenciar o próprio \calopsita{} usando a parte que já estava pronta do projeto. Contudo, houve trabalho de janeiro até o momento atual, com uma considerável queda em setembro para que focássemos nessa monografia.
+
+Esse fenômeno é bastante natural: quando começa-se a usar um sistema novo, encontra-se diversos problemas e pontos de melhoria. A pressa para resolver os problemas mais impeditivos demandou um esforço maior da equipe.
 
 \subsection{Gerenciamento do projeto}
 
@@ -26,9 +28,9 @@ Primeiramente porque, buscando informações históricas sobre o modelo \textit{
 \textit{``I believe in this concept, but the implementation described above is risky and invites failure.'}'
 \end{quote}
 
-Mais do que isso, o autor, já em 1970, sugeria que o desenvolvimento iterativo é mais apropriado para o desenvolvimento de projetos de \software{}. Isso apenas aumenta nossa consternação com relação ao que se vê no mercado de trabalho ainda hoje -- diversas empresas que clamam usar RUP~\cite{rup} ignoram sua parte mais importante, o desenvolvimento iterativo.
+Mais do que isso, o autor, já em 1970, sugeria que o desenvolvimento iterativo é mais apropriado para o desenvolvimento de projetos de \software{}. Isso apenas aumenta a consternação com relação ao que é ensinado em universidades ao redor do mundo e se vê no mercado de trabalho ainda hoje -- diversas empresas que clamam usar RUP~\cite{rup} ignoram sua parte mais importante, o desenvolvimento iterativo.
 
-Em segundo lugar, métodos tradicionais prezam pelo conhecido \textit{``Big Design Up Front'}', isto é, em planejar toda a arquitetura de um sistema antes de começar a produzí-lo e manter esse \textit{design} até o produto final surgir. Essa ideia pressupõe que, de início, se saiba tudo o que será necessário do sistema e que essas necessidades não mudem. A experiência mostra que, na produção de \software{}, o padrão é não conhecer de antemão o que se precisa e as necessidades mudarem com o tempo.
+Em segundo lugar, métodos tradicionais prezam pelo conhecido \textit{``Big Design Up Front'}', isto é, em planejar toda a arquitetura de um sistema antes de começar a produzí-lo e manter esse \textit{design} até o produto final surgir. Essa ideia pressupõe que, de início, se saiba tudo o que será necessário do sistema e que essas necessidades não mudem. A experiência mostra que, na produção de \software{}, o padrão é não conhecer de antemão o que se precisa e as necessidades mudarem com o tempo~\cite{change}.
 
 De fato, verificamos a verdade nessa afirmação quando, no início do projeto, os clientes queriam um papel Administrador do Sistema no \calopsita{} que restringiria partes do sistema que podem ser editados por cada tipo de usuário. Essa funcionalidade, assim como diversas outras, acabou não sendo implementado por se mostrar desnecessária.
 
