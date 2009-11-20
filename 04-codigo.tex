@@ -30,7 +30,7 @@ Desse modo, toda a arquitetura do sistema se baseia nesses termos e na interaç�
 
 Desde o começo, resolvemos adotar boas práticas de desenvolvimento como o uso de \textit{Behavior Driven Development} (BDD) \cite{bdd}, refatoração constante e programação em pares. Principalmente para usar BDD, precisávamos de ferramentas que nos ajudassem a escrever testes mais expressivos e legíveis. 
 
-No mundo do Ruby on Rails essa prática já está bastante difundida e, portanto, existem várias ferramentas de teste como o RSpec~\footnote{http://rspec.info/} e o Cucumber~\footnote{http://cukes.info/} que implementam BDD. O dinamismo da linguagem ajuda, possibilitando a escrita de DSLs (Domain Specific Languages)\footnote{Explicar DSL} e interfaces fluentes~\cite{dsl} de uma maneira bastante direta. Em Java, a tendência do uso de BDD ainda não é forte e não existem ferramentas avançadas. Além disso, Java é uma linguagem estática e burocrática, o que torna o desenvolvimento de tais ferramentas muito mais difícil. 
+No mundo do Ruby on Rails essa prática já está bastante difundida e, portanto, existem várias ferramentas de teste como o RSpec~\footnote{http://rspec.info/} e o Cucumber~\footnote{http://cukes.info/} que implementam BDD. O dinamismo da linguagem ajuda, possibilitando a escrita de DSLs (\textit{Domain Specific Languages}) e interfaces fluentes~\cite{dsl} de uma maneira bastante direta. Em Java, a tendência do uso de BDD ainda não é forte e não existem ferramentas avançadas. Além disso, Java é uma linguagem estática e burocrática, o que torna o desenvolvimento de tais ferramentas muito mais difícil. 
 
 Apesar das limitações impostas pela escolha da linguagem, acreditamos que as vantagens de usar BDD compensavam as dificuldades. Dessa forma, foram pesquisadas as seguintes alternativas:
 
@@ -197,13 +197,13 @@ O VRaptor 3.0 possibilita o desenvolvimento de aplicações RESTful~\cite{rest} 
 
 Em julho, o \calopsita{} foi totalmente migrado para VRaptor 3, aumentando sensivelmente a produtividade no desenvolvimento. Nessa época, o VRaptor ainda não tinha uma versão estável, mas a maneira com o que ele foi feito possibilitava a fácil personalização e resolução dos problemas que existiam nele. A versão final só saiu no começo de outubro, mas entre julho e outubro o \calopsita{} auxiliou no desenvolvimento e teste das versões beta do VRaptor 3.
 
-Usar injeção de dependências faz com que a aplicação fique naturalmente mais testável e com menor acoplamento. Isso aliado a \textit{Factory Methods}~\cite{gof} e o uso de interfaces ao invés de implementações~\cite{effective} fez com que as classes do \calopsita ficassem mais fáceis de testr unitariamente, possibilitando uma cobertura por testes de mais de 90\% -- cobertura rara em projetos Java. A injeção de dependências também auxiliou bastante o desenvolvimento da arquitetura em plugins do \calopsita{}.\footnote{Isso ficou meio perdido aqui}
+Usar injeção de dependências faz com que a aplicação fique naturalmente mais testável e com menor acoplamento. Isso aliado a \textit{Factory Methods}~\cite{gof} e o uso de interfaces ao invés de implementações~\cite{effective} fez com que as classes do \calopsita{} ficassem mais fáceis de testr unitariamente, possibilitando uma cobertura por testes de mais de 90\% -- cobertura rara em projetos Java. A injeção de dependências também auxiliou bastante o desenvolvimento da arquitetura em plugins do \calopsita{}.\footnote{Isso ficou meio perdido aqui}
 
 \subsection{\textit{ActiveRecord}}
 
 O padrão \textit{Active Record}~\cite{fowler} se tornou conhecido após o surgimento do Ruby on Rails~\footnote{http://rubyonrails.org}, que o usa para fazer a persistência dos dados. Em Java, o padrão \textit{Data Mapper}~\cite{fowler} é o mais utilizado, pois temos ótimas ferramentas ORM (Mapeamento Objeto-Relacional), como o Hibernate, que nos ajudam com a parte de persistência e são classificados como tal.
 
-É comum, em Java, usar o Hibernate e DAOs\footnote{Explicar DAO}~\cite{dao} para encapsular o acesso a dados. Mas, frequentemente, pode-se encontrar o seguinte exemplo de método, numa classe de acesso a dados:
+É comum, em Java, usar o Hibernate~\footnote{http://hibernate.org} e DAOs (\textit{Data Access Object})~\cite{dao}, que formam uma camada de abstração que tornam o acesso mais simples e independente do método de persistência dos dados. Mas, frequentemente, pode-se encontrar o seguinte exemplo de método, numa classe de acesso a dados:
 
 \begin{lstlisting}
 public List<Cartao> listaCartoesDoProjeto(Projeto projeto) {...}
