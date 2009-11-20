@@ -20,6 +20,14 @@ A vantagem é que pode-se criar uma hierarquia, tão profunda quanto se desejar,
   \caption{Cartão}\label{figura:cartao}
 \end{figure}
 
+\begin{figure}[H]
+  \centering
+  \fbox{
+    \includegraphics[width=110mm]{images/hierarquia-de-cartoes.png}
+  }
+  \caption{Cartões mostrados hierarquicamente}\label{figura:hierarquia}
+\end{figure}
+
 \subsubsection*{Tipos de Cartões}
 
 Um tipo de cartão é, para o \calopsita{}, um agrupamento de \textit{gadgets} que definem o comportamento de um determinado cartão. Perceba que a noção é puramente semântica, já que os \textit{gadgets} podem ser habilitados e desabilitados individualmente, por cartão.
@@ -32,18 +40,9 @@ Um tipo de cartão é, para o \calopsita{}, um agrupamento de \textit{gadgets} q
   \caption{Tipos de Cartões}\label{figura:tipo_cartao}
 \end{figure}
 
-\subsubsection*{Iterações}
 
+Está previsto para também fazer parte do núcleo do \calopsita{} uma funcionalidade de histórico de mudanças. Assim, vai ser possível coletar informações para gerar gráficos, e criar um serviço que retorne as últimas modificações feitas, em formato RSS para que os membros do projeto possam utilizar agregadores para acompanhar o andamento da iteração.
 
-
-
-Log, feed de mudanças
-
-*****************
-Falta coisa aqui... muita, btw
-*****************
-
- 
 
 \subsection{Calopsita Plugins}
 
@@ -70,8 +69,8 @@ Como explicado anteriormente, o \calopsita{} possuí um núcleo com as funcional
 	  \caption{Planejamento}\label{figura:planejamento}
 	\end{figure}
 	}
-	\item{Gráfico burn-up: a idéia desse plugin é que uma nova página contendo o gráfico burnup de uma determinada iteração sejá criada.}
-	\item{Gráfico burn-down: a idéia desse plugin é que uma nova página contendo o gráfico burndown de uma determinada iteração sejá criada.}
+	\item{Gráfico \textit{burn-up}: a idéia desse plugin é que uma nova página contendo o gráfico \textit{burn-up} de uma determinada iteração sejá criada. Este gráfico possui uma linha horizontal, que representa a meta a ser atingida. Essa meta é baseada em alguma métrica da iteração: número de cartões, soma da dificuldade dos cartões, etc. Com o passar dos dias da iteração é marcada a evolução da métrica escolhida, de acordo com o número de cartões prontos.}
+	\item{Gráfico \textit{burn-down}: a idéia desse plugin é que uma nova página contendo o gráfico \textit{burn-down} de uma determinada iteração sejá criada. Esse gráfico é parecido com o de \textit{burn-up}, mas a evolução se dá pela quantidade de uma métrica que ainda não está pronta. Geralmente tem uma linha decrescente que representa a velocidade estimada.}
 	\item{Marcação de horas: esse plugin permitirá que a pessoa que trabalhou na conclusão de determinado cartão possa marcar o número de horas trabalhadas.}
 	\item{Estimativas: possibilitará que um cartão tenha sua dificuldade estimada em pontos.}
 	\item{Personas: criará uma área especial para a definição de personas. Essas personas poderão ser utilizadas mais facilmente na criação de novos cartões.}
