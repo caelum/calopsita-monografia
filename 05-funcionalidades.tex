@@ -12,11 +12,28 @@ Diferente de outros sistemas com o mesmo propósito, o \calopsita{} não possui 
 
 A vantagem é que pode-se criar uma hierarquia, tão profunda quanto se desejar, para organizar tudo o que há para ser feito em um projeto. Isso também permite que o projeto possa ser visto no nível de detalhe mais apropriado pra cada envolvido no projeto, seja ele gerente, desenvolvedor ou cliente. 
 
+\begin{figure}[H]
+  \centering
+  \fbox{
+    \includegraphics[width=110mm]{images/cartao.png}
+  }
+  \caption{Cartão}\label{figura:cartao}
+\end{figure}
+
 \subsubsection*{Tipos de Cartões}
 
 Um tipo de cartão é, para o \calopsita{}, um agrupamento de \textit{gadgets} que definem o comportamento de um determinado cartão. Perceba que a noção é puramente semântica, já que os \textit{gadgets} podem ser habilitados e desabilitados individualmente, por cartão.
 
+\begin{figure}[H]
+  \centering
+  \fbox{
+    \includegraphics[width=110mm]{images/tipo_cartao.png}
+  }
+  \caption{Tipos de Cartões}\label{figura:tipo_cartao}
+\end{figure}
+
 \subsubsection*{Iterações}
+
 
 
 
@@ -33,8 +50,26 @@ Falta coisa aqui... muita, btw
 Como explicado anteriormente, o \calopsita{} possuí um núcleo com as funcionalidades essenciais e as demais serão fornecidas através de \textit{plugins}. Temos em nosso \textit{backlog}, diversos plugins para serem implementados e que já viriam na instalação padrão do \calopsita{}. Segue abaixo uma breve descrição de cada um deles:
 
 \begin{itemize}
-	\item{Priorização: permite seja atribuída uma prioridade a um determinado cartão através de uma interface baseada em \textit{drag 'n' drop}. Esse plugin já está implementado.}
-	\item{Planejamento: permite que cartões sejam adicionadas ou removidas de uma determinada iteração. Também baseado em \textit{drag 'n' drop} e já está implementado.}
+	\item{Priorização: permite seja atribuída uma prioridade a um determinado cartão através de uma interface baseada em \textit{drag 'n' drop}. Esse plugin já está implementado.
+	
+	\begin{figure}[H]
+	  \centering
+	  \fbox{
+	    \includegraphics[width=110mm]{images/priorizacao.png}
+	  }
+	  \caption{Priorizacao}\label{figura:priorizacao}
+	\end{figure}
+	}
+	\item{Planejamento: permite que cartões sejam adicionadas ou removidas de uma determinada iteração. Também baseado em \textit{drag 'n' drop} e já está implementado.
+	
+	\begin{figure}[H]
+	  \centering
+	  \fbox{
+	    \includegraphics[width=110mm]{images/planejamento.png}
+	  }
+	  \caption{Planejamento}\label{figura:planejamento}
+	\end{figure}
+	}
 	\item{Gráfico burn-up: a idéia desse plugin é que uma nova página contendo o gráfico burnup de uma determinada iteração sejá criada.}
 	\item{Gráfico burn-down: a idéia desse plugin é que uma nova página contendo o gráfico burndown de uma determinada iteração sejá criada.}
 	\item{Marcação de horas: esse plugin permitirá que a pessoa que trabalhou na conclusão de determinado cartão possa marcar o número de horas trabalhadas.}
@@ -42,48 +77,3 @@ Como explicado anteriormente, o \calopsita{} possuí um núcleo com as funcional
 	\item{Personas: criará uma área especial para a definição de personas. Essas personas poderão ser utilizadas mais facilmente na criação de novos cartões.}
 	\item{Integração com GitHub: permitírá que comentários feitos no \textit{commit} do projeto no GitHub consigam mover cartões dentro de uma determinada iteração e mudar seu status.}
 \end{itemize}
-
-
-\textbf{Priorização}
-\textbf{Gráficos}
-\textbf{Estimativas}
-\textbf{Marcação de horas}
-\textbf{Customizável}
-\textbf{Templates de metodologias}
-\textbf{Templates de cartões}
-\textbf{Personas}
-
-
-Ver onde colocar:
-
-\begin{figure}[H]
-  \centering
-  \fbox{
-    \includegraphics[width=110mm]{images/cartao.png}
-  }
-  \caption{Cartão}\label{figura:cartao}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \fbox{
-    \includegraphics[width=110mm]{images/planejamento.png}
-  }
-  \caption{Planejamento}\label{figura:planejamento}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \fbox{
-    \includegraphics[width=110mm]{images/priorizacao.png}
-  }
-  \caption{Priorizacao}\label{figura:priorizacao}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \fbox{
-    \includegraphics[width=110mm]{images/tipo_cartao.png}
-  }
-  \caption{Tipos de Cartões}\label{figura:tipo_cartao}
-\end{figure}
