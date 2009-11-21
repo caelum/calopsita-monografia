@@ -197,7 +197,7 @@ A decisão de desenvolver o \calopsita{} orientado a ações vem da propensão d
 
 Começamos a desenvolver o \calopsita{} com o VRaptor na versão 2.6, a mais atual na época. Paralelamente, a versão nova do VRaptor, a 3.0, começou a ser desenvolvida. Por volta de julho, já havia uma versão alfa funcional. Então, o \calopsita{} foi migrado para o VRaptor 3, já que ele trazia idéias melhores e boas práticas, muitas provenientes do Ruby on Rails. 
 
-Além disso, vislumbrou-se a possibilidade de o \calopsita{} auxiliar no desenvolvimento do VRaptor 3. Ambos são projetos \opensource{} e possuem desenvolvedores em comum. Graças a relação entre os projetos, tanto o \calopsita{} quanto o VRaptor 3 amadureceram e cresceram.
+Além disso, vislumbrou-se a possibilidade de o \calopsita{} auxiliar no desenvolvimento do VRaptor 3, como pode ser visto no~\ref{app:vraptor}. Ambos são projetos \opensource{} e possuem desenvolvedores em comum. Graças a relação entre os projetos, tanto o \calopsita{} quanto o VRaptor 3 amadureceram e cresceram.
 
 O VRaptor 3.0 possibilita o desenvolvimento de aplicações RESTful~\cite{rest} e o uso massivo de injeção de dependências~\cite{di}. O uso de uma interface web RESTful traz várias vantagens para uma aplicação web. Usando os verbos HTTP da forma recomendada na concepção do protocolo, pode-se aproveitar a semântica da web para uma aplicação. Além disso, o uso do REST permite aproveitar recursos dos servidores, como caching. Também, a aplicação se torna automaticamente um web-service, cada página um recurso, facilitando a integração com outros sistemas.
 
@@ -260,7 +260,7 @@ Mas além delas, há a parte dos \textit{plugins}, que permitem desenvolver as f
 	\item{\textbf{Transformer} - Responsável por modificar listagens, adicionando, removendo ou ordenando elementos.}
 \end{itemize}
 
-Além disso, se o \textit{plugin} precisar adicionar telas ao sistema, ele precisa implementá-las, usando o VRaptor3 para criar um controlador e as JSPs necessárias. Os pontos de extensão existentes ainda não possibilitam modificar telas já existentes, nem mudar formulários, por exemplo, mas podem ser implementados à medida em que forem necessários.
+Além disso, se o \textit{plugin} precisar adicionar telas ao sistema, ele precisa implementá-las, usando o VRaptor3 para criar um controlador e as JSPs necessárias. Os pontos de extensão existentes ainda não possibilitam modificar telas já existentes, nem mudar formulários, por exemplo, mas podem ser implementados à medida em que forem necessários. Um pequeno manual sobre como criar um plugin pode ser visto no~\ref{app:plugins}.
 
 \subsection{Cartões e subcartões}
 
