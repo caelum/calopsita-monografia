@@ -180,7 +180,11 @@ Ao desenhar aplicações REST, pensa-se nos recursos a serem disponibilizados pe
 No \calopsita{}, as idéias de REST são utilizadas dentro das limitações que a arquitetura Java nos impõe. Por exemplo, uma mesma URI de iteração (recurso) é capaz de adicionar, mostrar, atualizar e remover uma iteração.
 
 \begin{verbatim}
-	.../projects/5/iterations/
+ GET /projects/5/iterations/ => lista as iterações do projeto de id 5
+ POST /projects/5/iterations/ => adiciona uma iteração ao projeto de id 5
+ GET /projects/5/iterations/10 => visualiza a iteração de id 10 do projeto de id 5
+ PUT /projects/5/iterations/10 => atualiza a iteração de id 10 do projeto de id 5
+ DELETE /projects/5/iterations/10 => remove a iteração de id 10 do projeto de id 5
 \end{verbatim}
 
 Esse recurso responde adicionando uma iteração quando é chamado via POST e listando todas as iterações quando chamado via GET. As outras operações, que poderiam ser acessadas por outros métodos HTTP não fazem sentido nesse contexto, então não são implementados.
@@ -199,7 +203,7 @@ O VRaptor 3.0 possibilita o desenvolvimento de aplicações RESTful~\cite{rest} 
 
 Em julho, o \calopsita{} foi totalmente migrado para VRaptor 3, aumentando sensivelmente a produtividade no desenvolvimento. Nessa época, o VRaptor ainda não tinha uma versão estável, mas a maneira com o que ele foi feito possibilitava a fácil personalização e resolução dos problemas que existiam nele. A versão final só saiu no começo de outubro, mas entre julho e outubro o \calopsita{} auxiliou no desenvolvimento e teste das versões beta do VRaptor 3.
 
-Usar injeção de dependências faz com que a aplicação fique naturalmente mais testável e com menor acoplamento. Isso aliado a \textit{Factory Methods}~\cite{gof} e o uso de interfaces ao invés de implementações~\cite{effective} fez com que as classes do \calopsita{} ficassem mais fáceis de testr unitariamente, possibilitando uma cobertura por testes de mais de 90\% -- cobertura rara em projetos Java. A injeção de dependências também auxiliou bastante o desenvolvimento da arquitetura em plugins do \calopsita{}.\footnote{Isso ficou meio perdido aqui}
+Usar injeção de dependências faz com que a aplicação fique naturalmente mais testável e com menor acoplamento. Isso aliado a \textit{Factory Methods}~\cite{gof} e o uso de interfaces ao invés de implementações~\cite{effective} fez com que as classes do \calopsita{} ficassem mais fáceis de testar unitariamente, possibilitando uma cobertura por testes de mais de 90\% -- cobertura rara em projetos Java.
 
 \subsection{\textit{ActiveRecord}}
 
