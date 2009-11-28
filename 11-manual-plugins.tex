@@ -4,8 +4,8 @@ A criação de plugins no \calopsita{} é baseada em pontos de extensão. Os pon
 
 \begin{itemize}
 	\item{\textbf{Gadget} - Implemente uma entidade do Hibernate com essa interface, e então você pode adicionar informações aos cartões que possuirem esse gadget. Por exemplo se você quiser adicionar uma estimativa de velocidade, tempo total ou dificuldade do cartão}
-	\item{\textbf{Transformer} - Implemente essa interface e anote a classe gerada com @Component. Assim você consegue modificar as listagens, por exemplo mudando a ordenação ou removendo determinados itens.}
-	\item{\textbf{PluginConfig} - Implemente essa interface e anote a classe gerada com @Component. Com ela é possível adicionar itens aos menus do sistema, baseados nos parâmetros da requisição}
+	\item{\textbf{Transformer} - Implemente essa interface e anote a classe gerada com \texttt{@Component}. Assim você consegue modificar as listagens, por exemplo mudando a ordenação ou removendo determinados itens.}
+	\item{\textbf{PluginConfig} - Implemente essa interface e anote a classe gerada com \texttt{@Component}. Com ela é possível adicionar itens aos menus do sistema, baseados nos parâmetros da requisição}
 \end{itemize}
 
 Além disso, você pode criar novas telas para o sistema. Para isso basta criar um controlador do 
@@ -111,7 +111,7 @@ public class VelocidadeController {
 		\end{lstlisting}
 	}
 	
-	\item{um jsp que responda mostre a tela de estimar cartões. Logo precisa estar em /WEB-INF/jsp/velocidade/estima.jsp
+	\item{um jsp que responda a esse método e mostre a tela de estimar cartões. Logo precisa estar em \texttt{/WEB-INF/jsp/velocidade/estima.jsp}
 	\lstset{language=html,frame=ltrb,framesep=5pt,basicstyle=\footnotesize,
 	  keywordstyle=\ttfamily\color{OliveGreen},
 	 identifierstyle=\ttfamily\color{CadetBlue}\bfseries, 
@@ -133,6 +133,6 @@ public class VelocidadeController {
 	}
 \end{itemize}
 
-Para instalar o plugin, basta colocar as classes criadas no classpath (dentro de um jar, ou no WEB-INF/classes), jsps na pasta /WEB-INF/jsp, e eventuais javascripts e css's na pasta web.
+Para instalar o plugin, basta colocar as classes criadas no classpath (dentro de um \textit{jar}, ou no \texttt{WEB-INF/classes}), jsps na pasta \texttt{/WEB-INF/jsp}, e eventuais javascripts e css's na pasta \texttt{web}.
 
 
