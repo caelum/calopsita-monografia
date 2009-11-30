@@ -8,66 +8,92 @@
 
 	<style>
 		body {
-			background: #990000 url(calopsita-background.png) fixed no-repeat 100% 100%;
-			text-align:center;
+			background: #EEEEEE url(calopsita-background.png) fixed no-repeat 100% 100%;
 		}
 
 		#content {
-			margin: 0px 0px 0px 50px;
+			margin: 30px auto 0px;
 			width:1000px;
-			height: 500px;
+		}
+
+		#content p{
+			font-size:18px;
+			text-align:center;
+		}
+
+		#logo {
+			float: left;
 		}
 
 		#logo > img {
 			width: 200px;
 			margin: 20px;
 		}
+		
+		a:link, a:visited, a:active, a:hover {
+			text-decoration: none;
+			color: #000000;
+		}
 
-		#menu {
-			background: #CCCCCC;
-			width: 240px;
-			heigh: 100% ;
-			margin: 0px 20px;
+		#text {
+			background: url(box.png) no-repeat center center;
+			float: right;
+			width: 580px;
+			margin: 0px 160px 20px 0px;
 			padding: 10px;
-			text-align: left;
 			color:#EEEEEE;
 		}
 
-		ul {
-			list-style: none;
+		#menu {
+			font-size: 20px;
+			margin: 60px 0px;
 		}
 
-		a, a:visited, a:link {
-			text-decoration: none;
-			color: #333333;
+		#monografia {
+			font-size: 14px;
+			text-align: left;
+			margin: 0px 0px 0px 10px;
 		}
-	</style>
+		</style>
 
 </head>
 
 <body>
 
 <div id="content">
-	<div id="menu">
-		<div id="logo">
-			<img src="logo.png" alt="calopsita" />
-		</div>
+	<div id="logo">
+		<img src="logo.png" alt="calopsita" />
 
-		<br/><br/>
-		<ul>	
+		<ul id="menu">	
 			<li><a href="proposta.pdf">Proposta (pdf)</a></li>
 			<li><a href="poster.pdf">Poster (pdf)</a></li>
-			<li><a href="monografia.html">Monografia</a></li>
+			<li>Monografia<br/>
+				<div id="monografia">
+					<a href="monografia.pdf">Parte Objetiva (pdf)</a><br/>
+					<a href="caue.pdf">Subjetiva Cauê (pdf)</a><br/>
+					<a href="ceci.pdf">Subjetiva Ceci (pdf)</a><br/>
+					<a href="lucas.pdf">Subjetiva Lucas (pdf)</a>
+				</div>
+			</li>
 			<li><a href="http://prezi.com/zh1jnprulbv4/">Apresenta&ccedil;&atilde;o</a></li>
 			<li><a href="http://github.com/caelum/calopsita">Repositório</a></li>
 			<li><a href="http://calopsitaproject.org">Divulga&ccedil;&atilde;o</a></li>
 		</ul>
 	</div>
+	<div id="text">
+		<p>Sim, sim. Sabemos que nada substitui um quadro branco... mas, às vezes, ele não é uma 			opção.</p>
 
+		<p>Calopsita é uma ferramenta de gerenciamento de projetos para times ágeis distribuídos. 
+		Ele é simples e tenta ficar o mínimo possível no seu caminho -- usabilidade é nossa 
+		primeira prioridade. O Calopsita foi feito por agilistas para agilistas. É ágil, mas não 
+		foi feito uma metodologia específica - é flexível para que você possa trabalhar usando os 
+		métodos que quiser.</p>
 
+	</div>
+
+	
 </div>
 
 </body>
 	
 </html>
-
