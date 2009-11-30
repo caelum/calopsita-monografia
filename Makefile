@@ -10,3 +10,12 @@ paper: monografia.tex
 	
 poster: poster.pdf
 	acroread poster.pdf
+
+ceci: subjetivas/ceci.tex
+	pdflatex subjetivas/ceci.tex
+	rm ceci.aux -f
+	rm ceci.log -f
+	rm ceci.out -f
+
+	acroread ceci.pdf 
+
